@@ -7,7 +7,7 @@ export const qdrant = new QdrantClient({
   apiKey: process.env.QDRANT_API_KEY,
 });
 
-export const COLLECTION_NAME = 'msajce_elite_knowledge';
+export const COLLECTION_NAME = 'msajce_knowledge';
 
 export async function initQdrant() {
   const collections = await qdrant.getCollections();
