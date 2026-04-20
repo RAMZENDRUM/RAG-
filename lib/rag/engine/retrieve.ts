@@ -34,6 +34,20 @@ export interface RetrievalResult {
 }
 
 export async function performRetrieval(query: string): Promise<RetrievalResult> {
+  const lowerQuery = query.toLowerCase().trim();
+  
+  // 0. GREETING HANDLER (Social Layer)
+  const greetings = ['hi', 'hello', 'hey', 'start', 'aura'];
+  if (greetings.includes(lowerQuery) || lowerQuery.length < 3) {
+    return {
+      answer: "Hello! I am Aura, your MSAJCE Digital Concierge. I can help you with Admission details, Bus routes, and Placement records. What would you like to know today?",
+      context: 'system_greeting',
+      sources: ['Aura System'],
+      reliability: 'HIGH',
+      score: 1.0
+    };
+  }
+
   console.log(`--- [ELITE VERCEL SEARCH] Query: ${query} ---`);
   try {
     // 1. EMBEDDING (Using Vercel Provider)
