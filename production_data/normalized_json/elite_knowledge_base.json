@@ -1,0 +1,3823 @@
+[
+  {
+    "narrative": "This AI system, Aura Concierge, was developed by Ramanathan S, also known as Ram. He is a 2nd-year B.Tech IT student at MSAJCE (2024-2028).",
+    "metadata": {
+      "source": "Aura Developer Profile",
+      "type": "identity"
+    }
+  },
+  {
+    "narrative": "The developer, Ramanathan S, specializes in Full-stack Web Development, AI Chatbots, and Automation. He has a CGPA range of 7.8 to 8.8.",
+    "metadata": {
+      "source": "Aura Developer Profile",
+      "type": "identity"
+    }
+  },
+  {
+    "narrative": "Ram is a creative musician/artist who uses tools like FL Studio, VS Code, and Supabase. He developed projects like SmartHostel and Haunted Village.",
+    "metadata": {
+      "source": "Aura Developer Profile",
+      "type": "identity"
+    }
+  },
+  {
+    "narrative": "Aura Concierge's scope is strictly Mohamed Sathak A.J. College of Engineering (Engineering Only). It does not cover other trust institutions like Nursing or Architecture.",
+    "metadata": {
+      "source": "Aura Developer Profile",
+      "type": "identity"
+    }
+  },
+  {
+    "narrative": "Aura provides official info on Admissions, Placements, Bus Routes, and Faculty details for MSAJCE Engineering students.",
+    "metadata": {
+      "source": "Aura Developer Profile",
+      "type": "identity"
+    }
+  },
+  {
+    "narrative": "The Sathak Innovation and Incubation Foundation aims to promote commerce, science, education, and research by helping startups and individuals with innovative ideas.",
+    "exact": {
+      "foundation": "Sathak Innovation and Incubation Foundation"
+    },
+    "category": "incubation",
+    "importance": "high"
+  },
+  {
+    "narrative": "The foundation's main objects include promoting innovation-driven entrepreneurship in various fields, including science, engineering, and technology.",
+    "exact": {
+      "fields": "science, engineering, technology, commerce, agriculture, health care, medicine, pharmacy, education, arts, sports"
+    },
+    "category": "incubation",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Incubation Cell offers various programs and initiatives to support aspiring entrepreneurs and early-stage startups, including 5000 sqft physical office space and funding opportunities.",
+    "exact": {
+      "office space": "5000 sqft",
+      "funding opportunities": "grants, seed funding, connections to potential investors"
+    },
+    "category": "incubation",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Incubation Cell provides mentorship programs, access to a network of investors, and organizes events to foster innovation and entrepreneurial skills.",
+    "exact": {
+      "mentorship programs": "experienced professionals and industry experts",
+      "network of investors": "venture capitalists, angel investors"
+    },
+    "category": "incubation",
+    "importance": "high"
+  },
+  {
+    "narrative": "The National Innovation and Startup Policy aims to cater to the needs of student entrepreneurs with innovative ideas and promote a culture of entrepreneurship inside campus.",
+    "exact": {
+      "policy": "National Innovation and Startup Policy"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The policy's mission is to develop an ecosystem with required infrastructure to enable students and faculty to innovate and prototype their potential ideas.",
+    "exact": {
+      "mission": "develop an ecosystem with required infrastructure"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The policy's short-term objectives include helping student groups to prototype their ideas and improving innovation among student community.",
+    "exact": {
+      "short-term objectives": "help student groups to prototype their ideas, improve innovation among student community"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The policy's long-term objectives include associating with DST, CII, MSME, and other academic institutions to transfer world-class facilities for IEDC activities.",
+    "exact": {
+      "long-term objectives": "associate with DST, CII, MSME, and other academic institutions"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Incubation Lead is Akshita K, and the contact information is info@siif.ventures and www.siif.ventures.",
+    "exact": {
+      "incubation lead": "Akshita K",
+      "contact information": "info@siif.ventures, www.siif.ventures"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Mohamed Sathak A.J. College of Engineering was established on 5th July 2001 under the aegis of Mohamed Sathak Trust.",
+    "exact": {
+      "date": "5th July 2001"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college is approved by AICTE New Delhi, affiliated to Anna University Chennai and Government of Tamil Nadu.",
+    "exact": {
+      "approving_body": "AICTE New Delhi",
+      "affiliated_to": "Anna University Chennai",
+      "government": "Government of Tamil Nadu"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college campus is sprawling over 70 acres of greenery located inside the SIPCOT IT Park, Siruseri.",
+    "exact": {
+      "area": "70 acres",
+      "location": "SIPCOT IT Park, Siruseri"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college is surrounded by multinational IT companies such as TCS, CTS, Intellect, Aspire, Steria, Polaris, FSS, etc.",
+    "exact": {
+      "companies": "TCS, CTS, Intellect, Aspire, Steria, Polaris, FSS"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college has good infrastructure facilities such as spacious classrooms, drawing halls, laboratories, seminar halls, computer facilities with internet and wifi connectivity, library, workshops, auditorium and playground.",
+    "exact": {
+      "facilities": "spacious classrooms, drawing halls, laboratories, seminar halls, computer facilities, library, workshops, auditorium, playground"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college is well connected by Road, Rail and Air from various parts of the country.",
+    "exact": {
+      "connectivity": "Road, Rail, Air"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A team of well qualified and experienced faculty supports the teaching and learning process.",
+    "exact": {
+      "faculty": "well qualified and experienced"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college provides equal importance for academic, co curricular and extracurricular activities.",
+    "exact": {
+      "activities": "academic, co curricular, extracurricular"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college provides all kinds of training for the professional and overall transformation of the students.",
+    "exact": {
+      "training": "all kinds of training"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college has state of art facilities with industry collaborative technology centers.",
+    "exact": {
+      "facilities": "state of art facilities"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college has a good placement record.",
+    "exact": {
+      "placement_record": "good"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college provides support for higher education and entrepreneurship.",
+    "exact": {
+      "support": "higher education, entrepreneurship"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Civil Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Engineering with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electronics & Communication Engineering with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electrical & Electronics Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Mechanical Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Information Technology with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Artificial Intelligence & Data Science with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Business Systems with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Engineering (Cyber Security) with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Artificial Intelligence & Machine Learning with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electronics Engg with specialization in VLSI Design & Technology with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in ECE with specialization in Advanced Communication Technology with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Five percent of seats within approved intake shall be allowed for admission under NRI category.",
+    "exact": {
+      "NRI Category Seats": "5%"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "In the event of non-availability of students in NRI seats, the seats shall be given to general candidates as per merit.",
+    "exact": {},
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers postgraduate programmes in Computer Science & Engineering with a total sanctioned intake of 9, government quota of 3, and management quota of 6.",
+    "exact": {
+      "Total Sanctioned Intake": "9",
+      "Government Quota": "3",
+      "Management Quota": "6"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers postgraduate programmes in Structural Engineering with a total sanctioned intake of 18, government quota of 6, and management quota of 12.",
+    "exact": {
+      "Total Sanctioned Intake": "18",
+      "Government Quota": "6",
+      "Management Quota": "12"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission to B.E/B.Tech programmes is through TNEA Counselling conducted by Directorate of Technical Education (DoTE), Chennai.",
+    "exact": {
+      "TNEA Counselling": "TNEA Counselling"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Students who have completed Plus 2/Diploma may apply for Tamil Nadu Engineering Admissions (TNEA Counselling).",
+    "exact": {
+      "TNEA Counselling": "TNEA Counselling"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Eligibility for students from other states is based on qualifying marks (Q) obtained in Mathematics, Physics, and Chemistry at the Plus Two or Intermediate level.",
+    "exact": {
+      "Qualifying Marks": "Q = (Mathematics / 2) + ((Physics + Chemistry) / 4)"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "For admission assistance, students can contact Dr. Vamsi Naga Mohan at 9043358674 or 9502687344 or email cse.vamsi@-edu.in.",
+    "exact": {
+      "Contact Number": "9043358674, 9502687344",
+      "Email": "cse.vamsi@-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details are available, including Dr.K.S.Srinivasan, Principal at 9150575066 or principal@-edu.in.",
+    "exact": {
+      "Contact Number": "9150575066",
+      "Email": "principal@-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "B.E/B.Tech admission eligibility requires a pass in HSC (Academic) or its equivalent with a minimum average percentage in Mathematics, Physics, and Chemistry.",
+    "exact": {
+      "Minimum Average Percentage": "45.00% for General Category, 40.00% for Backward Class, MBC & DNC, and SC/SCA/ST"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Department of Artificial Intelligence and Data Science offers a B.Tech program in Artificial Intelligence and Data Science, which is a 4-year regular or 3-year lateral entry course.",
+    "exact": {
+      "duration": "4 years (Regular) / 3 years (Lateral Entry)",
+      "no_of_sems": "8 (Regular) / 6 (Lateral Entry)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The B.Tech in Artificial Intelligence and Data Science program has an intake of 30 students, with 15 government seats and 15 management seats.",
+    "exact": {
+      "intake": "30",
+      "gov_seats": "15",
+      "mgmt_seats": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the B.Tech in Artificial Intelligence and Data Science program is a pass in Physics, Chemistry, and Mathematics in the qualifying examination, following the 10+2 system of education.",
+    "exact": {
+      "eligibility": "10+2 system of Education, pass in Physics, Chemistry and Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program aims to equip students with statistical, mathematical reasoning, machine learning, knowledge discovery, and visualization skills, with career opportunities in various sectors such as manufacturing, software, research, education, defense, banking, and finance.",
+    "exact": {
+      "career_opportunities": "Manufacturing, Software, Research, Education, Defense, Banking & Finance"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The scope for higher studies after completing the B.Tech in Artificial Intelligence and Data Science program includes M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher_studies": "M.E. / M.Tech. / M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The vision of the Department of Artificial Intelligence and Data Science is to be a centre of excellence for transforming students into proficient Artificial Intelligence and Data Science professionals through sustainable practices.",
+    "exact": {
+      "vision": "To be a centre of excellence for transforming students into proficient Artificial Intelligence and Data Science using through sustainable practices"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Department of Artificial Intelligence & Machine Learning offers a B.Tech program with specialization in AIML, providing students with a range of courses in AI and ML with a foundation in Computer Science & Engineering.",
+    "exact": {
+      "program": "B.Tech in CSE with Specialization in AIML",
+      "duration": "4 years (Regular) / 3 years (Lateral Entry)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Artificial Intelligence (AI) is a technology that enables machines to reproduce human behavior, while Machine Learning (ML) is a sub-part of AI that allows machines to learn from past data without programming.",
+    "exact": {
+      "technology": "Artificial Intelligence (AI)",
+      "sub-part": "Machine Learning (ML)"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.Tech program in AIML is an ideal choice for students to enhance their knowledge of computer technologies, programming, coding, database, and web development.",
+    "exact": {
+      "program": "B.Tech in AIML"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The curriculum of the B.Tech program in AIML focuses on learning the foundations of Computational Mathematics, core areas of Computer Science, and the latest advancements in Artificial Intelligence and Machine Learning.",
+    "exact": {
+      "curriculum": "Foundations of Computational Mathematics, core areas of Computer Science, and latest advancements in AI and ML"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program offers specialized areas of AI&ML, including minor specializations in machine learning, deep learning, natural language processing, computer vision, data mining, and more.",
+    "exact": {
+      "specialized areas": "machine learning, deep learning, natural language processing, computer vision, data mining"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Students will gain hands-on experience with tools and technologies such as Python, R, TensorFlow, Spark, Hadoop, and many more.",
+    "exact": {
+      "tools": "Python, R, TensorFlow, Spark, Hadoop"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The demand for skilled professionals in the field of AIML is growing exponentially, with a huge shortage of talent worldwide.",
+    "exact": {
+      "demand": "growing exponentially",
+      "shortage": "huge"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Career prospects for graduates of the B.Tech program in AIML include Big Data Engineer, Business Intelligence Developer, Data Scientist, Machine Learning Engineer, Research Scientist, AI Data Analyst, AI Engineer, Robotics Scientist, and more.",
+    "exact": {
+      "career prospects": "Big Data Engineer, Business Intelligence Developer, Data Scientist, Machine Learning Engineer, Research Scientist, AI Data Analyst, AI Engineer, Robotics Scientist"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The annual average salary of an AI and ML engineer is higher than the average salary of any other engineering graduate.",
+    "exact": {
+      "salary": "higher than average"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The B.E. - Artificial Intelligence & Machine Learning program has a duration of 4 years (Regular) or 3 years (Lateral Entry), with 8 semesters (Regular) or 6 semesters (Lateral Entry).",
+    "exact": {
+      "duration": "4 years (Regular) / 3 years (Lateral Entry)",
+      "semesters": "8 (Regular) / 6 (Lateral Entry)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Alumni Association of Mohamed Sathak AJ College of Engineering welcomes all to join and reconnect with the institution.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The association aims to foster a sense of connectedness between alumni and the institution, establish and renew student relationships, and involve in various college activities.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The association has 31 office bearers for the term 2024-Till Now, including Dr. K. S. Srinivasan as President and Mr. Ahamed Jameel A.M.T as Secretary.",
+    "exact": {
+      "number_of_office_bearers": "31",
+      "president": "Dr. K. S. Srinivasan",
+      "secretary": "Mr. Ahamed Jameel A.M.T"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The association has 30 office bearers for the term 2023-2024, including Dr. K. S. Srinivasan as President and Mr. Ahamed Jameel A.M.T as Secretary.",
+    "exact": {
+      "number_of_office_bearers": "30",
+      "president": "Dr. K. S. Srinivasan",
+      "secretary": "Mr. Ahamed Jameel A.M.T"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The objectives of the Alumni Association include fostering a sense of connectedness, establishing and renewing student relationships, and providing assistance to needful students.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The association also aims to gather and maintain a database of employment and assist in placements, arrange teaching and training classes, and contribute to the overall upgrading of the institution.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Department of Civil Engineering at Mohamed Sathak A.J. College of Engineering was established in 2007 and offers undergraduate and postgraduate programs.",
+    "exact": {
+      "year": "2007"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department offers a 4-year B.E Civil Engineering program with 8 semesters and a 3-year lateral entry program with 6 semesters.",
+    "exact": {
+      "duration": "4 years",
+      "semesters": "8"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.E Civil Engineering program has an intake of 30 students, with 15 government seats and 15 management seats.",
+    "exact": {
+      "intake": "30",
+      "government seats": "15",
+      "management seats": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the B.E Civil Engineering program is a pass in Physics, Chemistry, and Mathematics in the qualifying examination.",
+    "exact": {
+      "eligibility": "10+2 system of Education"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The department also offers a 2-year M.E Structural Engineering program with 4 semesters and an intake of 18 students.",
+    "exact": {
+      "duration": "2 years",
+      "semesters": "4",
+      "intake": "18"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The vision of the department is to be a centre of excellence for transforming students into proficient Civil Engineers through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the department is to impart core fundamental knowledge and necessary skills in Civil engineering through innovative teaching and learning methodology.",
+    "exact": {
+      "mission": "M1. Impart core fundamental knowledge"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club at Mohamed Sathak AJ College of Engineering aims to maintain records of sports and games events attended by students and conduct sports events to reward students with trophies and medals.",
+    "exact": {
+      "club_name": "Sports Club"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club has several objectives, including building sportsmanship, fostering friendships, reducing stress, and improving health.",
+    "exact": {
+      "objectives": "sportsmanship, friendships, stress reduction, health improvement"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club's vision is to encourage and motivate students to participate in various sports activities at both inter and intra college level.",
+    "exact": {
+      "vision": "encourage and motivate students"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club's motto is 'Teamwork Makes The Dream Work'.",
+    "exact": {
+      "motto": "Teamwork Makes The Dream Work"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club conducts outdoor games such as Cricket, Football, Volleyball, Basketball, Rugby, Badminton, kho kho, and Throughball.",
+    "exact": {
+      "outdoor_games": "Cricket, Football, Volleyball, Basketball, Rugby, Badminton, kho kho, Throughball"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sports Club also conducts indoor games such as Carrom, Table tennis, and Chess.",
+    "exact": {
+      "indoor_games": "Carrom, Table tennis, Chess"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Fine Arts Club at Mohamed Sathak AJ College of Engineering aims to encourage the budding talent of students and provide opportunities for them to express themselves freely.",
+    "exact": {
+      "club_name": "Fine Arts Club"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Fine Arts Club has several objectives, including imparting skill-based training, providing opportunities for students to express themselves, and organizing competitions and events.",
+    "exact": {
+      "objectives": "skill-based training, self-expression, competitions, events"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Fine Arts Club's motto is to inspire and enable students to actively participate and develop their talent and skills.",
+    "exact": {
+      "motto": "inspire and enable students"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Fine Arts Club's vision is to encourage students to express their thoughts, feelings, and creativity through various visual art forms.",
+    "exact": {
+      "vision": "encourage self-expression"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Science Club at Mohamed Sathak AJ College of Engineering aims to invite eminent scientists to share their experience with students and motivate them to gain scientific knowledge.",
+    "exact": {
+      "club_name": "Science Club"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Science Club consists of a group of students who want to explore the many branches of engineering, mathematics, and science.",
+    "exact": {
+      "club_description": "group of students exploring engineering, mathematics, and science"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.Tech in Computer Science and Business System (CSBS) is a specialized undergraduate engineering program designed to blend core computer science education with insights into business systems and management.",
+    "exact": {
+      "program": "B.Tech in Computer Science and Business System (CSBS)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program is designed in collaboration with industry leaders like Tata Consultancy Services (TCS) to bridge the gap between traditional computer science education and the dynamic needs of the IT and business world.",
+    "exact": {
+      "collaborator": "Tata Consultancy Services (TCS)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The curriculum is designed to ensure that students get better exposure to emerging subjects such as Analytics, Deep learning, Machine Learning, Cloud Computing, Business Analytics, Financial Management, Economics and Internet of Things and Design thinking.",
+    "exact": {
+      "subjects": "Analytics, Deep learning, Machine Learning, Cloud Computing, Business Analytics, Financial Management, Economics, Internet of Things, Design thinking"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The objective of the program is to produce graduates who are not only technically sound in computer science but also understand the fundamentals of business, economics, and management.",
+    "exact": {
+      "objective": "produce graduates who are technically sound in computer science and understand business, economics, and management"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has a balanced curriculum that includes core computer science subjects and business and management subjects.",
+    "exact": {
+      "curriculum": "balanced"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program is designed to ensure that students develop an equal interest and appreciation towards humanity, value added science and other interrelated topics.",
+    "exact": {
+      "topics": "humanity, value added science, interrelated topics"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The students graduating from this program will be in high demand by the industries and will be productive.",
+    "exact": {
+      "demand": "high"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The top recruiters for this program are TCS, Infosys, Wipro, Accenture, CTS, and startups and Fin Tech companies like FSS.",
+    "exact": {
+      "recruiters": "TCS, Infosys, Wipro, Accenture, CTS, FSS"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program offers benefits over regular CSE, including more interdisciplinary exposure, better suited for roles in tech-enabled business functions, and greater alignment with industry expectations.",
+    "exact": {
+      "benefits": "more interdisciplinary exposure, better suited for roles in tech-enabled business functions, greater alignment with industry expectations"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program duration is 4 years for regular students and 3 years for lateral entry students, with 8 semesters for regular students and 6 semesters for lateral entry students.",
+    "exact": {
+      "duration": "4 years (regular), 3 years (lateral entry)",
+      "semesters": "8 (regular), 6 (lateral entry)"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The intake for the program is 30 students, with 15 government seats and 15 management seats.",
+    "exact": {
+      "intake": "30",
+      "government seats": "15",
+      "management seats": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the program is 10+2 system of education, with a pass in Physics, Chemistry, and Mathematics in the qualifying examination.",
+    "exact": {
+      "eligibility": "10+2 system of education, pass in Physics, Chemistry, and Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program offers scope for higher studies, including M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher studies": "M.E., M.Tech., M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The vision of the program is to be a centre of excellence for transforming students into proficient IT professionals with business skills through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence for transforming students into proficient IT professionals with business skills"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the program is to impart core fundamental knowledge and necessary skills in Information Science and Business through innovative teaching and learning methodology.",
+    "exact": {
+      "mission": "impart core fundamental knowledge and necessary skills in Information Science and Business"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Computer Science and Engineering department offers a B.E. programme with a duration of 4 years and 8 semesters, and a lateral entry programme with a duration of 3 years and 6 semesters.",
+    "exact": {
+      "duration": "4 years",
+      "no_of_semesters": "8"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.E. Computer Science and Engineering programme has an intake of 60 students, with 30 government seats and 30 management seats.",
+    "exact": {
+      "intake": "60",
+      "government_seats": "30",
+      "management_seats": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the B.E. Computer Science and Engineering programme is a pass in the 10+2 system of education with physics, chemistry, and mathematics.",
+    "exact": {
+      "eligibility": "10+2 system of education",
+      "subjects": "physics, chemistry, mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The M.E. Computer Science and Engineering programme has a duration of 2 years and 4 semesters, with an intake of 9 students.",
+    "exact": {
+      "duration": "2 years",
+      "no_of_semesters": "4",
+      "intake": "9"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has a vision to be a centre of excellence for transforming students into proficient Computer Science Engineers through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has a mission to impart core fundamental knowledge and necessary skills in Computer Science and Engineering through innovative teaching and learning methodology.",
+    "exact": {
+      "mission": "impart core fundamental knowledge"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme educational objectives include preparing graduates for analysing, designing, developing and testing software solutions and products with creativity and sustainability.",
+    "exact": {
+      "peo1": "analysing, designing, developing and testing software solutions"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme specific outcomes include developing creative solutions by adapting emerging technologies and tools for real-time applications of industry.",
+    "exact": {
+      "pso1": "developing creative solutions"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme outcomes include applying the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.",
+    "exact": {
+      "po1": "applying the knowledge of mathematics, science, engineering fundamentals"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college offers undergraduate programs in 12 departments, including Civil Engineering, Computer Science and Engineering, and Mechanical Engineering, under Regulations 2024.",
+    "exact": {
+      "departments": "12",
+      "regulations": "2024"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The undergraduate departments include Civil Engineering, Computer Science and Engineering, Computer Science and Engineering with specialization in Artificial Intelligence and Machine Learning, and others.",
+    "exact": {
+      "department1": "Civil Engineering",
+      "department2": "Computer Science and Engineering",
+      "department3": "Computer Science and Engineering w/s in Artificial Intelligence and Machine Learning"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college also offers postgraduate programs in 2 departments, including Computer Science and Engineering and Stuctural Engineering, under Regulations 2024.",
+    "exact": {
+      "departments": "2",
+      "regulations": "2024"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The postgraduate departments include Computer Science and Engineering and Stuctural Engineering.",
+    "exact": {
+      "department1": "Computer Science and Engineering",
+      "department2": "Stuctural Engineering"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The B.E. Computer Science and Engineering with Specialization in Cyber Security is an undergraduate engineering degree program focused on equipping students with the knowledge and skills needed to protect computer systems, networks, and data from cyber threats and attacks.",
+    "exact": {
+      "degree": "B.E. Computer Science and Engineering with Specialization in Cyber Security"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program is designed to meet the growing demand for professionals in the field of cyber security, with a focus on security principles, network security, cryptography, ethical hacking, and digital forensics.",
+    "exact": {
+      "field": "cyber security"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program includes foundational courses in computer science, such as Data Structures, Algorithms, and Operating Systems, as well as hands-on learning labs and simulation environments for penetration testing, secure coding, and threat analysis.",
+    "exact": {
+      "courses": "Data Structures, Algorithms, Operating Systems"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program also covers legal and ethical foundations, including cyber laws and ethics, compliance, and governance, as well as emerging technologies such as security in AI, IoT, Cloud computing, and Block chain.",
+    "exact": {
+      "technologies": "AI, IoT, Cloud computing, Block chain"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Top recruiters for the program include Government & Defense Agencies, IT and Cyber Security Firms, Banks and Financial Institutions, Healthcare and Insurance Companies, and E-commerce and Cloud Service Providers.",
+    "exact": {
+      "recruiters": "Government & Defense Agencies, IT and Cyber Security Firms, Banks and Financial Institutions, Healthcare and Insurance Companies, E-commerce and Cloud Service Providers"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program is offered as a 4-year regular course or a 3-year lateral entry course, with a total intake of 30 students, divided into 15 government seats and 15 management seats.",
+    "exact": {
+      "duration": "4 years",
+      "intake": "30",
+      "government seats": "15",
+      "management seats": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Eligibility for the program requires a 10+2 system of education, with a pass in Physics, Chemistry, and Mathematics in the qualifying examination.",
+    "exact": {
+      "eligibility": "10+2 system of education",
+      "subjects": "Physics, Chemistry, Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has a scope for higher studies, including M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher studies": "M.E., M.Tech., M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The vision of the program is to be a centre of excellence for transforming students into proficient Cyber Security Specialists through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence for Cyber Security Specialists"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the program includes imparting core fundamental knowledge and necessary skills in Cyber Security, inculcating critical thinking and ethics, and cultivating all-round competencies for career and higher education.",
+    "exact": {
+      "mission": "impart core fundamental knowledge and necessary skills in Cyber Security"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college has a Supporting Department.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.Tech ECE with Specialization in Advanced Communication Technology program is a 4-year regular or 3-year lateral entry course with 8 or 6 semesters, respectively, and has an intake of 30 students.",
+    "exact": {
+      "duration": "4 years",
+      "no_of_semesters": "8",
+      "intake": "30"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program is designed to develop industry-competent professionals in Advanced Communication Technology, with a focus on multidisciplinary education and NEP guidelines.",
+    "exact": {
+      "program_name": "B.Tech ECE with Specialization in Advanced Communication Technology"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program covers modern communication systems such as Wireless & Optical Communication, RF & Microwave Communication, and Laser & Light Wave Communication, among others.",
+    "exact": {
+      "communication_systems": "Wireless & Optical Communication, RF & Microwave Communication, Laser & Light Wave Communication"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Students will have professional prospects in various industries, including network providers, manufacturing, healthcare, education, and IT sector, among others.",
+    "exact": {
+      "industries": "network providers, manufacturing, healthcare, education, IT sector"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has a strong emphasis on developing practical skills and in-depth knowledge required by today's industries.",
+    "exact": {
+      "program_focus": "practical skills, in-depth knowledge"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The eligibility criteria for the program is 10+2 system of education with a pass in Physics, Chemistry, and Mathematics in the qualifying examination.",
+    "exact": {
+      "eligibility_criteria": "10+2 system of education, Physics, Chemistry, Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has a vision to be a centre of excellence for transforming students into proficient Communication Engineers through sustainable practices.",
+    "exact": {
+      "program_vision": "centre of excellence, proficient Communication Engineers, sustainable practices"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program has a mission to impart core fundamental knowledge and necessary skills in communication systems through innovative teaching and learning methodology.",
+    "exact": {
+      "program_mission": "core fundamental knowledge, necessary skills, communication systems, innovative teaching and learning methodology"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Department of Electronics Engineering with specialization in VLSI Design and Technology offers a B.Tech program to meet the growing demand for integrated chips and sensors in the digital economy.",
+    "exact": {
+      "department": "Electronics Engineering",
+      "specialization": "VLSI Design and Technology"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The global semiconductor market has grown exponentially, reaching $590 billion in 2021, and is expected to grow to $1 trillion by 2030, driven by technologies such as AI, EV, 5G Networks, and IoT.",
+    "exact": {
+      "market_value_2021": "$590 billion",
+      "projected_market_value_2030": "$1 trillion"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "India imports integrated chips worth billions of US dollars, and the government has initiated policies such as the Electronics System Design and Manufacturing policy to encourage indigenous manufacturing of integrated chips.",
+    "exact": {
+      "import_value": "billions of US dollars"
+    },
+    "category": "general",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Government of India has announced a Semiconductor scheme with an outlay of Rs 76,000 Crore to contribute significantly to the global semiconductor market and establish a Semiconductor ecosystem in India.",
+    "exact": {
+      "scheme_outlay": "Rs 76,000 Crore"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The B.Tech program in Electronics Engineering with specialization in VLSI Design and Technology aims to produce outstanding graduates who can contribute to the growth of the semiconductor industry in India.",
+    "exact": {
+      "program": "B.Tech in Electronics Engineering with specialization in VLSI Design and Technology"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has an estimated manpower requirement of 85,000 over the next five to seven years, with levels of B.Tech, M.Tech, and Ph.Ds in the field of VLSI Technology, Semiconductor Manufacturing, Electronics, Electrical, Mechanical, and Chemical Engineering streams.",
+    "exact": {
+      "manpower_requirement": "85,000",
+      "time_period": "five to seven years"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Electronics and Communication Engineering department offers a 4-year B.E. program with 8 semesters, and a 3-year lateral entry program with 6 semesters.",
+    "exact": {
+      "duration": "4 years",
+      "semesters": "8",
+      "lateral_entry_duration": "3 years",
+      "lateral_entry_semesters": "6"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program has a total intake of 60 students, with 30 government seats and 30 management seats.",
+    "exact": {
+      "total_intake": "60",
+      "government_seats": "30",
+      "management_seats": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the program is a 10+2 system of education with a pass in Physics, Chemistry, and Mathematics.",
+    "exact": {
+      "eligibility": "10+2",
+      "subjects": "Physics, Chemistry, Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The department has a vision to be a centre of excellence for transforming students into proficient Electronics and Communication Engineers.",
+    "exact": {
+      "vision": "centre of excellence"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the department is to impart core fundamental knowledge and necessary skills in Electronics and Communication Engineering.",
+    "exact": {
+      "mission": "impart core fundamental knowledge"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program educational objectives include preparing graduates for designing Electronics and Communication components and systems with creativity and sustainability.",
+    "exact": {
+      "peo1": "designing Electronics and Communication components and systems"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program specific outcomes include applying acquired knowledge to analyze, develop, and test creative solutions for Electronics and Communication Systems.",
+    "exact": {
+      "pso1": "apply acquired knowledge"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The career opportunities for graduates include working in companies such as Aagree Equipments Pvt. Ltd., Apps Daily Solution, and O M Innovation Services.",
+    "exact": {
+      "companies": "Aagree Equipments Pvt. Ltd., Apps Daily Solution, O M Innovation Services"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The scope for higher studies includes M.E., M.Tech., and M.B.A. programs.",
+    "exact": {
+      "higher_studies": "M.E., M.Tech., M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Department of Electrical and Electronics Engineering offers a 4-year B.E. program with 8 semesters, and a 3-year lateral entry program with 6 semesters.",
+    "exact": {
+      "duration": "4 years",
+      "no_of_semesters": "8"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program has a total intake of 30 seats, with 15 government seats and 15 management seats.",
+    "exact": {
+      "intake": "30",
+      "government_seats": "15",
+      "management_seats": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Eligibility for the program requires a 10+2 system of education with a pass in Physics, Chemistry, and Mathematics.",
+    "exact": {
+      "eligibility": "10+2",
+      "subjects": "Physics, Chemistry, Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program is grounded in science and maths, and offers many opportunities to solve real-time problems.",
+    "exact": {
+      "subjects": "science, maths"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Electrical engineering jobs represent over 25% of all available jobs in engineering, and 30% of government jobs in India are from electrical engineering sectors.",
+    "exact": {
+      "percentage_of_jobs": "25%",
+      "government_jobs": "30%"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Electrical and electronics engineers can enter into various job markets, including CSE, ECE, ICE, Robotics, Mechanical engineering, and Healthcare sectors.",
+    "exact": {
+      "job_markets": "CSE, ECE, ICE, Robotics, Mechanical engineering, Healthcare"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program has a vision to be a centre of excellence for transforming students into proficient Electrical and Electronics Engineers through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the program includes imparting core fundamental knowledge, inculcating critical thinking and ethics, and cultivating all-round competencies.",
+    "exact": {
+      "mission": "impart core fundamental knowledge, inculcate critical thinking and ethics, cultivate all-round competencies"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The program offers career opportunities in various fields, including Circuit Designers, Energy Efficiency Engineer, Distribution Planning Engineer, Power System Engineer, Research Engineer, Electrical Safety Engineer, and Power Plant Engineer.",
+    "exact": {
+      "career_opportunities": "Circuit Designers, Energy Efficiency Engineer, Distribution Planning Engineer, Power System Engineer, Research Engineer, Electrical Safety Engineer, Power Plant Engineer"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The program also offers scope for higher studies, including M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher_studies": "M.E., M.Tech., M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Engineering College is one of the institutions in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Engineering College",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Hamid College of Arts and Science for Women is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Hamid College of Arts and Science for Women",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Syed Hameedha Arts & Science College is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Syed Hameedha Arts & Science College",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Polytechnic College is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Polytechnic College",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak I.T.I. is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak I.T.I.",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Syed Hameedha Arabic College is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Syed Hameedha Arabic College",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Dastagir Matriculation Hr. Sec. School is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Dastagir Matriculation Hr. Sec. School",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Kabeer Public School (CBSE) is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Kabeer Public School (CBSE)",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Dasthagir Teacher Training College is an institution in Kilakarai and Ramanathapuram.",
+    "exact": {
+      "institution": "Mohamed Sathak Dasthagir Teacher Training College",
+      "location": "Kilakarai and Ramanathapuram"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. College of Engineering is one of the institutions in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak A.J. College of Engineering",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. Academy of Architecture is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak A.J. Academy of Architecture",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak College of Arts And Science is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak College of Arts And Science",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. College of Nursing is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak A.J. College of Nursing",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. College of Pharmacy is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak A.J. College of Pharmacy",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. College of Physiotherapy is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak A.J. College of Physiotherapy",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Teacher Training College is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak Teacher Training College",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Matric & Hr. Sec. School is an institution in Chennai.",
+    "exact": {
+      "institution": "Mohamed Sathak Matric & Hr. Sec. School",
+      "location": "Chennai"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Group of Institutions has a brochure available for download.",
+    "exact": {
+      "brochure": "Brochure.pdf"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Boys Hostel is located within the campus and has 3 blocks with 233 non-AC rooms and 6 AC rooms, accommodating 480 boy students with 2 persons per room.",
+    "exact": {
+      "number_of_blocks": "3",
+      "number_of_non_ac_rooms": "233",
+      "number_of_ac_rooms": "6",
+      "number_of_boys": "480",
+      "persons_per_room": "2"
+    },
+    "category": "placement",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Girls Hostel is located at Sholinganallur, 5 KM away from the campus, and has 71 rooms accommodating 3 girl students per room.",
+    "exact": {
+      "location": "Sholinganallur",
+      "distance_from_campus": "5 KM",
+      "number_of_rooms": "71",
+      "number_of_girls": "210",
+      "persons_per_room": "3"
+    },
+    "category": "placement",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The hostels have facilities such as cot, chair, lamp, fan, water heater, WiFi, and TV hall.",
+    "exact": {
+      "facilities": "cot, chair, lamp, fan, water heater, WiFi, TV hall"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The hostels have a hygienic canteen, entertainment hall with LCD TV, indoor game facilities, reading room, and library facility.",
+    "exact": {
+      "facilities": "hygienic canteen, entertainment hall, LCD TV, indoor game facilities, reading room, library facility"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The College Main Library and Computer Centre are open till 7:00 PM for hostellers.",
+    "exact": {
+      "library_timings": "7:00 PM",
+      "computer_centre_timings": "7:00 PM"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Girls Hostel has library and computer facilities available till 9:00 PM.",
+    "exact": {
+      "library_timings": "9:00 PM",
+      "computer_facility_timings": "9:00 PM"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Students must occupy the rooms allotted to them by the Warden and refrain from anti-social activities.",
+    "exact": {
+      "rules": "occupy allotted rooms, refrain from anti-social activities"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Students are responsible for the cleanliness of their rooms and must follow the rules.",
+    "exact": {
+      "rules": "cleanliness of rooms"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Visitors are allowed on holidays from 11:00 AM to 6:00 PM.",
+    "exact": {
+      "visitor_timings": "11:00 AM to 6:00 PM"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Hostel Mess serves vegetarian and non-vegetarian food, with mess charges collected annually at the time of admission.",
+    "exact": {
+      "mess_charges": "annual",
+      "food_types": "vegetarian, non-vegetarian"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mess hall has separate seating arrangements for boys and girls, with timings from 7:00 AM to 8:00 AM for breakfast, 1:00 PM to 1:45 PM for lunch, and 7:00 PM to 8:30 PM for dinner on working days.",
+    "exact": {
+      "mess_timings": "7:00 AM to 8:00 AM, 1:00 PM to 1:45 PM, 7:00 PM to 8:30 PM"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mess hall has separate seating arrangements for boys and girls, with timings from 7:30 AM to 9:00 AM for breakfast, 12:30 PM to 2:00 PM for lunch, and 7:00 PM to 9:00 PM for dinner on holidays.",
+    "exact": {
+      "mess_timings": "7:30 AM to 9:00 AM, 12:30 PM to 2:00 PM, 7:00 PM to 9:00 PM"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre held a Smart India Hackathon 2025 Internal Edition on 11 Sep 2025.",
+    "exact": {
+      "date": "11 Sep 2025",
+      "event": "Smart India Hackathon 2025 Internal Edition"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A Social Media Awareness Program was conducted on 02 Sep 2025.",
+    "exact": {
+      "date": "02 Sep 2025",
+      "event": "Social Media Awareness Program"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Life Skill Empowerment Program took place on 01 Sep 2025.",
+    "exact": {
+      "date": "01 Sep 2025",
+      "event": "Life Skill Empowerment Program"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The SATHAK GRAND MASTER, a State Level Chess Tournament, was held on 30 July 2025.",
+    "exact": {
+      "date": "30 July 2025",
+      "event": "SATHAK GRAND MASTER"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A Workshop on Design Thinking 2025 was organized on 18 and 19 July 2025.",
+    "exact": {
+      "date": "18 and 19 July 2025",
+      "event": "Workshop on Design Thinking 2025"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "TedX 2025 was held on 10 Mar 2025.",
+    "exact": {
+      "date": "10 Mar 2025",
+      "event": "TedX 2025"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Sheros 2025 International Women's Day Celebration took place on 8 Mar 2025.",
+    "exact": {
+      "date": "8 Mar 2025",
+      "event": "Sheroes 2025 International Women's Day Celebration"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "An Alumni Meet for 2005 to 2020 passed out batches was held on 02 Feb 2025.",
+    "exact": {
+      "date": "02 Feb 2025",
+      "event": "Alumni Meet"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "A Workshop on Basics of Photography and Video Editing was organized by the Photography Club on 08 Nov 2024.",
+    "exact": {
+      "date": "08 Nov 2024",
+      "event": "Workshop on Basics of Photography and Video Editing"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mr. Purushothaman N, batch 2001-2005, is an Assistant Vice President at Standard Chartered.",
+    "exact": {
+      "name": "Mr. Purushothaman N",
+      "batch": "2001-2005",
+      "designation": "Assistant Vice President",
+      "organization": "Standard Chartered"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Ms. Sabana Yasmi S, batch 2001-2005, is a Vice President at DBS Bank.",
+    "exact": {
+      "name": "Ms. Sabana Yasmi S",
+      "batch": "2001-2005",
+      "designation": "Vice President",
+      "organization": "DBS Bank"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Saravanan Perumal, batch 2001-2005, is a Senior Manager at LTI Mindtree.",
+    "exact": {
+      "name": "Mr. Saravanan Perumal",
+      "batch": "2001-2005",
+      "designation": "Senior Manager",
+      "organization": "LTI Mindtree"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Ahamed Jameel A.M.T, batch 2001-2005, is a Technical Consultant at HCL.",
+    "exact": {
+      "name": "Mr. Ahamed Jameel A.M.T",
+      "batch": "2001-2005",
+      "designation": "Technical Consultant",
+      "organization": "HCL"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Feroz Khan N, batch 2001-2005, is a General Manager at Maersk.",
+    "exact": {
+      "name": "Mr. Feroz Khan N",
+      "batch": "2001-2005",
+      "designation": "General Manager",
+      "organization": "Maersk"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Fayad Ahamed, batch 2001-2005, is a Project Manager at Union Insurance Company, Dubai.",
+    "exact": {
+      "name": "Mr. Fayad Ahamed",
+      "batch": "2001-2005",
+      "designation": "Project Manager",
+      "organization": "Union Insurance Company, Dubai"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Mohammed Azeem, batch 2001-2005, is a Senior Manager - Sales at Allied Motors, Dubai.",
+    "exact": {
+      "name": "Mr. Mohammed Azeem",
+      "batch": "2001-2005",
+      "designation": "Senior Manager - Sales",
+      "organization": "Allied Motors, Dubai"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Srikanth K, batch 2001-2005, is a Technical Architect at TeleApps.",
+    "exact": {
+      "name": "Mr. Srikanth K",
+      "batch": "2001-2005",
+      "designation": "Technical Architect",
+      "organization": "TeleApps"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Majed Arafat, batch 2001-2005, is an IT Consultant at TCS.",
+    "exact": {
+      "name": "Mr. Majed Arafat",
+      "batch": "2001-2005",
+      "designation": "IT Consultant",
+      "organization": "TCS"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Santhosh Kumar V, batch 2001-2005, is a Technical Architect at HCL.",
+    "exact": {
+      "name": "Mr. Santhosh Kumar V",
+      "batch": "2001-2005",
+      "designation": "Technical Architect",
+      "organization": "HCL"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Syed Faiyaz Hussain, batch 2002-2006, is a Digital Product Manager at Anthem, USA.",
+    "exact": {
+      "name": "Mr. Syed Faiyaz Hussain",
+      "batch": "2002-2006",
+      "designation": "Digital Product Manager",
+      "organization": "Anthem, USA"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Ms. Harini Raman, batch 2002-2006, is a Business Analyst at IBM.",
+    "exact": {
+      "name": "Ms. Harini Raman",
+      "batch": "2002-2006",
+      "designation": "Business Analyst",
+      "organization": "IBM"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Chandra Bose, batch 2003-2007, is a Senior Delivery Manager at CMA CGM India.",
+    "exact": {
+      "name": "Mr. Chandra Bose",
+      "batch": "2003-2007",
+      "designation": "Senior Delivery Manager",
+      "organization": "CMA CGM India"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Arun Natarajan, batch 2003-2007, is a Principal Consultant at Emirates NBD.",
+    "exact": {
+      "name": "Mr. Arun Natarajan",
+      "batch": "2003-2007",
+      "designation": "Principal Consultant",
+      "organization": "Emirates NBD"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Ms. Misbah Khairunissa A, batch 2005-2009, is a Senior HR Manager at Savista.",
+    "exact": {
+      "name": "Ms. Misbah Khairunissa A",
+      "batch": "2005-2009",
+      "designation": "Senior HR Manager",
+      "organization": "Savista"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Ms. Lakshmi Narayanan, batch 2005-2009, is an HR Manager at Valeo.",
+    "exact": {
+      "name": "Ms. Lakshmi Narayanan",
+      "batch": "2005-2009",
+      "designation": "HR Manager",
+      "organization": "Valeo"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Rahul Murali, batch 2006-2010, is a Lead Product Manager at Thoughtworks.",
+    "exact": {
+      "name": "Mr. Rahul Murali",
+      "batch": "2006-2010",
+      "designation": "Lead Product Manager",
+      "organization": "Thoughtworks"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Vinoth Kumar Manickam, batch 2006-2010, is a Lead Developer at Striven.",
+    "exact": {
+      "name": "Mr. Vinoth Kumar Manickam",
+      "batch": "2006-2010",
+      "designation": "Lead Developer",
+      "organization": "Striven"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Sathakathulla E, batch 2006-2010, is an eApps Testing Lead at HCL.",
+    "exact": {
+      "name": "Mr. Sathakathulla E",
+      "batch": "2006-2010",
+      "designation": "eApps Testing Lead",
+      "organization": "HCL"
+    },
+    "category": "placement",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Information Technology Department plays a vital role in every aspect of human life, studying and using systems for storing, retrieving, and processing information.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The introduction of computers has changed the business world forever, ensuring smooth running and faster access to global market changes.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Information technology has increased globalization and brought the world closer, enabling quick and easy information sharing and communication across the globe.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The key fields in Information Technology include Machine Learning, Deep Learning, Data Science, Artificial Intelligence, Cloud Computing, Networking, Mobile computing, and Block Chain, with tremendous job openings.",
+    "exact": {
+      "key fields": "Machine Learning, Deep Learning, Data Science, Artificial Intelligence, Cloud Computing, Networking, Mobile computing, Block Chain"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.Tech. Information Technology programme has a duration of 4 years for regular students and 3 years for lateral entry students, with 8 semesters for regular and 6 semesters for lateral entry.",
+    "exact": {
+      "duration": "4 years (Regular), 3 years (Lateral Entry)",
+      "semesters": "8 (Regular), 6 (Lateral Entry)"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The programme has a total intake of 60 seats, with 30 government seats and 30 management seats, and eligibility requires a 10+2 system of education with passes in Physics, Chemistry, and Mathematics.",
+    "exact": {
+      "intake": "60",
+      "government seats": "30",
+      "management seats": "30",
+      "eligibility": "10+2 system of Education, passes in Physics, Chemistry, and Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The department's vision is to be a centre of excellence for transforming students into proficient IT professionals through sustainable practices.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department's mission includes imparting core fundamental knowledge and necessary skills in Information Technology, inculcating critical thinking and ethics, and cultivating all-round competencies for career and higher education.",
+    "exact": {
+      "mission": "M1. Impart core fundamental knowledge and necessary skills in Information Technology, M2. Inculcate critical thinking, ethics, lifelong learning and creativity, M3. Cultivate the students with all-round competencies"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme educational objectives (PEOs) include preparing graduates for designing and developing efficient Information Technology systems and software, skilled in modern tools for critical problem-solving, and prepared with managerial and leadership skills.",
+    "exact": {
+      "PEOs": "PEO1. Graduates will be prepared for designing and developing efficient Information Technology systems and software, PEO2. Graduates will be skilled in the use of modern tools, PEO3. Graduates will be prepared with managerial and leadership skills"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme specific outcomes (PSOs) include applying acquired knowledge and adapting modern tools to provide innovative solutions in Networking and Cyber Security applications, and designing, implementing, and testing mobile apps and software solutions.",
+    "exact": {
+      "PSOs": "PSO1. Apply the acquired knowledge and adapt modern tools, PSO2. Design, implement and test mobile apps and software solutions"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The programme outcomes (PO) include applying engineering knowledge to solve complex engineering problems, identifying and analyzing complex engineering problems, and designing solutions for complex engineering problems.",
+    "exact": {
+      "PO": "PO1. Engineering Knowledge, PO2. Problem Analysis, PO3. Design/Development Of Solutions"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Learning Centre Library is the heart of every academic institution and encourages students and staff to make the best use of its resources.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library's prime objective is to provide the right information to the right readers at the right time in the right manner.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library is housed in a spacious area of 8978 Sq.ft, fully computerized with more than 29853 books and 1885 reference volumes.",
+    "exact": {
+      "area": "8978 Sq.ft",
+      "books": "29853",
+      "reference_volumes": "1885"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library subscribes to around 35 specialized printed journals and 20 magazines.",
+    "exact": {
+      "journals": "35",
+      "magazines": "20"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library is a member of DELNET and J-Gate database, subscribed yearly.",
+    "exact": {
+      "database": "DELNET, J-Gate"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library has a collection of 29853 volumes, 5628 titles, 1885 reference books, and 3790 e-books.",
+    "exact": {
+      "volumes": "29853",
+      "titles": "5628",
+      "reference_books": "1885",
+      "e_books": "3790"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library working hours are from 8.00 A.M. to 7.00 P.M. from Monday to Saturday and 10.00 A.M. to 4.00 P.M. on Sundays.",
+    "exact": {
+      "working_hours": "8.00 A.M. to 7.00 P.M. (Monday to Saturday), 10.00 A.M. to 4.00 P.M. (Sunday)"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library has a list of printed journals with 37 journals across various departments.",
+    "exact": {
+      "journals": "37"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library provides access to open access e-journals through providers like Directory of Open Access Journals, BioMed Central, and more.",
+    "exact": {
+      "providers": "Directory of Open Access Journals, BioMed Central, etc."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library provides access to e-library resources through providers like Delnet, J-Gate, and more.",
+    "exact": {
+      "providers": "Delnet, J-Gate, etc."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The library provides access to e-books through databases like Directory of Open Access Books, E-Books Directory, and more.",
+    "exact": {
+      "databases": "Directory of Open Access Books, E-Books Directory, etc."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Mechanical Engineering department is the oldest and 2nd largest engineering discipline, providing a solid foundation for professional engineering practices.",
+    "exact": {
+      "department": "Mechanical Engineering"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Mechanical Engineering programme has a duration of 4 years for regular students and 3 years for lateral entry students, with 8 semesters for regular and 6 semesters for lateral entry.",
+    "exact": {
+      "duration": "4 years",
+      "semesters": "8"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Mechanical Engineering programme has an intake of 60 students, with 30 government seats and 30 management seats.",
+    "exact": {
+      "intake": "60",
+      "government seats": "30",
+      "management seats": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for the Mechanical Engineering programme is a pass in Physics, Chemistry, and Mathematics in the qualifying examination, following the 10+2 system of education.",
+    "exact": {
+      "eligibility": "10+2 system of Education",
+      "subjects": "Physics, Chemistry, and Mathematics"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Mechanical Engineering programme offers career opportunities as planners, designers, constructors, operators, stewards of the environment, innovators, integrators of technology, managers of risk, and leaders in public policy.",
+    "exact": {
+      "career opportunities": "planners, designers, constructors, operators, stewards of the environment, innovators, integrators of technology, managers of risk, and leaders in public policy"
+    },
+    "category": "placement",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Mechanical Engineering programme has scope for higher studies, including M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher studies": "M.E., M.Tech., and M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The vision of the Mechanical Engineering department is to be a centre of excellence for transforming students into proficient mechanical engineers through sustainable practices.",
+    "exact": {
+      "vision": "centre of excellence for transforming students into proficient mechanical engineers through sustainable practices"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The mission of the Mechanical Engineering department includes imparting core fundamental knowledge and necessary skills, inculcating critical thinking and ethics, and cultivating all-round competencies for career and higher education.",
+    "exact": {
+      "mission": "imparting core fundamental knowledge and necessary skills, inculcating critical thinking and ethics, and cultivating all-round competencies for career and higher education"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak Trust was established on 26 October 1973 at Kilakarai to provide quality education to deprived people from rural and financially challenged backgrounds.",
+    "exact": {
+      "date": "26 October 1973",
+      "location": "Kilakarai"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The first self-financing engineering college in the country was established by the Trust in 1984 at Kilakarai.",
+    "exact": {
+      "year": "1984",
+      "location": "Kilakarai"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Trust has 18 educational institutions at present in Kilakarai, Ramanathapuram, and Chennai.",
+    "exact": {
+      "number_of_institutions": "18",
+      "locations": "Kilakarai, Ramanathapuram, Chennai"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak A.J. College of Engineering, Chennai, offers quality education with academic excellence to meet industry requirements.",
+    "exact": {
+      "college_name": "Mohamed Sathak A.J. College of Engineering",
+      "location": "Chennai"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college has a Chairman who invites prospective students to visit the campus and experience the state-of-the-art facilities.",
+    "exact": {
+      "designation": "Chairman"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college has various committees, including the Governing Council, Planning & Monitoring Board, and Anti-Ragging Committee & Squad.",
+    "exact": {
+      "committee_names": "Governing Council, Planning & Monitoring Board, Anti-Ragging Committee & Squad"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The principal, Dr. K.S. Srinivasan, welcomes parents and prospective students, emphasizing the institution's commitment to providing an excellent all-round education with state-of-the-art facilities.",
+    "exact": {
+      "name": "Dr. K.S. Srinivasan",
+      "title": "Principal"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The institution focuses on building the powers of the human mind and spirit, rather than just acquiring information, to develop multidimensional students.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The institution evaluates students based on their physical, mental, social, emotional, and intellectual development to provide a holistic education.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The institution aims to develop skilled and outstanding students who can pursue their interests and strengths to the best of their ability, preparing them to face Industry 4.0 challenges.",
+    "exact": {},
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The institution practices a holistic approach with a new structure that stimulates young minds, encouraging innovative and creative thinking with freedom to learn.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The principal wishes students a memorable studentship and hopes they will achieve greater heights and bring laurels to the institution.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Computer Society of India (CSI) has a vision of \"IT for Masses\" and works towards making the IT profession a preferred choice among all sections of society.",
+    "exact": {
+      "vision": "IT for Masses"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI regularly organizes conferences, conventions, lectures, projects, and awards to fulfill its objective.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI provides training and skill updating for IT professionals through its Education Directorate.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI helps physically challenged citizens by providing training through its 'Punarjani' program.",
+    "exact": {
+      "program": "Punarjani"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI has a strong Educational Directorate that undertakes activities related to certification of professionals in the latest technologies.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI offers distance education in Business Domain areas with technology-enabled learning and personal counseling.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI provides professional counseling to its members through various events and conferences.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Our college received the Best Supporting College award from the CSI Kancheepuram Chapter.",
+    "exact": {
+      "award": "Best Supporting College"
+    },
+    "category": "general",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. D. Weslin, our faculty member, received the Active Participant award from the CSI Kancheepuram Chapter.",
+    "exact": {
+      "award": "Active Participant"
+    },
+    "category": "general",
+    "importance": "high"
+  },
+  {
+    "narrative": "Dr. K.S. Srinivasan is the Principal of Mohamed Sathak AJ College of Engineering and can be contacted at 9150575066 or principal@-edu.in.",
+    "exact": {
+      "name": "Dr. K.S. Srinivasan",
+      "designation": "Principal",
+      "phone": "9150575066",
+      "email": "principal@-edu.in"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. I. Manju is a Professor in the Department of ECE and can be contacted at 9949055026 or ece.manju@-edu.in.",
+    "exact": {
+      "name": "Dr. I. Manju",
+      "designation": "Professor",
+      "phone": "9949055026",
+      "email": "ece.manju@-edu.in"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. D. Weslin is an Associate Professor in the Department of IT and can be contacted at 9715202533 or it.weslin@-edu.in.",
+    "exact": {
+      "name": "Dr. D. Weslin",
+      "designation": "Associate Professor",
+      "phone": "9715202533",
+      "email": "it.weslin@-edu.in"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Yogesh R is the President of the CSI Student Branch and is from the IT department, batch 2022-2026.",
+    "exact": {
+      "name": "Yogesh R",
+      "designation": "President",
+      "department": "IT",
+      "batch": "2022-2026"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Saqlin Mustaq M is the Vice President of the CSI Student Branch and is from the AI&DS department, batch 2023-2027.",
+    "exact": {
+      "name": "Saqlin Mustaq M",
+      "designation": "Vice President",
+      "department": "AI&DS",
+      "batch": "2023-2027"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The CSI Inaugural Function was held on 28.02.23 with 200 participants and was coordinated by Mrs. Viswajaa S and Mr. Pandiyan G.",
+    "exact": {
+      "date": "28.02.23",
+      "participants": "200",
+      "coordinators": "Mrs. Viswajaa S, Mr. Pandiyan G"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A guest lecture on 'Voice over IP' was held on 22.03.23 with 100 participants and was coordinated by Mrs. Gayathiri and Mrs. Aiswarya M S.",
+    "exact": {
+      "date": "22.03.23",
+      "participants": "100",
+      "coordinators": "Mrs. Gayathiri, Mrs. Aiswarya M S"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A guest lecture on 'Digital Marketing' was held on 17.03.23 with 110 participants and was coordinated by Mr. Rajasekar R and Mrs. Aysha Surfeen M A.",
+    "exact": {
+      "date": "17.03.23",
+      "participants": "110",
+      "coordinators": "Mr. Rajasekar R, Mrs. Aysha Surfeen M A"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "An interactive session on 'Innovation & Invention in AI Technology' was held on 10.03.23 with 100 participants and was coordinated by Mr. Vigneshwaran and Mr. Hamer Shield J M.",
+    "exact": {
+      "date": "10.03.23",
+      "participants": "100",
+      "coordinators": "Mr. Vigneshwaran, Mr. Hamer Shield J M"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A session on 'Benefits of CSI membership' was held on 20.02.20 with 200 participants and was coordinated by Mrs. S Kayalvizhi and Mrs. Bapitha Rani.",
+    "exact": {
+      "date": "20.02.20",
+      "participants": "200",
+      "coordinators": "Mrs. S Kayalvizhi, Mrs. Bapitha Rani"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell aims to nurture research culture in the College by promoting research in newly emerging and challenging areas of Engineering, Technology, Science and Humanities.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell encourages students and faculty members to carry out research in the fields of Engineering, Technology, Science and Humanities by providing necessary facilities and infrastructures required for carrying out research.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell creates zeal among the students and faculty towards research and innovation and encourages them to publish their findings in conferences and journals.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell assists students to apply funding for conducting research under student project scheme to various funding agencies like TNSCST, MSME, IEI (I) etc.",
+    "exact": {
+      "agencies": "TNSCST, MSME, IEI (I)"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell works closely with the industry to understand their needs that eventually will result in new or improved products, processes, systems or services that can increase the company's productivity and also promote Institute- Industry Collaboration.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell supports the government in serving the society by taking up sponsored projects offered by agencies such as TNSCST, DST, AICTE, UGC, ISRO, DRDO, CSIR, DBT etc.",
+    "exact": {
+      "agencies": "TNSCST, DST, AICTE, UGC, ISRO, DRDO, CSIR, DBT"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell enhances the general research capability of budding engineers by way of participating in conferences, seminars, workshops, project competition, etc.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell organizes various workshops/ seminar/ trainings related to promotion of research.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Research and Development Cell encourages both students and faculty to apply copyrights and patents.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr.B.Janarthanan is the Convener of the Research Advisory Committee.",
+    "exact": {
+      "name": "Dr.B.Janarthanan",
+      "designation": "Convener"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr.Srinivasan is the Advisor of the Research Advisory Committee and can be contacted at 044-22301428 or ms.tanscst@nic.in.",
+    "exact": {
+      "name": "Dr.Srinivasan",
+      "designation": "Advisor",
+      "contact": "044-22301428",
+      "email": "ms.tanscst@nic.in"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr.Parthiban is the Advisor of the Research Advisory Committee and can be contacted at 9443430246 or parthiban@nitt.edu.",
+    "exact": {
+      "name": "Dr.Parthiban",
+      "designation": "Advisor",
+      "contact": "9443430246",
+      "email": "parthiban@nitt.edu"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. Somashekhar S Hiremath is the Advisor of the Research Advisory Committee and can be contacted at https://iitm.irins.org/profile/61849#personal_information_panel.",
+    "exact": {
+      "name": "Dr. Somashekhar S Hiremath",
+      "designation": "Advisor",
+      "contact": "https://iitm.irins.org/profile/61849#personal_information_panel"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr.Sabitha Ramakrishnan is the Advisor of the Research Advisory Committee and can be contacted at 9789977989 or sabitha.ramakrishnan@gmail.com.",
+    "exact": {
+      "name": "Dr.Sabitha Ramakrishnan",
+      "designation": "Advisor",
+      "contact": "9789977989",
+      "email": "sabitha.ramakrishnan@gmail.com"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "All Ph.D qualified faculty are members of the Research Advisory Committee.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. E. Dhiravidachelvi filed a patent for the design and implementation of a disaster management system using IoT and cloud computing techniques for a connected building to save lives with early warnings, with patent number 2020101867.",
+    "exact": {
+      "name": "Dr. E. Dhiravidachelvi",
+      "patent_number": "2020101867"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Dr. E. Dhiravidachelvi, Mrs. E. Jayanthi, Mrs. I. Suganthi, Mr. J. Raja, and Mr.S. Naveenkumar filed a patent for Vehicular Edge Computing Using A Smart Embedded System For Intelligent Transportation, with patent number 202041033273.",
+    "exact": {
+      "names": "Dr. E. Dhiravidachelvi, Mrs. E. Jayanthi, Mrs. I. Suganthi, Mr. J. Raja, Mr.S. Naveenkumar",
+      "patent_number": "202041033273"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. K. Vairaperumal filed a patent for Battery Swapping Smart Station for Future E-Vehicle Transportation, with patent number 202141021897 A.",
+    "exact": {
+      "name": "Mr. K. Vairaperumal",
+      "patent_number": "202141021897 A"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. Chintala Venkatesh filed a patent for A Vehicle Tire Control System at curved roads using intelligent interfaces and support vector machines, with patent number 202141025111 A.",
+    "exact": {
+      "name": "Mr. Chintala Venkatesh",
+      "patent_number": "202141025111 A"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mrs. D. Hema Sumitha filed a patent for Real time based IOT Enabled Smart Metering System, with patent number 202141026200 A.",
+    "exact": {
+      "name": "Mrs. D. Hema Sumitha",
+      "patent_number": "202141026200 A"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mrs. G. Premalatha and Dr.E.Dhiravidachelvi filed a patent for Fundamentals of Electrical Measuring Instruments, with patent number 202141014294 A.",
+    "exact": {
+      "names": "Mrs. G. Premalatha, Dr.E.Dhiravidachelvi",
+      "patent_number": "202141014294 A"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. M. Kamarajan and Mr.M. Ashokkumar filed a patent for Wireless sensor network for long- term environmental checking for internet of things application, with patent number 202141061248.",
+    "exact": {
+      "names": "Mr. M. Kamarajan, Mr.M. Ashokkumar",
+      "patent_number": "202141061248"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. M. Kamarajan filed a patent for Deep learning based automatic eye cataract detection algorithm using MATLAB, with patent number 202141061583A.",
+    "exact": {
+      "name": "Mr. M. Kamarajan",
+      "patent_number": "202141061583A"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr. S.R. Mohan filed a patent for Refrigerator with food warming apparatus attachment, with patent number 365189001.",
+    "exact": {
+      "name": "Mr. S.R. Mohan",
+      "patent_number": "365189001"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Mr.D.Weslin and Mr. V.Vigneshwaran filed a patent for A method and a device of Wireless Master.",
+    "exact": {
+      "names": "Mr.D.Weslin, Mr. V.Vigneshwaran"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Department of Science and Humanities was started in the year 2000 to lay the base for furthering into one’s engineering career.",
+    "exact": {
+      "year": "2000"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has well experienced faculty with four doctorates to contribute in developing and moulding the students.",
+    "exact": {
+      "number_of_doctorates": "4"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department provides innovative teaching methods to make learning enjoyable and has well equipped laboratories for practical classes.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department offers various activities like Literary and Debating Club, NSS, YRC, Physical Education, and Yoga to enable students to face life with confidence and societal responsibility.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has a vision to be a centre of excellence for transforming students into proficient engineers through sustainable problems.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has a mission to impart fundamental knowledge and necessary skills in Science & Humanities through innovative teaching and learning methodology.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The B.E. - Mechanical Engineering programme has a duration of 4 years for regular and 3 years for lateral entry, with 8 semesters for regular and 6 semesters for lateral entry.",
+    "exact": {
+      "duration_regular": "4 years",
+      "duration_lateral": "3 years",
+      "semesters_regular": "8",
+      "semesters_lateral": "6"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The B.E. - Mechanical Engineering programme has an intake of 120 seats, with 60 government seats and 60 management seats.",
+    "exact": {
+      "total_seats": "120",
+      "government_seats": "60",
+      "management_seats": "60"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The eligibility criteria for B.E. - Mechanical Engineering programme is 10+2 system of Education with a pass in Physics, Chemistry, and Mathematics.",
+    "exact": {
+      "eligibility": "10+2"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The career opportunities for Mechanical Engineering graduates include Planners, Designers, Constructors & Operators, Stewards of the Environment, Innovators & Integrators of Technology, Managers of risk, and Leaders in Public Policy.",
+    "exact": {},
+    "category": "placement",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The scope for higher studies for Mechanical Engineering graduates includes M.E., M.Tech., and M.B.A.",
+    "exact": {
+      "higher_studies": "M.E., M.Tech., M.B.A."
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Programme Educational Objectives (PEOs) for Mechanical Engineering graduates include designing mechanical components and systems, critical problem solving, and managerial and leadership skills.",
+    "exact": {
+      "peo1": "designing mechanical components and systems",
+      "peo2": "critical problem solving",
+      "peo3": "managerial and leadership skills"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Program Specific Outcomes (PSOs) for Mechanical Engineering graduates include applying acquired knowledge to solve industrial problems and developing cost effective and eco-friendly mechanical components and systems.",
+    "exact": {
+      "pso1": "applying acquired knowledge to solve industrial problems",
+      "pso2": "developing cost effective and eco-friendly mechanical components and systems"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Programme Outcomes (PO) for Mechanical Engineering graduates include engineering knowledge, problem analysis, design/development of solutions, and conduct investigation of complex problems.",
+    "exact": {
+      "po1": "engineering knowledge",
+      "po2": "problem analysis",
+      "po3": "design/development of solutions",
+      "po4": "conduct investigation of complex problems"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mohamed Sathak AJ College of Engineering established National Service Scheme (NSS) in 2001 with the goal to encourage selfless service and social service among young students.",
+    "exact": {
+      "year": "2001"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The NSS unit has over 100 active members from various disciplines of 1st year and 2nd year, working for the betterment of society in and around Chennai.",
+    "exact": {
+      "number_of_members": "100"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The NSS unit has carried out blood donation camps, awareness programmes on health and hygiene, consumer rights, environmental protection, and AIDS awareness programme.",
+    "exact": {
+      "programmes": "blood donation camps, awareness programmes on health and hygiene, consumer rights, environmental protection, and AIDS awareness programme"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The objectives of NSS include working for and among the people, enhancing knowledge of themselves and the community, and applying their study to practical use.",
+    "exact": {
+      "objectives": "to work for/among the people, to enhance the knowledge of themselves and the community, to apply their study to practical use"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The duties of NSS volunteers include establishing relationships with the society, identifying needs and problems, planning programs, and recording activities systematically.",
+    "exact": {
+      "duties": "to establish relationship with the society, to identify needs, problems and resources of the community, to plan programs and execute them"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The code of conduct for NSS volunteers includes working under the guidance of a group leader, avoiding controversial issues, and keeping a day-to-day record of activities.",
+    "exact": {
+      "code_of_conduct": "all volunteers should work under the guidance of a group leader, all volunteers should scrupulously avoid entering into any controversial issues"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Youth Red Cross (YRC) club was established in 2014 with the objective of inculcating social welfare in students and preparing young minds to render significant contributions for the needy.",
+    "exact": {
+      "year": "2014"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The YRC club has around 100 active members, all trained and encouraged to manage the affairs of the group and elect their own office bearers.",
+    "exact": {
+      "number_of_members": "100"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The objectives of YRC include conducting social and health awareness programmes and promoting awareness on the care of their own health and that of others.",
+    "exact": {
+      "objectives": "to conduct social and health awareness programmes, awareness on the care of their own health and that of others"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Various events organized by NSS and YRC include Tobacco Awareness Rally, Eye Screening Camp, International Yoga Day, and Blood Donation Camp.",
+    "exact": {
+      "events": "Tobacco Awareness Rally, Eye Screening Camp, International Yoga Day, Blood Donation Camp"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Department of Physical Education provides sports activities to make students physically strong and increase stamina and strength.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The department has created necessary sports and games facilities for students to strengthen physical education.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Sports and games play an integral part in molding and refining the character of an individual.",
+    "exact": {},
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Exercise and sport activities increase blood flow to the brain, help in increased concentration, stimulate creativity, develop better problem-solving methods, and enable quick learning methods.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Director of Physical Education is Dr. K. P. Santhosh Nathan, with a qualification of B.P.E.S., B.P.Ed., M.P.Ed., M.Phil., Ph.D, and can be contacted at ped.santhosh@-edu.in.",
+    "exact": {
+      "name": "Dr. K. P. Santhosh Nathan",
+      "qualification": "B.P.E.S., B.P.Ed., M.P.Ed., M.Phil., Ph.D",
+      "email": "ped.santhosh@-edu.in"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Assistant Director of Physical Education is Mr. M. Janakiraman, with a qualification of B.Sc., M.P.Ed., NSNIS(Cricket).",
+    "exact": {
+      "name": "Mr. M. Janakiraman",
+      "qualification": "B.Sc., M.P.Ed., NSNIS(Cricket)"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The objectives of the Department of Physical Education include providing opportunities through talent identification, developing identified talent, and promoting physical fitness, talent identification, competitiveness, and brotherhood.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college offers a Sports Quota Scholarship to encourage sports enthusiasts, with admission through Sports quota and scholarship to District, State, and National level participants.",
+    "exact": {},
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college has excellent infrastructure for sports skills development, including facilities for Basketball, Football, Cricket, Yoga, Kabaddi, Volleyball, Table Tennis, Carrom, Chess, Track and Field, and Kho Kho.",
+    "exact": {
+      "facilities": "Basketball, Football, Cricket, Yoga, Kabaddi, Volleyball, Table Tennis, Carrom, Chess, Track and Field, Kho Kho"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college has a well-equipped gymnasium with latest equipment, including Multi Gym, Leg Extension, Preacher Curl Bench, Multi Adjustable Bench Press, Cable cross over machine, Sitting and Standing Twister, Leg Press, Spin Bike, Round Dumbbells, Rubber Weight Plates, Olympic Curl Bar, Olympic Weight lifting Bar, Chrome Push ub Bar, and Triceps rope.",
+    "exact": {
+      "equipment": "Multi Gym, Leg Extension, Preacher Curl Bench, Multi Adjustable Bench Press, Cable cross over machine, Sitting and Standing Twister, Leg Press, Spin Bike, Round Dumbbells, Rubber Weight Plates, Olympic Curl Bar, Olympic Weight lifting Bar, Chrome Push ub Bar, Triceps rope"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The college conducts Annual Sports Activities, including participation in Anna University, South Zone, and Invitation Tournaments, conducting Anna University Zonal and Inter-Zonal Tournaments, Annual Sports Day, Mohamed Sathak Trophy-Football, BSM Trophy-cricket, and Fit India Cyclothon.",
+    "exact": {
+      "events": "Anna University, South Zone, Invitation Tournaments, Anna University Zonal and Inter-Zonal Tournaments, Annual Sports Day, Mohamed Sathak Trophy-Football, BSM Trophy-cricket, Fit India Cyclothon"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre was established in the year 2019-2020 to educate, train, and up-skill students in niche technologies.",
+    "exact": {
+      "year": "2019-2020"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The courses and training at the Technology Centre are designed based on the recommendations of AICTE and India Skill Report 2020.",
+    "exact": {
+      "report": "India Skill Report 2020",
+      "organization": "AICTE"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre provides an ambient learning environment for research and innovation with state-of-the-art facilities.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Each Technology Centre is collaborated with industry or government organizations to provide certifications, onsite or offsite projects, and internships.",
+    "exact": {},
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre has collaborations with various industries including Automation Anywhere, Godrej Inc, Ford, Palo Alto systems, Amazon Web Services, National Instruments, CISCO Academy, Altair, Open wave computing, Levergent Technologies, and Propeller Technologies.",
+    "exact": {
+      "industries": "Automation Anywhere, Godrej Inc, Ford, Palo Alto systems, Amazon Web Services, National Instruments, CISCO Academy, Altair, Open wave computing, Levergent Technologies, Propeller Technologies"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre has established various centres including Centre for 3D Printing and Additive Manufacturing, Centre for CAE, Centre for Industrial Robotics, Centre for NDT-Non Destructive Testing, and Centre for Building Information Modelling.",
+    "exact": {
+      "centres": "Centre for 3D Printing and Additive Manufacturing, Centre for CAE, Centre for Industrial Robotics, Centre for NDT-Non Destructive Testing, Centre for Building Information Modelling"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre has established Centre for Embedded & IOT, Centre for UAV / Drone Technology, Centre for Godrej Disha Skill Development Centre, Centre for Bosch Industry Institute Collaboration, and Centre for E-Mobility.",
+    "exact": {
+      "centres": "Centre for Embedded & IOT, Centre for UAV / Drone Technology, Centre for Godrej Disha Skill Development Centre, Centre for Bosch Industry Institute Collaboration, Centre for E-Mobility"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre has established Centre for Renewable Energy, Centre for APJ Abdul Kalam Innovation Centre, Centre for Bot Lab & Robotics Process Automation, and Centre for Cisco Networking Academy.",
+    "exact": {
+      "centres": "Centre for Renewable Energy, Centre for APJ Abdul Kalam Innovation Centre, Centre for Bot Lab & Robotics Process Automation, Centre for Cisco Networking Academy"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Technology Centre has established Centre for Code Tantra - Coding Learning Centre, Centre for GAMING AND AR/VR, Centre for Artificial Intelligence and Machine Learning Centre, Centre for Block Chain Technology, and Centre for Mobile and Web Application Development.",
+    "exact": {
+      "centres": "Centre for Code Tantra - Coding Learning Centre, Centre for GAMING AND AR/VR, Centre for Artificial Intelligence and Machine Learning Centre, Centre for Block Chain Technology, Centre for Mobile and Web Application Development"
+    },
+    "category": "academic",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The College is easily accessible from Chennai Central Railway Station, Tambaram Railway Station and CMDA Bus station by the state operated transport service.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The College provides its own transportation for students and staff residing in and around the campus.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Institute has 22 buses, One Tata ACE, One Ambulance for the benefit of students and the staff.",
+    "exact": {
+      "number_of_buses": "22",
+      "number_of_tata_ace": "1",
+      "number_of_ambulance": "1"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The transport facility is available from various places in Chennai, Chengalpattu, Kanchipuram and Thiruvallur districts to the institute on all working days.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The bus facilities are being utilized for local social service activities, Sports, NCC/ NSS activities, Placement and Training activities, industrial visits and educational trips.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A transport committee, headed by a Convener, is formed to take care of the smooth operation of buses.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The staff in-charge of the buses ensure the smooth functioning of the buses.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Transport committee meets once in Six months and the Principal and the staff in-charge of the buses attend the meeting.",
+    "exact": {
+      "meeting_frequency": "Six months"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. K. P. SANTHOSH NATHAN is the Transport Convener and can be contacted at 98408 86992.",
+    "exact": {
+      "name": "Dr. K. P. SANTHOSH NATHAN",
+      "contact": "98408 86992"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mr. A. ABDUL GAFOOR is the Asst. Transport Convener and can be contacted at 99403 19629.",
+    "exact": {
+      "name": "Mr. A. ABDUL GAFOOR",
+      "contact": "99403 19629"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 19 starts from T. Nagar and ends at Thiruporur, passing through OMR, Madhiya Kailash, SRP, and operates daily.",
+    "exact": {
+      "bus_number": "19",
+      "starting_point": "T. Nagar",
+      "ending_point": "Thiruporur",
+      "route": "OMR, Madhiya Kailash, SRP",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 519 starts from T. Nagar and ends at Thiruporur, passing through Saidapet, Adyar, SRP, and operates daily.",
+    "exact": {
+      "bus_number": "519",
+      "starting_point": "T. Nagar",
+      "ending_point": "Thiruporur",
+      "route": "Saidapet, Adyar, SRP",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 221H starts from Central and ends at Thiruporur, passing through Anna Salai, Saidapet, SRP, and operates daily.",
+    "exact": {
+      "bus_number": "221H",
+      "starting_point": "Central",
+      "ending_point": "Thiruporur",
+      "route": "Anna Salai, Saidapet, SRP",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102X starts from Broadway and ends at Thiruporur, passing through Marina, Adyar, OMR, and operates daily.",
+    "exact": {
+      "bus_number": "102X",
+      "starting_point": "Broadway",
+      "ending_point": "Thiruporur",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102S starts from Broadway and ends at Sipcot, passing through Marina, Adyar, OMR, and operates daily.",
+    "exact": {
+      "bus_number": "102S",
+      "starting_point": "Broadway",
+      "ending_point": "Sipcot",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102 starts from Broadway and ends at Kelambakkam, passing through Marina, Adyar, OMR, and operates daily.",
+    "exact": {
+      "bus_number": "102",
+      "starting_point": "Broadway",
+      "ending_point": "Kelambakkam",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number B19 starts from Shollinganallur and ends at Kelambakkam, passing through Sipcot, OMR, and operates daily.",
+    "exact": {
+      "bus_number": "B19",
+      "starting_point": "Shollinganallur",
+      "ending_point": "Kelambakkam",
+      "route": "Sipcot, OMR",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 570 starts from CMBT and ends at Kelambakkam, passing through Vadapalani, Velachery, SRP, and operates daily.",
+    "exact": {
+      "bus_number": "570",
+      "starting_point": "CMBT",
+      "ending_point": "Kelambakkam",
+      "route": "Vadapalani, Velachery, SRP",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 570S starts from CMBT and ends at Sipcot, passing through Vadapalani, Velachery, SRP, and operates daily.",
+    "exact": {
+      "bus_number": "570S",
+      "starting_point": "CMBT",
+      "ending_point": "Sipcot",
+      "route": "Vadapalani, Velachery, SRP",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 105 starts from Tambaram and ends at Siruseri, passing through Thalambur, and operates daily.",
+    "exact": {
+      "bus_number": "105",
+      "starting_point": "Tambaram",
+      "ending_point": "Siruseri",
+      "route": "Thalambur",
+      "frequency": "daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "College Bus Route AR 3 - UTHIRAMERUR starts at 5.50 AM.",
+    "exact": {
+      "bus_route": "AR 3 - UTHIRAMERUR",
+      "time": "5.50 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 4 - MOOLAKADAI starts at 6.10 AM.",
+    "exact": {
+      "bus_route": "AR 4 - MOOLAKADAI",
+      "time": "6.10 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 5 - MMDA SCHOOL starts at 6.15 AM.",
+    "exact": {
+      "bus_route": "AR 5 - MMDA SCHOOL",
+      "time": "6.15 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 6 - ICF starts at 6.15 AM.",
+    "exact": {
+      "bus_route": "AR 6 - ICF",
+      "time": "6.15 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 7 - CHUNAMBEDU starts at 5.25 AM.",
+    "exact": {
+      "bus_route": "AR 7 - CHUNAMBEDU",
+      "time": "5.25 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 8 - MANJAMBAKKAM starts at 5.50 AM.",
+    "exact": {
+      "bus_route": "AR 8 - MANJAMBAKKAM",
+      "time": "5.50 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 9 - ENNORE starts at 6.15 AM.",
+    "exact": {
+      "bus_route": "AR 9 - ENNORE",
+      "time": "6.15 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 10 - PORUR starts at 6.25 AM.",
+    "exact": {
+      "bus_route": "AR 10 - PORUR",
+      "time": "6.25 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route R 22 - NEMILICHERY starts at 6.00 AM.",
+    "exact": {
+      "bus_route": "R 22 - NEMILICHERY",
+      "time": "6.00 AM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "The vision of the institute is to be an eminent institution for higher education and research through innovative teaching-learning and sustainable practices to meet industrial and societal needs.",
+    "exact": {
+      "vision": "To be an eminent institute for higher education and research through innovative teaching-learning and sustainable practices to meet the industrial and societal needs"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The mission of the institute is to impart quality technical education by transforming students into professionally competent technocrats.",
+    "exact": {
+      "mission": "To impart quality technical education by transforming students into professionally competent technocrats"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The institute aims to nurture students in all-round sustainable development for career and self-employability.",
+    "exact": {
+      "objective": "To nurture the students in all-round sustainable development, for career and self employability"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The institute seeks to inculcate critical thinking, professional ethics, and civic responsibilities by instilling values in its students.",
+    "exact": {
+      "objective": "To inculcate critical thinking, professional ethics with civic responsibilities by instilling values"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The quality policy of the institute is committed to creating quality professionals through innovative teaching, research, industrial relations, and nurturing human values and ethics.",
+    "exact": {
+      "quality policy": "committed to create quality professionals through innovative teaching, research, industrial relations and nurturing human values & ethics to meet the industrial and societal needs on continual improvement basis"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "The institute has various committees, including the Governing Council, Planning and Monitoring Board, Academic Advisory Committee, Grievance and Redressal Committee, Anti-Ragging Committee and Squad, and Women's Empowerment Cell.",
+    "exact": {
+      "committees": "Governing Council, Planning & Monitoring Board, Academic Advisory Committe, Grievance and Redressal Committee, Anti-Ragging Committee & Squad, Womens Empowerment Cell"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The institute is part of the Mohamed Sathak AJ College of Engineering group of institutions.",
+    "exact": {
+      "institution": "Mohamed Sathak AJ College of Engineering"
+    },
+    "category": "general",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The College is easily accessible from Chennai Central Railway Station, Tambaram Railway Station and CMDA Bus station by the state operated transport service.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The College provides its own transportation for students and staff residing in and around the campus.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Institute has 22 buses, One Tata ACE, One Ambulance for the benefit of students and the staff.",
+    "exact": {
+      "number_of_buses": "22",
+      "number_of_tata_ace": "1",
+      "number_of_ambulance": "1"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The transport facility is available from various places in Chennai, Chengalpattu, Kanchipuram and Thiruvallur districts to the institute on all working days.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The bus facilities are being utilized for local social service activities, Sports, NCC/ NSS activities, Placement and Training activities, industrial visits and educational trips.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Our transport facilities ensure that our students and staff are able to reach the college in time with utmost care and ease.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "A transport committee, headed by a Convener, is formed to take care of the smooth operation of buses.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The staff in-charge of the buses (one teaching and one supporting staff) ensure the smooth functioning of the buses.",
+    "exact": {},
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "The Transport committee meets once in Six months and the Principal and the staff in-charge of the buses attend the meeting.",
+    "exact": {
+      "meeting_frequency": "Six months"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Dr. K. P. SANTHOSH NATHAN is the Transport Convener and can be contacted at 98408 86992.",
+    "exact": {
+      "name": "Dr. K. P. SANTHOSH NATHAN",
+      "contact": "98408 86992"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "Mr. A. ABDUL GAFOOR is the Asst. Transport Convener and can be contacted at 99403 19629.",
+    "exact": {
+      "name": "Mr. A. ABDUL GAFOOR",
+      "contact": "99403 19629"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 19 starts from T. Nagar and ends at Thiruporur, passing through OMR, Madhiya Kailash, SRP, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "19",
+      "starting_point": "T. Nagar",
+      "ending_point": "Thiruporur",
+      "route": "OMR, Madhiya Kailash, SRP",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 519 starts from T. Nagar and ends at Thiruporur, passing through Saidapet, Adyar, SRP, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "519",
+      "starting_point": "T. Nagar",
+      "ending_point": "Thiruporur",
+      "route": "Saidapet, Adyar, SRP",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 221H starts from Central and ends at Thiruporur, passing through Anna Salai, Saidapet, SRP, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "221H",
+      "starting_point": "Central",
+      "ending_point": "Thiruporur",
+      "route": "Anna Salai, Saidapet, SRP",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102X starts from Broadway and ends at Thiruporur, passing through Marina, Adyar, OMR, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "102X",
+      "starting_point": "Broadway",
+      "ending_point": "Thiruporur",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102S starts from Broadway and ends at Sipcot, passing through Marina, Adyar, OMR, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "102S",
+      "starting_point": "Broadway",
+      "ending_point": "Sipcot",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 102 starts from Broadway and ends at Kelambakkam, passing through Marina, Adyar, OMR, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "102",
+      "starting_point": "Broadway",
+      "ending_point": "Kelambakkam",
+      "route": "Marina, Adyar, OMR",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number B19 starts from Shollinganallur and ends at Kelambakkam, passing through Sipcot, OMR, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "B19",
+      "starting_point": "Shollinganallur",
+      "ending_point": "Kelambakkam",
+      "route": "Sipcot, OMR",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 570 starts from CMBT and ends at Kelambakkam, passing through Vadapalani, Velachery, SRP, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "570",
+      "starting_point": "CMBT",
+      "ending_point": "Kelambakkam",
+      "route": "Vadapalani, Velachery, SRP",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 570S starts from CMBT and ends at Sipcot, passing through Vadapalani, Velachery, SRP, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "570S",
+      "starting_point": "CMBT",
+      "ending_point": "Sipcot",
+      "route": "Vadapalani, Velachery, SRP",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "MTC Bus number 105 starts from Tambaram and ends at Siruseri, passing through Thalambur, with a frequency of Daily.",
+    "exact": {
+      "bus_number": "105",
+      "starting_point": "Tambaram",
+      "ending_point": "Siruseri",
+      "route": "Thalambur",
+      "frequency": "Daily"
+    },
+    "category": "transport",
+    "importance": "normal"
+  },
+  {
+    "narrative": "College Bus Route AR 3 starts at 5:50 AM from UTHIRAMERUR.",
+    "exact": {
+      "bus_route": "AR 3",
+      "time": "5:50 AM",
+      "starting_point": "UTHIRAMERUR"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 4 starts at 6:10 AM from MOOLAKADAI.",
+    "exact": {
+      "bus_route": "AR 4",
+      "time": "6:10 AM",
+      "starting_point": "MOOLAKADAI"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 5 starts at 6:15 AM from MMDA SCHOOL.",
+    "exact": {
+      "bus_route": "AR 5",
+      "time": "6:15 AM",
+      "starting_point": "MMDA SCHOOL"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 6 starts at 6:15 AM from ICF.",
+    "exact": {
+      "bus_route": "AR 6",
+      "time": "6:15 AM",
+      "starting_point": "ICF"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 7 starts at 5:25 AM from CHUNAMBEDU.",
+    "exact": {
+      "bus_route": "AR 7",
+      "time": "5:25 AM",
+      "starting_point": "CHUNAMBEDU"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 8 starts at 5:50 AM from MANJAMBAKKAM.",
+    "exact": {
+      "bus_route": "AR 8",
+      "time": "5:50 AM",
+      "starting_point": "MANJAMBAKKAM"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 9 starts at 6:15 AM from ENNORE.",
+    "exact": {
+      "bus_route": "AR 9",
+      "time": "6:15 AM",
+      "starting_point": "ENNORE"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route AR 10 starts at 6:25 AM from PORUR.",
+    "exact": {
+      "bus_route": "AR 10",
+      "time": "6:25 AM",
+      "starting_point": "PORUR"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "College Bus Route R 22 starts at 6:00 AM from NEMILICHERY.",
+    "exact": {
+      "bus_route": "R 22",
+      "time": "6:00 AM",
+      "starting_point": "NEMILICHERY"
+    },
+    "category": "transport",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Civil Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Engineering with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electronics & Communication Engineering with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electrical & Electronics Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Mechanical Engineering with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Information Technology with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Artificial Intelligence & Data Science with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Business Systems with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Computer Science & Engineering (Cyber Security) with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Artificial Intelligence & Machine Learning with a total sanctioned intake of 60, government quota of 30, and management quota of 30.",
+    "exact": {
+      "Total Sanctioned Intake": "60",
+      "Government Quota": "30",
+      "Management Quota": "30"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in Electronics Engg with specialization in VLSI Design & Technology with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers undergraduate programmes in ECE with specialization in Advanced Communication Technology with a total sanctioned intake of 30, government quota of 15, and management quota of 15.",
+    "exact": {
+      "Total Sanctioned Intake": "30",
+      "Government Quota": "15",
+      "Management Quota": "15"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Five percent of seats within approved intake shall be allowed for admission under NRI category, and in the event of non-availability of students in NRI seats, the seats shall be given to general candidates as per merit.",
+    "exact": {
+      "NRI Seats Percentage": "5%"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers postgraduate programmes in Computer Science & Engineering with a total sanctioned intake of 9, government quota of 3, and management quota of 6.",
+    "exact": {
+      "Total Sanctioned Intake": "9",
+      "Government Quota": "3",
+      "Management Quota": "6"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "The college offers postgraduate programmes in Structural Engineering with a total sanctioned intake of 18, government quota of 6, and management quota of 12.",
+    "exact": {
+      "Total Sanctioned Intake": "18",
+      "Government Quota": "6",
+      "Management Quota": "12"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Students who have completed Plus 2 or Diploma may apply for Tamil Nadu Engineering Admissions (TNEA Counselling) for B.E/B.Tech programmes admission conducted by Directorate of Technical Education (DoTE), Chennai.",
+    "exact": {
+      "TNEA Counselling": "Tamil Nadu Engineering Admissions"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "For More Details, Please Visit TNEA DoTE Anna University.",
+    "exact": {
+      "TNEA DoTE Anna University": "https://www.annauniv.edu/"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Eligibility for students from other states (Andhra Pradesh, Telangana, Kerala, and all Northern States) will be based on the qualifying marks (Q) obtained in Mathematics, Physics, and Chemistry at the Plus Two or Intermediate level.",
+    "exact": {
+      "Qualifying Marks Formula": "Q = (Mathematics / 2) + ((Physics + Chemistry) / 4)"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "For admission assistance, students can contact Dr. Vamsi Naga Mohan A, who can communicate in Telugu, Tamil, Malayalam, and Hindi, at contact numbers 9043358674 and 9502687344, or email cse.vamsi@msajce-edu.in.",
+    "exact": {
+      "Contact Number": "9043358674, 9502687344",
+      "Email": "cse.vamsi@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Dr. K.S. Srinivasan, Principal, MSAJCE, Chennai, at phone number 9150575066 and email principal@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "9150575066",
+      "Email": "principal@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Mr. A. Abdul Gafoor, Administrative Officer, MSAJCE, Chennai, at phone number 9940319629 and email abdulgafoor@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "9940319629",
+      "Email": "abdulgafoor@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Dr. K.P. Santhosh Nathan, Physical Education Director & Head-Admission, MSAJCE, Chennai, at phone number 9840886992 and email ped.santhosh@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "9840886992",
+      "Email": "ped.santhosh@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Mr. S. Syed Abuthahir, Assistant Professor, MSAJCE, Chennai, at phone number 9944127339 and email mech.syedabuthahir@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "9944127339",
+      "Email": "mech.syedabuthahir@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Mr. B. Rizha Ur Rahman, Assistant Professor, MSAJCE, Chennai, at phone number 9790836981 and email civil.rizha@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "9790836981",
+      "Email": "civil.rizha@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "Admission contact details include Mrs. I.S. Suganthi, Assistant Professor, MSAJCE, Chennai, at phone number 7299772958 and email ece.suganthi@msajce-edu.in.",
+    "exact": {
+      "Phone Number": "7299772958",
+      "Email": "ece.suganthi@msajce-edu.in"
+    },
+    "category": "admission",
+    "importance": "high"
+  },
+  {
+    "narrative": "B.E/B.Tech admission eligibility requires a pass in HSC (Academic) or its equivalent with a minimum average percentage in Mathematics, Physics, and Chemistry put together as given below.",
+    "exact": {
+      "Minimum Average Percentage": "45.00% for General Category, 40.00% for Backward Class, MBC & DNC, and SC/SCA/ST"
+    },
+    "category": "admission",
+    "importance": "high"
+  }
+]
