@@ -5,14 +5,24 @@ import dotenv from 'dotenv';
 import { qdrant, COLLECTION_NAME } from './qdrant';
 dotenv.config();
 
-const sql = postgres(process.env.DATABASE_URL!);
-const ai = createOpenAI({
+/**
+ * ELITE AI GATEWAY CONFIG V5.0
+ * Separating Providers to resolve the 404 Mismatch Error
+ */
+
+// PROVIDER 1: Standard OpenAI (For Embeddings)
+const openai = createOpenAI({
+  apiKey: process.env.VERCEL_AI_KEY, // Standard OpenAI/Vercel Key
+});
+
+// PROVIDER 2: NVIDIA NIM (For Llama 3.3 70B Generation)
+const nvidia = createOpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
   compatibility: 'strict',
 });
 
-const DEFAULT_MODEL = 'meta/llama-3.3-70b-instruct';
+const DEFAULT_CHAT_MODEL = 'meta/llama-3.3-70b-instruct';
 const RELIABILITY_THRESHOLD = 0.65;
 
 export interface RetrievalResult {
@@ -23,20 +33,16 @@ export interface RetrievalResult {
   score: number;
 }
 
-/**
- * PRODUCTION FAST RETRIEVAL ENGINE V4.0
- * Optimized for Vercel Serverless (Sub-3s Response)
- */
 export async function performRetrieval(query: string): Promise<RetrievalResult> {
-  console.log(`--- [SEARCH] Query: ${query} ---`);
+  console.log(`--- [ELITE SEARCH] Query: ${query} ---`);
   try {
-    // 1. Vector Embedding (OpenAI is fast)
+    // 1. EMBEDDING (Using OpenAI Provider)
     const { embedding } = await embed({
-      model: ai.embedding('openai/text-embedding-3-small'),
+      model: openai.embedding('text-embedding-3-small'),
       value: query,
     });
 
-    // 2. Direct Qdrant Search (Instant)
+    // 2. QDRANT SEARCH
     const qResult = await qdrant.search(COLLECTION_NAME, {
       vector: embedding,
       limit: 5,
@@ -49,16 +55,16 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
 
     const context = qResult.map(r => r.payload?.content).join('\n---\n');
     const bestScore = qResult[0].score;
-    const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
+    const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'ELITE DOCUMENT'))];
 
-    // 3. Direct Generation (Llama 3.3 70B via NVIDIA NIM)
+    // 3. GENERATION (Using NVIDIA NIM Provider)
     const { text: answer } = await generateText({
-        model: ai.chat(DEFAULT_MODEL),
-        system: "You are Aura, the MSAJCE Concierge. Answer ONLY using the PROVIDED CONTEXT. If unsure or no info found, provide the office contact: 044-27470025.",
+        model: nvidia.chat(DEFAULT_CHAT_MODEL),
+        system: "You are Aura, the MSAJCE Concierge. Answer ONLY using the provided context. If no info found, provide office contact: 044-27470025.",
         prompt: `Context:\n${context}\n\nQuestion: ${query}`
     });
 
-    console.log(`✅ [SUCCESS] Score: ${bestScore.toFixed(3)}`);
+    console.log(`✅ [ELITE SUCCESS] Score: ${bestScore.toFixed(3)}`);
     return { 
         context, 
         sources, 
@@ -68,7 +74,7 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     };
 
   } catch (err) {
-    console.error("❌ RETRIEVAL CRASH:", err.message);
+    console.error("❌ ELITE ENGINE CRASH:", err.message);
     return { 
         context: '', 
         sources: [], 
