@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+extracted_data/0_source_pdfs
+extracted_data/organized/Academic_Syllabus
+extracted_data/organized/Miscellaneous
+.env
+*.md

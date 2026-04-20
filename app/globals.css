@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+    --on-surface-variant: #4f4535;
+    --on-primary-container: #fffbff;
+    --surface-variant: #e3e2e2;
+    --surface-dim: #dadada;
+    --on-secondary-fixed: #111d27;
+    --tertiary-fixed: #ffdbd0;
+    --outline-variant: #d3c4af;
+    --on-surface: #1a1c1c;
+    --on-background: #1a1c1c;
+    --on-error: #ffffff;
+    --on-primary-fixed: #271900;
+    --surface-container-highest: #e3e2e2;
+    --surface-bright: #faf9f9;
+    --on-primary-fixed-variant: #5d4200;
+    --on-secondary-fixed-variant: #3d4854;
+    --surface-container-lowest: #ffffff;
+    --primary-container: #986d00;
+    --primary: #785600;
+    --surface: #faf9f9;
+    --error-container: #ffdad6;
+    --surface-container-high: #e9e8e8;
+    --on-primary: #ffffff;
+    --error: #ba1a1a;
+    --on-tertiary: #ffffff;
+    --inverse-primary: #f7bd48;
+    --surface-container-low: #f4f3f3;
+    --tertiary-fixed-dim: #e7bdb1;
+    --primary-fixed: #ffdea6;
+    --on-secondary: #ffffff;
+    --inverse-on-surface: #f1f0f0;
+    --primary-fixed-dim: #f7bd48;
+    --on-tertiary-fixed-variant: #5d4037;
+    --surface-container: #eeeeed;
+    --secondary-fixed: #d8e4f3;
+    --secondary-container: #d8e4f3;
+    --tertiary-container: #8f6d62;
+    --secondary-fixed-dim: #bcc8d6;
+    --on-tertiary-fixed: #2c160e;
+    --inverse-surface: #2f3131;
+    --secondary: #545f6c;
+    --tertiary: #74554b;
+    --on-error-container: #93000a;
+    --background: #faf9f9;
+    --surface-tint: #7b5800;
+    --outline: #817563;
+    --on-secondary-container: #5a6572;
+    --on-tertiary-container: #fffbff;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--background);
+  color: var(--on-background);
+}
+
+h1, h2, h3, .serif-font {
+  font-family: 'Newsreader', serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom Chat Styles */
+.glass-input {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
