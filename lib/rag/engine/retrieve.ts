@@ -10,9 +10,10 @@ dotenv.config();
  * ELITE AI GATEWAY CONFIG V6.0 (Vercel-NVIDIA Hybrid)
  */
 
-// PROVIDER 1: Vercel AI (Optimized for your vck_ key)
-const vercel = createVercel({
+// PROVIDER 1: Vercel AI Gateway (Matched to Ingestor)
+const openai = createOpenAI({
   apiKey: process.env.VERCEL_AI_KEY,
+  baseURL: 'https://ai-gateway.vercel.sh/v1',
 });
 
 // PROVIDER 2: NVIDIA NIM (For the Brain)
@@ -23,7 +24,7 @@ const nvidia = createOpenAI({
 });
 
 const DEFAULT_CHAT_MODEL = 'meta/llama-3.3-70b-instruct';
-const RELIABILITY_THRESHOLD = 0.65;
+const RELIABILITY_THRESHOLD = 0.40;
 
 export interface RetrievalResult {
   answer?: string;
@@ -50,9 +51,9 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
 
   console.log(`--- [ELITE VERCEL SEARCH] Query: ${query} ---`);
   try {
-    // 1. EMBEDDING (Using Vercel Provider)
+    // 1. EMBEDDING (Using Vercel Gateway)
     const { embedding } = await embed({
-      model: vercel.embedding('text-embedding-3-small'),
+      model: openai.embedding('text-embedding-3-small'),
       value: query,
     });
 
