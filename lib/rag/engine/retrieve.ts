@@ -1,4 +1,5 @@
 import { generateText, embed } from 'ai';
+import { createVercel } from '@ai-sdk/vercel'; // Using the dedicated Vercel provider
 import { createOpenAI } from '@ai-sdk/openai';
 import postgres from 'postgres';
 import dotenv from 'dotenv';
@@ -6,16 +7,15 @@ import { qdrant, COLLECTION_NAME } from './qdrant';
 dotenv.config();
 
 /**
- * ELITE AI GATEWAY CONFIG V5.0
- * Separating Providers to resolve the 404 Mismatch Error
+ * ELITE AI GATEWAY CONFIG V6.0 (Vercel-NVIDIA Hybrid)
  */
 
-// PROVIDER 1: Standard OpenAI (For Embeddings)
-const openai = createOpenAI({
-  apiKey: process.env.VERCEL_AI_KEY, // Standard OpenAI/Vercel Key
+// PROVIDER 1: Vercel AI (Optimized for your vck_ key)
+const vercel = createVercel({
+  apiKey: process.env.VERCEL_AI_KEY,
 });
 
-// PROVIDER 2: NVIDIA NIM (For Llama 3.3 70B Generation)
+// PROVIDER 2: NVIDIA NIM (For the Brain)
 const nvidia = createOpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
@@ -34,11 +34,11 @@ export interface RetrievalResult {
 }
 
 export async function performRetrieval(query: string): Promise<RetrievalResult> {
-  console.log(`--- [ELITE SEARCH] Query: ${query} ---`);
+  console.log(`--- [ELITE VERCEL SEARCH] Query: ${query} ---`);
   try {
-    // 1. EMBEDDING (Using OpenAI Provider)
+    // 1. EMBEDDING (Using Vercel Provider)
     const { embedding } = await embed({
-      model: openai.embedding('text-embedding-3-small'),
+      model: vercel.embedding('text-embedding-3-small'),
       value: query,
     });
 
@@ -50,21 +50,21 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     });
 
     if (!qResult.length) {
-        return { context: '', sources: [], reliability: 'LOW', score: 0, answer: "No matching institutional records found." };
+        return { context: '', sources: [], reliability: 'LOW', score: 0, answer: "No institutional records found." };
     }
 
     const context = qResult.map(r => r.payload?.content).join('\n---\n');
     const bestScore = qResult[0].score;
-    const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'ELITE DOCUMENT'))];
+    const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
 
-    // 3. GENERATION (Using NVIDIA NIM Provider)
+    // 3. GENERATION (Using NVIDIA NIM)
     const { text: answer } = await generateText({
         model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: "You are Aura, the MSAJCE Concierge. Answer ONLY using the provided context. If no info found, provide office contact: 044-27470025.",
+        system: "You are Aura, the MSAJCE Concierge. Answer ONLY using the provided context. No rambling. Office: 044-27470025.",
         prompt: `Context:\n${context}\n\nQuestion: ${query}`
     });
 
-    console.log(`✅ [ELITE SUCCESS] Score: ${bestScore.toFixed(3)}`);
+    console.log(`✅ [SUCCESS] Score: ${bestScore.toFixed(3)}`);
     return { 
         context, 
         sources, 
@@ -74,13 +74,13 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     };
 
   } catch (err) {
-    console.error("❌ ELITE ENGINE CRASH:", err.message);
+    console.error("❌ CLOUD ENGINE CRASH:", err.message);
     return { 
         context: '', 
         sources: [], 
         reliability: 'LOW', 
         score: 0, 
-        answer: "Aura is currently refining her data. Please try again or call the office at 044-27470025." 
+        answer: "Aura is refining her connection. Please try again or call the office at 044-27470025." 
     };
   }
 }
