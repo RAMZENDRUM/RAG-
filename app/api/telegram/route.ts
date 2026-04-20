@@ -23,28 +23,15 @@ export async function POST(req: Request) {
     // We wrap the handler to ensure it fits in a serverless window
     if (body.message?.text) {
       const text = body.message.text;
-      const userId = body.message.from.id.toString();
+      const chatId = body.message.chat.id;
 
-      // 1. RAG Retrieval
-      const { context, reliability, answer, score } = await performRetrieval(text);
-
-      if (reliability === 'LOW') {
-        await bot.telegram.sendMessage(body.message.chat.id, answer);
-        return new Response('OK');
-      }
-
-      // 2. Generation
-      const { text: responseText } = await generateText({
-        model: ai.chat('openai/gpt-4.1-nano'),
-        system: "You are the MSAJCE Aura Concierge. Use context only.",
-        prompt: `Context: ${context}\n\nQuestion: ${text}`,
-      });
-
-      // 3. Persistence
-      await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'assistant', ${responseText})`;
-
-      // 4. Send back to Telegram
-      await bot.telegram.sendMessage(body.message.chat.id, responseText, { parse_mode: 'Markdown' });
+      // 1. FAST RAG (Direct Qdrant Search for Speed)
+      const { answer, context, reliability } = await performRetrieval(text);
+      
+      // 2. Immediate Reply
+      const response = reliability === 'HIGH' ? answer : "I am refining my records for that specific query. Please check the portal or try simplified keywords like 'bus timing'.";
+      
+      await bot.telegram.sendMessage(chatId, response || "System is busy. Please try again.");
     }
 
     return new Response('OK');
