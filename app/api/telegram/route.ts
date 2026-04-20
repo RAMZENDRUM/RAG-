@@ -12,12 +12,27 @@ export async function GET() {
   }), { headers: { 'Content-Type': 'application/json' } });
 }
 
-const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN!);
-const sql = postgres(process.env.DATABASE_URL!);
-const ai = createOpenAI({
-  apiKey: process.env.VERCEL_AI_KEY,
-  baseURL: 'https://ai-gateway.vercel.sh/v1',
-});
+
+// Lazy Initializers to prevent top-level crashes if ENV is missing during build
+let _bot: Telegraf | null = null;
+let _sql: any = null;
+
+const getBot = () => {
+  if (!_bot) _bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || '');
+  return _bot;
+};
+
+const getSql = () => {
+  if (!_sql) _sql = postgres(process.env.DATABASE_URL || '');
+  return _sql;
+};
+
+const getAi = () => {
+  return createOpenAI({
+    apiKey: process.env.VERCEL_AI_KEY,
+    baseURL: 'https://ai-gateway.vercel.sh/v1',
+  });
+};
 
 /**
  * PRODUCTION TELEGRAM WEBHOOK HANDLER
@@ -34,17 +49,16 @@ export async function POST(req: Request) {
       const chatId = body.message.chat.id;
 
       // 1. FAST RAG (Speed-First Pattern)
-      // We do a direct search without the heavy expansion/judging for Telegram
       const { answer, reliability } = await performRetrieval(text);
       
       const response = reliability === 'HIGH' ? answer : "I'm refining my records. Try asking: 'bus route to porur' or 'prospectus'.";
       
-      await bot.telegram.sendMessage(chatId, response || "Aura is busy.");
+      await getBot().telegram.sendMessage(chatId, response || "Aura is busy.");
       console.log('✅ Sent fast response');
 
       // 3. Optional Persistence (Non-Blocking)
       try {
-        await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${body.message.from.id.toString()}, 'assistant', ${response || ''})`;
+        await getSql()`INSERT INTO chat_histories (user_id, role, content) VALUES (${body.message.from.id.toString()}, 'assistant', ${response || ''})`;
       } catch (dbError) {
         console.warn('⚠️ persistence failed but bot answered:', dbError.message);
       }
