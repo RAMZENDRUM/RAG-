@@ -4,6 +4,14 @@ import { generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import postgres from 'postgres';
 
+export async function GET() {
+  return new Response(JSON.stringify({ 
+    status: 'online', 
+    engine: 'Aura Unified v4.0',
+    webhook: 'https://rag-ye65.vercel.app/api/telegram'
+  }), { headers: { 'Content-Type': 'application/json' } });
+}
+
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN!);
 const sql = postgres(process.env.DATABASE_URL!);
 const ai = createOpenAI({
@@ -25,14 +33,14 @@ export async function POST(req: Request) {
       const text = body.message.text;
       const chatId = body.message.chat.id;
 
-      // 1. FAST RAG (Direct Qdrant Search for Speed)
+      // 1. FAST RAG (Speed-First Pattern)
+      // We do a direct search without the heavy expansion/judging for Telegram
       const { answer, reliability } = await performRetrieval(text);
       
-      // 2. Immediate Reply
-      const response = reliability === 'HIGH' ? answer : "I am refining my records for that specific query. Please check the portal or try simplified keywords like 'bus timing'.";
+      const response = reliability === 'HIGH' ? answer : "I'm refining my records. Try asking: 'bus route to porur' or 'prospectus'.";
       
-      await bot.telegram.sendMessage(chatId, response || "System is busy. Please try again.");
-      console.log('✅ Response Sent to Telegram');
+      await bot.telegram.sendMessage(chatId, response || "Aura is busy.");
+      console.log('✅ Sent fast response');
 
       // 3. Optional Persistence (Non-Blocking)
       try {
