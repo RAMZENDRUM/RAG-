@@ -120,7 +120,14 @@ export async function performRetrieval(query: string, history: any[] = []): Prom
     };
 
   } catch (err) {
-    // ... same catch block
+    console.error("❌ CLOUD ENGINE CRASH:", err.message);
+    return { 
+        context: '', 
+        sources: [], 
+        reliability: 'LOW', 
+        score: 0, 
+        answer: "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!" 
+    };
   }
 }
 

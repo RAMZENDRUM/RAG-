@@ -3819,5 +3819,43 @@
     },
     "category": "admission",
     "importance": "high"
+  },
+  {
+    "narrative": "The Girls Hostel is located at Sholinganallur, approximately 5-10 km away from the main MSAJCE campus, in a posh residential area for safety.",
+    "exact": {
+      "location": "Sholinganallur",
+      "distance": "5-10 km"
+    },
+    "category": "hostel",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Girls Hostel has 71 rooms, accommodating 3 students per room, and includes a library/computer center open till 9:00 PM.",
+    "exact": {
+      "rooms": "71",
+      "capacity": "3 per room",
+      "library_hours": "9:00 PM"
+    },
+    "category": "hostel",
+    "importance": "high"
+  },
+  {
+    "narrative": "The Boys Hostel is situated inside the Siruseri IT Park campus and accommodates 480 students in rooms for 2, 4, or 5 persons.",
+    "exact": {
+      "location": "On-campus (Siruseri)",
+      "total_capacity": "480 students"
+    },
+    "category": "hostel",
+    "importance": "high"
+  },
+  {
+    "narrative": "Hostel mess timings: Breakfast (7:00-8:00 AM), Lunch (1:00-1:45 PM), and Dinner (7:00-8:30 PM). Veg and Non-Veg food is served.",
+    "exact": {
+      "breakfast": "7:00 AM",
+      "lunch": "1:00 PM",
+      "dinner": "7:00 PM"
+    },
+    "category": "hostel",
+    "importance": "normal"
   }
 ]
