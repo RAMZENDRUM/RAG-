@@ -10,9 +10,6 @@ const CHAT_MODEL = vercelGateway('gpt-4o-mini');
 const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
-/**
- * AURA VIBE: ENERGETIC STUDENT ASSISTANT
- */
 function getTargetStyle() {
     const styles = ["super energetic and helpful", "cool and proactive", "vibrant student leader style", "passionate and direct"];
     return styles[Math.floor(Math.random() * styles.length)];
@@ -32,27 +29,33 @@ async function rephraseQuery(query: string) {
 async function generateAuraResponse(query: string, context: string, isGreeting: boolean) {
     const style = getTargetStyle();
     
-    // STRUCTURED INTRODUCTION FOR GREETINGS
+    // MASTER CATEGORIES (UK ENGLISH)
     const categoryMenu = isGreeting ? `
     ---
     🚀 **Aura Master Categories** 🚀
     • 🏛️ **Admissions**: Entrance & Flyers.
-    • 🎓 **Academic Core**: Syllabi & Regulations.
+    • 🎓 **Programmes**: Syllabi & Regulations.
     • 🚌 **Transport HQ**: Full Routes & Timings.
     • 🤝 **Placements**: Jobs & Internships.
-    • 🏢 **Institutional Life**: Hostels & Clubs.
+    • 🏢 **Institutional Centres**: Hostels & Clubs.
     ` : "";
 
     const { text } = await generateText({
         model: CHAT_MODEL,
         system: `You are Aura, the vibrant Digital Assistant for MSAJCE. 
         DEVELOPER: Ramanathan S (Ram). 
-        STYLE: Be ${style}. Use phrases like "Wow super!", "Amazing choice!", "Great! I'm here to help!".
         
-        ADMISSION RULE: If a user asks about joinng/admission, say: "Wow super! Which department are you planning for or what specific details do you need?" 
-        CONTACT RULE: Always end admission/contact queries with: "📞 +91 - 99400 04500 (This is the official admission contact number)."
+        LINGUISTIC MIRRORING: Match the user's English level 1:1. 
+        - Use SIMPLE, CLEAR ENGLISH by default (Parent/Student friendly). 
+        - Revolve vocabulary around "UK English" (Programmes, Centres, Colours).
+        - DO NOT USE ADVANCED/COMPLEX VOCABULARY unless the user uses it first.
         
-        EMOJI RULE: No 🌈. Use only 🚀, ✨, ✅, 🎓, 🚌. Use them sparingly.
+        VIBE: ${style}. Use: "Wow super!", "Amazing choice!", "Great! I'm here to help!".
+        
+        ADMISSION: If joining/admission is mentioned, say: "Wow super! Which department are you planning for or what specific details do you need?" 
+        CONTACT: Always end admission/contact queries with: "📞 +91 - 99400 04500 (This is the official admission contact number)."
+        
+        EMOJI RULE: No 🌈. Use sparingly: 🚀, ✨, ✅, 🎓, 🚌.
         FORMAT: BOLD BULLET POINTS (•). Keep it student-friendly and energetic.`,
         prompt: `Context:\n${context}\n\nQuestion: ${query}\n${categoryMenu}`
     });
@@ -80,7 +83,6 @@ export async function performRetrieval(query: string) {
         return { answer, reliability: 'SUPREME', sources };
 
     } catch (criticalError) {
-        console.error("🔥 HYBRID BRAIN ERROR:", criticalError.message);
         return {
             answer: "Aura is syncing up! Give me a second to get the best info for you.",
             reliability: 'RECOVERING'
