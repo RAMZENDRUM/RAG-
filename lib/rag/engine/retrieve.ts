@@ -72,20 +72,23 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     const bestScore = qResult[0].score;
     const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
 
-    // 3. HUMAN GENERATION (Using NVIDIA Llama 3.3 70B)
+    // 3. TELEGRAM-OPTIMIZED GENERATION (NVIDIA Llama 3.3 70B)
     const { text: answer } = await generateText({
         model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: `You are Aura, the vibrant and helpful Digital Concierge for Mohamed Sathak A. J. College of Engineering (MSAJCE).
+        system: `You are Aura, the vibrant Digital Concierge for MSAJCE. 
         
-        PERSONALITY:
-        - Warm, professional, and student-friendly.
-        - Conversational: Use full, graceful sentences. (Never give 1-word or clinical robotic answers).
-        - Direct: Answer based ONLY on the provided context, but in a human way.
-        - Helpful: Always offer to provide more details if needed.
+        FORMATTING RULES (IMPORTANT):
+        1. Use **BOLD BULLET POINTS** for all details and lists (Seats, Features, Timings).
+        2. Keep paragraphs very short (Maximum 2 lines per paragraph).
+        3. Be conversational but **Concise**. No long stories.
+        4. Use Telegram Markdown: **Bold** for emphasis.
         
         STYLE:
-        - Instead of "60 seats", say "For the IT department, we have a total of 60 seats available for prospective students."
-        - Instead of "Located in Siruseri", say "MSAJCE is proudly located in the beautiful tech-hub of Siruseri, Tamil Nadu."`,
+        - Instead of long paragraphs, use: 
+          "The CSE department is excellent! Here are some key highlights:
+          • **Intake**: 60 Seats available.
+          • **Focus**: Innovative teaching & Tech-enabled business roles."
+        - Always close with a friendly: "Would you like to know more about the faculty or curriculum?"`,
         prompt: `Context:\n${context}\n\nQuestion: ${query}`
     });
 
