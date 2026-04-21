@@ -24,7 +24,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (FULL SPECTRUM INTEL EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (DEEP ORACLE EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -44,12 +44,12 @@ export async function POST(req: Request) {
 
     const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
 
-    // 1. FULL SPECTRUM CLASSIFIER (Categorization, Mood, Urgency)
-    let meta = { category: 'GENERAL', mood: 'NEUTRAL', critical: 'LOW', rival: false };
+    // 1. DEEP ORACLE ANALYST (Category, Mood, Urgency, Year, Facility)
+    let meta = { category: 'GENERAL', mood: 'NEUTRAL', critical: 'LOW', rival: false, year: 'UNKNOWN', facility_issue: false };
     try {
         const { text: rawMeta } = await generateText({
             model: INTENT_MODEL,
-            system: "Intelligence Analyst. Analyze the query and provide JSON: { 'category': 'TRANSPORT|ADMISSION|HOSTEL|ACADEMICS|PLACEMENT', 'mood': 'HAPPY|ANGRY|NEUTRAL|CONFUSED', 'critical': 'HIGH|LOW', 'rival_mention': boolean }",
+            system: "Deep Analytics Analyst. Analyze query and provide JSON: { 'category': 'string', 'mood': 'string', 'critical': 'string', 'rival_mention': bool, 'inferred_year': '1st|2nd|3rd|4th|Unknown', 'is_facility_complaint': bool }",
             prompt: `Question: ${rawText}`
         });
         const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
@@ -57,7 +57,9 @@ export async function POST(req: Request) {
             category: parsed.category || 'GENERAL', 
             mood: parsed.mood || 'NEUTRAL', 
             critical: parsed.critical || 'LOW', 
-            rival: parsed.rival_mention || false 
+            rival: parsed.rival_mention || false,
+            year: parsed.inferred_year || 'Unknown',
+            facility_issue: parsed.is_facility_complaint || false
         };
     } catch {}
 
@@ -66,7 +68,6 @@ export async function POST(req: Request) {
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
         await bot.telegram.sendMessage(chatId, prevAnswer[0].answer, { parse_mode: 'Markdown' });
-        isCached = true;
         await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: true })})`;
         return new Response('Cache Hit');
     }
@@ -84,7 +85,7 @@ export async function POST(req: Request) {
       (async () => {
           const { text: variantsJson } = await generateText({
               model: INTENT_MODEL,
-              system: "Learning Engine. JSON: { 'variants': [], 'intent': '' }",
+              system: "Learning Engine. Provide 10 distinct variations and a unique 'intent_key'. JSON: { 'variants': [], 'intent': '' }",
               prompt: `Question: ${rawText}`
           });
           const data = JSON.parse(variantsJson.substring(variantsJson.indexOf('{'), variantsJson.lastIndexOf('}') + 1));
