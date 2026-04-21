@@ -34,14 +34,14 @@ export interface RetrievalResult {
   score: number;
 }
 
-export async function performRetrieval(query: string): Promise<RetrievalResult> {
+export async function performRetrieval(query: string, history: any[] = []): Promise<RetrievalResult> {
   const lowerQuery = query.toLowerCase().trim();
   
-  // 0. GREETING HANDLER (Social Layer)
+  // 0. GREETING HANDLER
   const greetings = ['hi', 'hello', 'hey', 'start', 'aura'];
-  if (greetings.includes(lowerQuery) || lowerQuery.length < 3) {
+  if (greetings.includes(lowerQuery) || (lowerQuery.length < 3 && !history.length)) {
     return {
-      answer: "Hello! I am Aura, your MSAJCE Digital Concierge. I can help you with Admission details, Bus routes, and Placement records. What would you like to know today?",
+      answer: "Hello! I am Aura, your MSAJCE Digital Concierge. I remember our chat! What can I help you with now?",
       context: 'system_greeting',
       sources: ['Aura System'],
       reliability: 'HIGH',
@@ -49,12 +49,25 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     };
   }
 
-  console.log(`--- [ELITE VERCEL SEARCH] Query: ${query} ---`);
+  // 1. MEMORY REPHRASING (Resolves "it", "that", "the timings")
+  let searchTerms = query;
+  if (history.length > 0) {
+    console.log("🧠 Aura is thinking back...");
+    const { text: rephrased } = await generateText({
+        model: nvidia.chat(DEFAULT_CHAT_MODEL),
+        system: "You are a context-resolver. Re-write the user's LATEST message into a standalone search query using the provided history. Keep it concise. Focus on the subject and intent.",
+        prompt: `History:\n${history.map(m => `${m.role}: ${m.content}`).join('\n')}\n\nLatest: ${query}`
+    });
+    searchTerms = rephrased;
+    console.log(`🔎 Rephrased Query: ${searchTerms}`);
+  }
+
+  console.log(`--- [ELITE VERCEL SEARCH] Terms: ${searchTerms} ---`);
   try {
-    // 1. EMBEDDING (Using Vercel Gateway)
+    // 2. EMBEDDING (Using Vercel Gateway)
     const { embedding } = await embed({
       model: openai.embedding('text-embedding-3-small'),
-      value: query,
+      value: searchTerms,
     });
 
     // 2. QDRANT SEARCH

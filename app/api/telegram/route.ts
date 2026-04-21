@@ -48,17 +48,39 @@ export async function POST(req: Request) {
       const text = body.message.text;
       const chatId = body.message.chat.id;
 
-      // 1. FAST RAG (Speed-First Pattern)
-      const { answer, reliability } = await performRetrieval(text);
+      // 1. FETCH CONTEXT (Memory)
+      let history: any[] = [];
+      try {
+        const userId = body.message.from.id.toString();
+        history = await getSql()`
+          SELECT role, content 
+          FROM chat_histories 
+          WHERE user_id = ${userId} 
+          ORDER BY created_at DESC 
+          LIMIT 4
+        `;
+        history = history.reverse(); // Standard chron order for AI
+      } catch (hErr) {
+        console.warn("⚠️ Memory fetch failed:", hErr.message);
+      }
+
+      // 2. FAST RAG (Speed-First Pattern)
+      const { answer, reliability } = await performRetrieval(text, history);
       
       const response = reliability === 'HIGH' ? answer : "I'm refining my records. Try asking: 'bus route to porur' or 'prospectus'.";
       
       await getBot().telegram.sendMessage(chatId, response || "Aura is busy.", { parse_mode: 'Markdown' });
       console.log('✅ Sent fast response');
 
-      // 3. Optional Persistence (Non-Blocking)
+      // 4. Persistence (User and Assistant)
       try {
-        await getSql()`INSERT INTO chat_histories (user_id, role, content) VALUES (${body.message.from.id.toString()}, 'assistant', ${response || ''})`;
+        const userId = body.message.from.id.toString();
+        await getSql()`
+          INSERT INTO chat_histories (user_id, role, content) 
+          VALUES 
+            (${userId}, 'user', ${text}),
+            (${userId}, 'assistant', ${response || ''})
+        `;
       } catch (dbError) {
         console.warn('⚠️ persistence failed but bot answered:', dbError.message);
       }
