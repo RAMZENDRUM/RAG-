@@ -1,5 +1,7 @@
 import { Telegraf } from 'telegraf';
 import { performRetrieval } from '../../../lib/rag/engine/retrieve';
+import { generateText } from 'ai';
+import { createOpenAI } from '@ai-sdk/openai';
 import postgres from 'postgres';
 
 let _bot: Telegraf | null = null;
@@ -15,11 +17,14 @@ const getSql = () => {
   return _sql;
 };
 
+const nvidiaInternal = createOpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: 'https://integrate.api.nvidia.com/v1' });
+const LEARNING_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
+
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (NEURAL THREAD EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (ACTIVE LEARNING EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -34,35 +39,12 @@ export async function POST(req: Request) {
     const sql = getSql();
     const bot = getBot();
 
-    // FETCH CONVERSATION THREAD (Last 10 turns)
-    const historyRows = await sql`
-        SELECT role, content FROM chat_histories 
-        WHERE user_id = ${userId} 
-        ORDER BY created_at DESC 
-        LIMIT 10
-    `.catch(() => []);
-    
-    // Format for the LLM (Reverse to chronological order)
-    const chatHistory = historyRows.reverse().map((h: any) => ({
-        role: h.role,
-        content: h.content
-    }));
+    const historyRows = await sql`SELECT role, content FROM chat_histories WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 10`.catch(() => []);
+    const chatHistory = historyRows.reverse().map((h: any) => ({ role: h.role, content: h.content }));
 
     const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
-    if (!isAdmin && !isGreeting && rawText.length < 5) {
-        await bot.telegram.sendMessage(chatId, "🤔 **Aura needs more context**: Please provide at least 5 characters!");
-        return new Response('Too Short');
-    }
 
-    if (!isAdmin) {
-        const [speedCheck] = await sql`SELECT count(*) FROM chat_histories WHERE user_id = ${userId} AND created_at > now() - interval '10 seconds'`;
-        if (parseInt(speedCheck.count) >= 3) {
-            await bot.telegram.sendMessage(chatId, "⏲️ **Neural Pacing**: My circuits need 10 seconds to cool down.");
-            return new Response('Rate Limited');
-        }
-    }
-
-    // BYPASS CACHE FOR ADMIN / DYNAMIC CONTEXT
+    // 1. FAST CACHE CHECK (0 Tokens)
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
         await sleep(600);
@@ -70,16 +52,35 @@ export async function POST(req: Request) {
         return new Response('Cache Hit');
     }
 
-    // EXECUTE RETRIEVAL WITH MEMORY THREAD
+    // 2. RETRIEVAL (Full RAG Flow)
     const { answer } = await performRetrieval(rawText, chatHistory);
     if (!isAdmin) await sleep(600);
 
     await bot.telegram.sendMessage(chatId, answer, { parse_mode: 'Markdown' });
 
-    try {
-      await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${rawText}), (${userId}, 'assistant', ${answer})`;
-      if (answer && answer.length > 10) { await sql`INSERT INTO knowledge_cache (query, answer) VALUES (${cleanText}, ${answer})`; }
-    } catch {}
+    // 3. AUTONOMOUS LEARNING (Background)
+    (async () => {
+        try {
+            // Save actual interaction
+            await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${rawText}), (${userId}, 'assistant', ${answer})`;
+            
+            // Generate 10 Variations for Training Dataset / Cache Pre-fill
+            const { text: variantsJson } = await generateText({
+                model: LEARNING_MODEL,
+                system: "Variation Generator. Provide 10 distinct ways a student might ask this question (Simple, Slang, Formal, Query-style). Output as a JSON array of strings only.",
+                prompt: `Question: ${rawText}`
+            });
+
+            // Parse and Pre-fill Cache
+            const variations = JSON.parse(variantsJson.substring(variantsJson.indexOf('['), variantsJson.lastIndexOf(']') + 1));
+            const inserts = [...variations, cleanText].map(v => ({ query: v.toLowerCase().trim(), answer: answer }));
+            
+            await sql`INSERT INTO knowledge_cache ${sql(inserts, 'query', 'answer')} ON CONFLICT (query) DO NOTHING`;
+            console.log(`🧠 Aura Learned ${variations.length} new variations for: "${rawText}"`);
+        } catch (learningError) {
+            console.warn('Learning Loop Error:', learningError.message);
+        }
+    })();
 
     return new Response('OK');
   } catch (error) {
