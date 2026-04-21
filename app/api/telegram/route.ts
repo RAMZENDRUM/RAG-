@@ -24,7 +24,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (INTELLIGENCE HUB EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (FULL SPECTRUM INTEL EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -44,27 +44,30 @@ export async function POST(req: Request) {
 
     const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
 
-    // 1. NEURAL CATEGORIZATION (For College Strategic Data)
-    let category = 'GENERAL';
+    // 1. FULL SPECTRUM CLASSIFIER (Categorization, Mood, Urgency)
+    let meta = { category: 'GENERAL', mood: 'NEUTRAL', critical: 'LOW', rival: false };
     try {
-        const { text: cat } = await generateText({
+        const { text: rawMeta } = await generateText({
             model: INTENT_MODEL,
-            system: "Classifier. Categories: ADMISSION, TRANSPORT, ACADEMICS, PLACEMENT, HOSTEL, GENERAL. Output one word only.",
+            system: "Intelligence Analyst. Analyze the query and provide JSON: { 'category': 'TRANSPORT|ADMISSION|HOSTEL|ACADEMICS|PLACEMENT', 'mood': 'HAPPY|ANGRY|NEUTRAL|CONFUSED', 'critical': 'HIGH|LOW', 'rival_mention': boolean }",
             prompt: `Question: ${rawText}`
         });
-        category = cat.toUpperCase().trim();
+        const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
+        meta = { 
+            category: parsed.category || 'GENERAL', 
+            mood: parsed.mood || 'NEUTRAL', 
+            critical: parsed.critical || 'LOW', 
+            rival: parsed.rival_mention || false 
+        };
     } catch {}
 
     // 2. CACHE PROXIMITY CHECK
     let isCached = false;
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
-        await sleep(600);
         await bot.telegram.sendMessage(chatId, prevAnswer[0].answer, { parse_mode: 'Markdown' });
         isCached = true;
-        
-        // Save cached interaction for analytics
-        await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ category, cached: true })})`;
+        await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: true })})`;
         return new Response('Cache Hit');
     }
 
@@ -76,12 +79,12 @@ export async function POST(req: Request) {
 
     // 4. PERSISTENCE & AUTO-LEARNING
     try {
-      await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ category, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category })})`;
+      await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category: meta.category })})`;
       
       (async () => {
           const { text: variantsJson } = await generateText({
               model: INTENT_MODEL,
-              system: "Learning Engine. Provide 5 variations AND a 3-word 'intent_key'. JSON: { 'variants': [], 'intent': '' }",
+              system: "Learning Engine. JSON: { 'variants': [], 'intent': '' }",
               prompt: `Question: ${rawText}`
           });
           const data = JSON.parse(variantsJson.substring(variantsJson.indexOf('{'), variantsJson.lastIndexOf('}') + 1));
