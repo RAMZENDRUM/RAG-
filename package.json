@@ -11,9 +11,11 @@
     "bot:prod": "tsx lib/telegram/bot.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.64",
     "@ai-sdk/openai": "^3.0.53",
     "@ai-sdk/react": "^3.0.170",
     "@ai-sdk/vercel": "^2.0.43",
+    "@google/generative-ai": "^0.24.1",
     "@langchain/community": "^1.1.27",
     "@langchain/core": "^1.1.40",
     "@langchain/openai": "^1.4.4",
@@ -37,6 +39,7 @@
     "postgres": "^3.4.9",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-markdown": "^10.1.0",
     "telegraf": "^4.16.3",
     "zod": "^3.23.8"
   },

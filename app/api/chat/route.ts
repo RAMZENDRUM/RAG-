@@ -1,48 +1,88 @@
-import { streamText } from 'ai';
-import { createOpenAI } from '@ai-sdk/openai';
 import { performRetrieval } from '../../../lib/rag/engine/retrieve';
+import { generateText } from 'ai';
+import { createOpenAI } from '@ai-sdk/openai';
+import postgres from 'postgres';
 
-const ai = createOpenAI({
-  apiKey: process.env.VERCEL_AI_KEY,
-  baseURL: 'https://ai-gateway.vercel.sh/v1',
-});
+let _sql: any = null;
+const getSql = () => {
+  if (!_sql) _sql = postgres(process.env.DATABASE_URL || '');
+  return _sql;
+};
 
+const nvidiaInternal = createOpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: 'https://integrate.api.nvidia.com/v1' });
+const INTENT_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
+
+/**
+ * AURA UNIVERSAL WEB API (v1)
+ * Use this to connect your website's Chatbot UI to Aura's Brain.
+ */
 export async function POST(req: Request) {
-  const { messages } = await req.json();
-  const lastMessage = messages[messages.length - 1].content.trim();
-
   try {
-    // 1. Unified Retrieval
-    const { context, reliability, answer, sources, score } = await performRetrieval(lastMessage);
+    const { messages, userId = 'web_guest' } = await req.json();
+    if (!messages || messages.length === 0) return new Response('Missing messages', { status: 400 });
 
-    // 2. Production Generation
-    // CRITICAL FIX: Always use streamText to avoid "Cannot use 'in' operator" TypeError in @ai-sdk/react
-    const result = await streamText({
-      model: ai.chat('openai/gpt-4.1-nano'),
-      system: `You are the MSAJCE Aura Concierge. 
-      
-      RULES:
-      - If provided context is empty or reliability is LOW, use the FALLBACK_ANSWER.
-      - Answer ONLY using the provided context.
-      - Present technical data in bullet points.
-      
-      FALLBACK_ANSWER:
-      ${answer || "I do not have specific institutional records for that exact query. Please contact the college office for official details."}
-      
-      CONTEXT:
-      ${reliability === 'HIGH' ? context : ''}`,
-      messages,
-      onFinish({ usage }) {
-        console.log('Production Metrics:', { score, sources: sources?.length, usage });
-      }
+    const latestMessage = messages[messages.length - 1].content;
+    const cleanText = latestMessage.toLowerCase().trim();
+    const sql = getSql();
+
+    // 1. ANALYTICS (SENTINEL LAYER)
+    let meta = { category: 'GENERAL', mood: 'NEUTRAL', persona: 'UNKNOWN' };
+    try {
+        const { text: rawMeta } = await generateText({
+            model: INTENT_MODEL,
+            system: "Analyst. Provide JSON: { 'category': 'string', 'mood': 'string', 'persona': 'string' }",
+            prompt: `Question: ${latestMessage}`
+        });
+        meta = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
+    } catch {}
+
+    // 2. CACHE CHECK (SPEED & COST)
+    const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
+    if (prevAnswer.length > 0) {
+        return Response.json({ answer: prevAnswer[0].answer, cached: true, ...meta });
+    }
+
+    // 3. RAG CORE (AURA'S KNOWLEDGE)
+    const history = messages.slice(0, -1).map((m: any) => ({ role: m.role, content: m.content }));
+    const { answer } = await performRetrieval(latestMessage, history);
+
+    // 4. PERSISTENCE & LEARNING
+    try {
+        await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'web_user', ${latestMessage}, ${JSON.stringify({ ...meta, source: 'web' })})`;
+    } catch {}
+
+    // 5. RETURN WITH CORS HEADERS
+    return new Response(JSON.stringify({ 
+        answer, 
+        cached: false,
+        category: meta.category,
+        mood: meta.mood,
+        persona: meta.persona
+    }), {
+        status: 200,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*', // Allow all for now, can be restricted to college domain later
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        }
     });
 
-    return result.toTextStreamResponse();
   } catch (error) {
-    console.error('Production RAG Error:', error);
-    // Even on error, we should ideally return a stream if possible, 
-    // but for 500s the SDK usually handles it. 
-    // To be safest, we stream the error message.
-    return new Response('System maintenance in progress. Please try again in a few moments.', { status: 500 });
+    console.error('Web API Error:', error);
+    return new Response('Internal Aura Sync Error', { status: 500 });
   }
 }
+
+// OPTIONS handler for CORS preflight
+export async function OPTIONS() {
+    return new Response(null, {
+        status: 204,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        }
+    });
+}
+

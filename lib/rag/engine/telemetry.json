@@ -1,0 +1,11 @@
+{
+  "nvidia": {
+    "facts": 9615,
+    "tokens": 994500
+  },
+  "gemini": {
+    "facts": 0,
+    "tokens": 0
+  },
+  "lastUpdate": "2026-04-21T14:25:02.000Z"
+}
