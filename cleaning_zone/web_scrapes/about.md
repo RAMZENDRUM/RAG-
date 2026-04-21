@@ -1,0 +1,58 @@
+# Source: https://www.msajce-edu.in/about.php
+
+About Us
+--------
+
+1.  [Home](index.php)
+2.  [Pages](#)
+3.  An Overview
+
+### MSAJCE An Overview
+
+The Mohamed Sathak A.J. College of Engineering (MSAJCE), established on 5th July 2001 under the aegis of Mohamed Sathak Trust, is approved by AICTE New Delhi, affiliated to Anna University Chennai and Government of Tamil Nadu. MSAJCE Strives to continuously upgrade its facilities to provide quality technical education to meet the industrial and societal needs, by providing skill based training with the state of art facilities.  
+  
+The college campus, sprawling over 70 acres of greenery located inside the SIPCOT IT Park, Siruseri is surrounded by multinational IT companies such as TCS, CTS, Intellect, Aspire, Steria, Polaris, FSS, etc. MSAJCE has good infrastructure facilities such as spacious classrooms, drawing halls, laboratories, seminar halls, computer facilities with internet and wifi connectivity, library, workshops, auditorium and playground. The college is well connected by Road, Rail and Air from various parts of the country. A team of well qualified and experienced faculty supports the teaching and learning process. The college provides equal importance for academic, co curricular and extracurricular activities. MSAJCE provides all kinds of training for the professional and overall transformation of the students.
+
+####  Why Join MSAJCE ?
+
+*   Located in green lush environment at Sirucheri IT Park surrounded by 100+ leading IT Industries Like TCS, CTS, Infosys, InteIlect, FSS, HCL etc
+*   State of art facilities with industry collaborative technology centers
+*   Qualified, Experienced & Dedicated team of faculty members
+*   Well defined academic process make the student Smart learning
+*   Involve the students to work in various research and industrial projects, Industrial Hackathon and Project competitions will gain the Competency based learning
+*   Professional society, Club activities and Student chapter activities enable them Innovative learning
+*   State of art facilities with industry collaborative technology centers
+*   Student Exchange Program for Cultural learning
+*   Internship, Industrial Visits, Guest lecture, Seminar / Webinar by Industrial Experts to meet the Industrial Expectations
+*   Communication Language Learning facility – (English, German & Japan)
+*   Value Added Courses & Technology Training to bridge the gap between Institute and Industry
+*   Good Placement Record
+*   Support for Higher Education & became an Entrepreneur
+
+*   [Overview](about.php)
+*   [Vision & Mission](visionmission.php)
+*   [Management](ourhistory.php)
+*   [Principal Message](principal.php)
+*   Statutory body
+    *   [Governing Council](governingcouncil.php)
+    *   [Planning & Monitoring Board](planningmonitoringboard.php)
+    *   [Academic Advisory Committe](academicadvisorycommitte.php)
+    *   [Grievance and Redressal Committee](grievanceredressalcommittee.php)
+    *   [Anti-Ragging Committee & Squad](Anti-Ragging.php)
+    *   [Womens Empowerment Cell](womensempowermentcell.php)
+*   [Functional Committees](FunctionalCommittees.php)
+*   [MSAJCE Policies](msajcepolicy.php)
+*   [Mandatory Disclosure](mandatorydisclosure.php)
+*   [Group of Institutions](groupofinstitutions.php)
+
+#### Download Brochure
+
+* * *
+
+*   [Brochure.pdf](uploads/College-Prospectus.pdf)
+
+> [Mohamed Sathak AJ College of Engineering](https://www.facebook.com/msaj.engg.college/)
+
+[](#)
+
+--- MEDIA RESOURCES ---

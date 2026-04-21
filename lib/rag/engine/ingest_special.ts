@@ -12,31 +12,29 @@ const google = createGoogleGenerativeAI({
 
 const EMBED_MODEL = google.textEmbeddingModel('text-embedding-004');
 
-const COMPLETE_SPECIAL_DATA = [
-  "MSAJCE provides 22 buses for transportation, covering Chennai, Chengalpattu, Kanchipuram, and Thiruvallur.",
-  "Route AR-3 starts from Uthiramerur at 05:50 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Sathish K (9789970304).",
-  "Route AR-4 starts from Moolakadai at 06:10 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. M. Suresh (9849265637).",
-  "Route AR-5 starts from MMDA School at 06:15 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Velu (9940050685).",
-  "Route AR-6 starts from MMDA School at 06:15 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Venkatachalam (9025731746).",
-  "Route AR-7 starts from Chunambedu at 05:25 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Suresh (9789895025).",
-  "Route AR-8 starts from Manjambakkam at 05:50 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Raju (9790750906). Stops include Retteri, Anna Nagar, CMBT, Vadapalani, Ashok Pillar, and Medavakkam.",
-  "Route AR-9 starts from Ennore at 06:15 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Kanagaraj (9710209097).",
-  "Route R-20 starts from Moolakadai at 05:55 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. M. Suresh (9849265637).",
-  "Route R-21 starts from Porur at 06:25 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. E. Sathish (9677007583).",
-  "Route R-22 starts from Nemilichery at 05:50 AM. Reaches MSAJCE at 08:00 AM. Driver: Mr. Jaffar (9566037890)."
+const ABSOLUTE_ADMISSION_DATA = [
+  "MSAJCE Undergraduate (B.E./B.Tech) Programmes & Seats: CSE (60 seats), ECE (60 seats), IT (60 seats), AI & ML (60 seats), Civil (30 seats), EEE (30 seats), Mechanical (30 seats), AI & Data Science (30 seats), CSBS (30 seats), CSE Cyber Security (30 seats), VLSI Design & Technology (30 seats), Advanced Communication Technology (30 seats).",
+  "Admission eligibility for other state students (AP, Telangana, Kerala, etc.): Selection based on Q-mark. Formula: Q = (Mathematics / 2) + ((Physics + Chemistry) / 4).",
+  "NRI Category Admission: 5% of sanctioned seats are reserved for NRI candidates at MSAJCE.",
+  "MSAJCE Postgraduate (M.E.) Programmes: M.E. Computer Science and Engineering (9 seats), M.E. Structural Engineering (18 seats).",
+  "Research (Ph.D) Programs: MSAJCE offers Ph.D in Mechanical Engineering.",
+  "Principal Admission Contact: Dr. K.S. Srinivasan (9150575066 | principal@msajce-edu.in).",
+  "Administrative Officer Contact: Mr. A. Abdul Gafoor (9940319629 | abdulgafoor@msajce-edu.in).",
+  "Head of Admission Contact: Dr. K.P. Santhosh Nathan (98408 86992 | ped.santhosh@msajce-edu.in).",
+  "Other Contacts: Mr. S. Syed Abuthahir (9944127339), Mr. B. Rizha Ur Rahman (9790836981), Mrs. I.S. Suganthi (7299772958)."
 ];
 
 async function inject() {
-    console.log("🚀 Injecting COMPLETE Transport facts...");
+    console.log("🚀 Injecting ABSOLUTE ADMISSION TRUTH...");
     const client = getQdrant();
-    const { embeddings } = await embedMany({ model: EMBED_MODEL, values: COMPLETE_SPECIAL_DATA });
-    const points = COMPLETE_SPECIAL_DATA.map((content, i) => {
+    const { embeddings } = await embedMany({ model: EMBED_MODEL, values: ABSOLUTE_ADMISSION_DATA });
+    const points = ABSOLUTE_ADMISSION_DATA.map((content, i) => {
         const hash = crypto.createHash('md5').update(content).digest('hex');
         const id = `${hash.slice(0,8)}-${hash.slice(8,12)}-4${hash.slice(13,16)}-a${hash.slice(17,20)}-${hash.slice(20,32)}`;
-        return { id, vector: embeddings[i], payload: { content, source: "transport_sync_v2" } };
+        return { id, vector: embeddings[i], payload: { content, source: "absolute_website_sync_v30" } };
     });
     await client.upsert(COLLECTION_NAME, { wait: true, points });
-    console.log("🏁 Transport Sync v2 Complete!");
+    console.log("🏁 Absolute Truth Saturation Complete!");
 }
 
 inject();
