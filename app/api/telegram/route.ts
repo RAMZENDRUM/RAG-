@@ -24,7 +24,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (NEURAL INTENT EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (INTELLIGENCE HUB EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -44,25 +44,27 @@ export async function POST(req: Request) {
 
     const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
 
-    // 1. NEURAL INTENT MAPPING (The Semantic Bridge)
-    // We normalize the query to its CORE INTENT before checking the cache.
-    let intentKey = cleanText;
-    if (!isGreeting && !isAdmin) {
-        try {
-            const { text: resolvedIntent } = await generateText({
-                model: INTENT_MODEL,
-                system: "Intent Resolver. Reduce the question to its simplest semantic key (e.g. 'who is principal' -> 'principal_info', 'where is hostel' -> 'hostel_location'). Output the key only.",
-                prompt: `Question: ${rawText}`
-            });
-            intentKey = resolvedIntent.toLowerCase().trim().replace(/ /g, '_');
-        } catch { intentKey = cleanText; }
-    }
+    // 1. NEURAL CATEGORIZATION (For College Strategic Data)
+    let category = 'GENERAL';
+    try {
+        const { text: cat } = await generateText({
+            model: INTENT_MODEL,
+            system: "Classifier. Categories: ADMISSION, TRANSPORT, ACADEMICS, PLACEMENT, HOSTEL, GENERAL. Output one word only.",
+            prompt: `Question: ${rawText}`
+        });
+        category = cat.toUpperCase().trim();
+    } catch {}
 
-    // 2. CACHE HIT CHECK (Using Intent Key)
-    const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${intentKey} OR query = ${cleanText} LIMIT 1`.catch(() => []);
+    // 2. CACHE PROXIMITY CHECK
+    let isCached = false;
+    const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
         await sleep(600);
         await bot.telegram.sendMessage(chatId, prevAnswer[0].answer, { parse_mode: 'Markdown' });
+        isCached = true;
+        
+        // Save cached interaction for analytics
+        await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ category, cached: true })})`;
         return new Response('Cache Hit');
     }
 
@@ -72,27 +74,21 @@ export async function POST(req: Request) {
 
     await bot.telegram.sendMessage(chatId, answer, { parse_mode: 'Markdown' });
 
-    // 4. BEYOND-VARIATION LEARNING (Background)
-    (async () => {
-        try {
-            await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${rawText}), (${userId}, 'assistant', ${answer})`;
-            
-            // Map the intent AND variations
-            const { text: variantsJson } = await generateText({
-                model: INTENT_MODEL,
-                system: "Learning Engine. Provide 5 variants of the question AND one 3-word unique 'intent_key'. Output as JSON: { 'variants': [], 'intent': '' }",
-                prompt: `Question: ${rawText}`
-            });
-
-            const data = JSON.parse(variantsJson.substring(variantsJson.indexOf('{'), variantsJson.lastIndexOf('}') + 1));
-            const intent = data.intent.toLowerCase().trim().replace(/ /g, '_');
-            const variations = data.variants.map((v: string) => v.toLowerCase().trim());
-
-            // Save everything to the same answer pool
-            const entries = [intent, ...variations, cleanText].map(v => ({ query: v, answer: answer }));
-            await sql`INSERT INTO knowledge_cache ${sql(entries, 'query', 'answer')} ON CONFLICT (query) DO NOTHING`;
-        } catch {}
-    })();
+    // 4. PERSISTENCE & AUTO-LEARNING
+    try {
+      await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ category, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category })})`;
+      
+      (async () => {
+          const { text: variantsJson } = await generateText({
+              model: INTENT_MODEL,
+              system: "Learning Engine. Provide 5 variations AND a 3-word 'intent_key'. JSON: { 'variants': [], 'intent': '' }",
+              prompt: `Question: ${rawText}`
+          });
+          const data = JSON.parse(variantsJson.substring(variantsJson.indexOf('{'), variantsJson.lastIndexOf('}') + 1));
+          const entries = [data.intent.replace(/ /g, '_'), ...data.variants, cleanText].map(v => ({ query: v.toLowerCase().trim(), answer: answer }));
+          await sql`INSERT INTO knowledge_cache ${sql(entries, 'query', 'answer')} ON CONFLICT (query) DO NOTHING`;
+      })();
+    } catch {}
 
     return new Response('OK');
   } catch (error) {

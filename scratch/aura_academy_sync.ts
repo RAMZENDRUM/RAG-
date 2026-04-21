@@ -6,45 +6,45 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sql = postgres(process.env.DATABASE_URL || '');
-const OUTPUT_FILE = path.join(process.cwd(), 'scratch', 'aura_training_dataset.csv');
+const TRAINING_FILE = path.join(process.cwd(), 'scratch', 'aura_training_dataset.csv');
+const INTELLIGENCE_FILE = path.join(process.cwd(), 'scratch', 'msajce_aura_report.csv');
 
-async function syncAndExport() {
-  console.log("🚀 Starting Aura Academy Sync...");
+async function masterSync() {
+  console.log("🚀 Starting Aura Institutional Intelligence Sync...");
 
   try {
-    // 1. HARDEN DATABASE (Zero-Duplicate Shield)
-    console.log("🛡️ Hardening Fast-Cache Constraints...");
-    await sql`ALTER TABLE knowledge_cache ADD CONSTRAINT unique_query UNIQUE (query)`.catch(() => {
-        console.log("ℹ️ Fast-Cache already hardened.");
-    });
+    // --- 1. EXPORT TRAINING DATA (THE GOLD VARIANTS) ---
+    const cacheRows = await sql`SELECT query, answer, created_at FROM knowledge_cache ORDER BY created_at DESC`;
+    if (cacheRows.length > 0) {
+        console.log(`📊 Exporting Training Data (${cacheRows.length} variants)...`);
+        const header = "Question_Variant,Verified_Answer,Date_Learned\n";
+        const content = cacheRows.map(r => `"${r.query.replace(/"/g, '""')}","${r.answer.replace(/"/g, '""')}","${r.created_at}"`).join('\n');
+        fs.writeFileSync(TRAINING_FILE, header + content);
+    }
 
-    // 2. FETCH ALL LEARNED KNOWLEDGE
-    console.log("📊 Pulling Golden Dataset from Supabase...");
-    const rows = await sql`
-        SELECT query, answer, created_at 
-        FROM knowledge_cache 
+    // --- 2. EXPORT STRATEGIC INTELLIGENCE (STUDENT DEMAND) ---
+    const chatRows = await sql`
+        SELECT user_id, content, metadata, created_at 
+        FROM chat_histories 
+        WHERE role = 'user' 
         ORDER BY created_at DESC
     `;
 
-    if (rows.length === 0) {
-        console.log("⚠️ No learned data found yet. Aura needs more student chats!");
-        return;
+    if (chatRows.length > 0) {
+        console.log(`📉 Exporting Strategic Report (${chatRows.length} interactions)...`);
+        const intelHeader = "User_ID,Student_Question,Category,Was_Cached,Date_Time\n";
+        const intelContent = chatRows.map(r => {
+            const meta = r.metadata || {};
+            const cat = meta.category || 'UNKNOWN';
+            const cacheStatus = meta.cached ? 'YES ($0 SAVED)' : 'NO (RAG HIT)';
+            return `"${r.user_id}","${r.content.replace(/"/g, '""')}","${cat}","${cacheStatus}","${r.created_at}"`;
+        }).join('\n');
+        fs.writeFileSync(INTELLIGENCE_FILE, intelHeader + intelContent);
     }
 
-    // 3. CONVERT TO EXCEL-READY CSV
-    console.log(`📂 Generating Dataset with ${rows.length} records...`);
-    const header = "Question Variant,Predicted Answer,Discovery Date\n";
-    const csvContent = rows.map(r => {
-        // Sanitize for CSV (Escape quotes/newlines)
-        const q = `"${r.query.replace(/"/g, '""')}"`;
-        const a = `"${r.answer.replace(/"/g, '""')}"`;
-        return `${q},${a},${r.created_at}`;
-    }).join('\n');
-
-    fs.writeFileSync(OUTPUT_FILE, header + csvContent);
-    
-    console.log("✅ SYNC COMPLETE!");
-    console.log(`📁 Your Excel-ready file is at: ${OUTPUT_FILE}`);
+    console.log("✅ SYSTEM SYNC COMPLETE!");
+    console.log(`📁 1. Training Dataset: ${TRAINING_FILE}`);
+    console.log(`📁 2. Institutional Report: ${INTELLIGENCE_FILE}`);
 
   } catch (err) {
     console.error("❌ Sync Failed:", err.message);
@@ -53,4 +53,4 @@ async function syncAndExport() {
   }
 }
 
-syncAndExport();
+masterSync();
