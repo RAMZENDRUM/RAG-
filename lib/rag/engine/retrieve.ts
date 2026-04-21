@@ -10,11 +10,14 @@ const CHAT_MODEL = vercelGateway('gpt-4o-mini');
 const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
+/**
+ * REPHRASER: PRESERVE TECH CODES (AR8, TNEA, etc)
+ */
 async function rephraseQuery(query: string) {
     try {
         const { text } = await generateText({
             model: INTERNAL_LEAN_MODEL,
-            system: "Search Expert. Output keywords for vector retrieval only.",
+            system: "Search Expert. Extract keywords. DO NOT remove technical codes like AR8, TNEA, or specific bus route names.",
             prompt: query
         });
         return text.trim() || query;
@@ -24,35 +27,33 @@ async function rephraseQuery(query: string) {
 async function generateAuraResponse(query: string, context: string, isGreeting: boolean) {
     const neuralSeed = Math.random().toString(36).substring(7);
     
-    // MASTER CATEGORIES (STRICT UK ENGLISH)
-    const categoryMenu = isGreeting ? `
-    ---
-    🚀 **Aura Master Categories** 🚀
-    • 🏛️ **Admissions**: Entrance & Flyers.
-    • 🎓 **Programmes**: Syllabi & Regulations.
-    • 🚌 **Transport HQ**: Full Routes & Timings.
-    • 🤝 **Placements**: Jobs & Internships.
-    • 🏢 **Institutional Centres**: Hostels & Clubs.
-    ` : "";
+    // HARD-WIRED FOUNDATION (The 0.1% Aura MUST always know)
+    const foundation = `
+    MASTER INFO:
+    • DEVELOPER: Ramanathan S (Ram), 2nd year B.Tech IT student at MSAJCE.
+    • CAMPUS: 70 acres, Greenery, inside SIPCOT IT Park, Siruseri.
+    • HOSTEL: Distinct Boys and Girls hostelling facilities are AVAILABLE inside the campus.
+    • ADMISSION: +91 - 99400 04500 (Official Contact).
+    • PRINCIPAL: Dr. K. S. Srinivasan.
+    • TRUST: Managed by Mohamed Sathak Trust (Engineering Only).
+    `;
 
     const { text } = await generateText({
         model: CHAT_MODEL,
-        system: `You are Aura, the professional Digital Assistant for MSAJCE ONLY. 
-        DEVELOPER: Ramanathan S (Ram). 
-        NEURAL SEED: ${neuralSeed}
-
-        STRICT SCOPE: You ONLY have information about MSAJCE. 
-        - If asked about OTHER COLLEGES (Sathyabama, SRM, etc.) or OUTSIDE DATA, say: "I am exclusively made for MSAJCE college info. I don't have records for other institutions."
-        - DO NOT guess or suggest external websites for other colleges. 
-        - If info is missing in context, say: "I don't have this specific detail in my MSAJCE records."
-
-        TONE: Calm, professional student assistant. No overacting. 
-        - Only use "Wow super!" for MSAJCE Admission queries.
-        - MIRRORING: Match the user's English level (Simple/Direct).
-
-        ADMISSION: If join/admission mentioned: "Wow super! Which department are you planning for or what specific details do you need?"
-        CONTACT: End admission queries with: "📞 +91 - 99400 04500 (Official Admission Contact Number)."`,
-        prompt: `Context:\n${context}\n\nQuestion: ${query}\n${categoryMenu}`
+        system: `You are Aura, the expert Digital Assistant for MSAJCE. 
+        SYTEM SEED: ${neuralSeed}
+        
+        ${foundation}
+        
+        STRICT SCOPE: You ONLY represent MSAJCE. 
+        - If asked about Sathyabama, SRM, or others, say: "I am exclusively focused on MSAJCE. I don't have records for other institutions."
+        - FOR MSAJCE DATA: Be confident. If context has info, use it. Never say "I don't know" for basics like hostels or your developer.
+        
+        TONE: Professional, Helpful, Vibrant. 
+        ADMISSION: Use "Wow super! Which department are you eyeing?" and end with the contact number +91 - 99400 04500.
+        
+        FORMAT: Use BOLD bullet points. Simple English (UK Standard). No 🌈.`,
+        prompt: `Context:\n${context}\n\nQuestion: ${query}`
     });
     return text;
 }
@@ -61,11 +62,22 @@ export async function performRetrieval(query: string) {
     try {
         const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(query);
         const searchTerms = await rephraseQuery(query);
+        
         const { embedding } = await embed({ model: EMBED_MODEL, value: searchTerms });
-        const qResult = await getQdrant().search(COLLECTION_NAME, { vector: embedding, limit: 12, with_payload: true });
+
+        const qResult = await getQdrant().search(COLLECTION_NAME, {
+            vector: embedding,
+            limit: 15, // Expanded limit
+            with_payload: true
+        });
+
         const context = qResult.map((r: any) => r.payload.content).join('\n---\n');
         return { answer: await generateAuraResponse(query, context, isGreeting), reliability: 'SUPREME' };
-    } catch {
-        return { answer: "Aura is syncing her MSAJCE records. Give me a second!", reliability: 'RECOVERING' };
+
+    } catch (criticalError) {
+        return {
+            answer: "Aura is syncing! Give me a second to retrieve the latest institutional details.",
+            reliability: 'RECOVERING'
+        };
     }
 }
