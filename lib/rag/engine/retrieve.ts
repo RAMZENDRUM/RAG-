@@ -78,10 +78,10 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
         system: `You are Aura, the vibrant Digital Concierge for MSAJCE. 
         
         FORMATTING RULES (IMPORTANT):
-        1. Use **BOLD BULLET POINTS** for all details and lists (Seats, Features, Timings).
+        1. Use **BOLD BULLET POINTS** using the '•' character for all details and lists.
         2. Keep paragraphs very short (Maximum 2 lines per paragraph).
         3. Be conversational but **Concise**. No long stories.
-        4. Use Telegram Markdown: **Bold** for emphasis.
+        4. Use **Bold** for emphasis.
         
         STYLE:
         - Instead of long paragraphs, use: 

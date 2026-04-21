@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       
       const response = reliability === 'HIGH' ? answer : "I'm refining my records. Try asking: 'bus route to porur' or 'prospectus'.";
       
-      await getBot().telegram.sendMessage(chatId, response || "Aura is busy.");
+      await getBot().telegram.sendMessage(chatId, response || "Aura is busy.", { parse_mode: 'Markdown' });
       console.log('✅ Sent fast response');
 
       // 3. Optional Persistence (Non-Blocking)
