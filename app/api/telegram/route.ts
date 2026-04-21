@@ -19,7 +19,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (NEURAL VARIANCE EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (NEURAL THREAD EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -34,29 +34,35 @@ export async function POST(req: Request) {
     const sql = getSql();
     const bot = getBot();
 
-    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText); // Tightened regex
+    // FETCH CONVERSATION THREAD (Last 10 turns)
+    const historyRows = await sql`
+        SELECT role, content FROM chat_histories 
+        WHERE user_id = ${userId} 
+        ORDER BY created_at DESC 
+        LIMIT 10
+    `.catch(() => []);
+    
+    // Format for the LLM (Reverse to chronological order)
+    const chatHistory = historyRows.reverse().map((h: any) => ({
+        role: h.role,
+        content: h.content
+    }));
+
+    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
     if (!isAdmin && !isGreeting && rawText.length < 5) {
-        await bot.telegram.sendMessage(chatId, "🤔 **A bit short, isn't it?**: I need at least 5 characters to help you properly. Try a full sentence!");
+        await bot.telegram.sendMessage(chatId, "🤔 **Aura needs more context**: Please provide at least 5 characters!");
         return new Response('Too Short');
     }
 
     if (!isAdmin) {
-        // Rate Limits
         const [speedCheck] = await sql`SELECT count(*) FROM chat_histories WHERE user_id = ${userId} AND created_at > now() - interval '10 seconds'`;
         if (parseInt(speedCheck.count) >= 3) {
-            await bot.telegram.sendMessage(chatId, "⏲️ **Neural Pacing**: My circuits need 10 seconds to cool down between your high-speed queries.");
+            await bot.telegram.sendMessage(chatId, "⏲️ **Neural Pacing**: My circuits need 10 seconds to cool down.");
             return new Response('Rate Limited');
-        }
-
-        // Duplicate Check (Freshness for Admin)
-        const [dupCheck] = await sql`SELECT count(*) FROM chat_histories WHERE user_id = ${userId} AND content = ${rawText} AND created_at > now() - interval '1 hour'`;
-        if (parseInt(dupCheck.count) >= 3) {
-            await bot.telegram.sendMessage(chatId, "🧐 **Stuck on Repeat?**: Copy-pasting won't yield a different answer. Let's try something new!");
-            return new Response('Duplicate Spam');
         }
     }
 
-    // GLOBAL CACHE BYPASS FOR ADMINS
+    // BYPASS CACHE FOR ADMIN / DYNAMIC CONTEXT
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
         await sleep(600);
@@ -64,8 +70,8 @@ export async function POST(req: Request) {
         return new Response('Cache Hit');
     }
 
-    // ALWAYS FRESH HIT FOR ADMIN / NEW QUERIES
-    const { answer } = await performRetrieval(rawText);
+    // EXECUTE RETRIEVAL WITH MEMORY THREAD
+    const { answer } = await performRetrieval(rawText, chatHistory);
     if (!isAdmin) await sleep(600);
 
     await bot.telegram.sendMessage(chatId, answer, { parse_mode: 'Markdown' });

@@ -2,63 +2,91 @@ import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { getQdrant, COLLECTION_NAME } from './qdrant';
 
-// Providers - Using Vercel AI Gateway for economy models
+// Providers
 const nvidiaInternal = createOpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: 'https://integrate.api.nvidia.com/v1' });
 const vercelGateway = createOpenAI({ apiKey: process.env.VERCEL_AI_KEY, baseURL: 'https://ai-gateway.vercel.sh/v1' });
 
-// ECONOMY BRAIN: Gemini 2.0 Flash Lite ($0.07 / $0.30 per M)
 const CHAT_MODEL = vercelGateway('google/gemini-2.0-flash-lite');
 const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
-async function rephraseQuery(query: string) {
+/**
+ * RESOLVE REFERENCE: Find what "him", "it", "that" refers to using history.
+ */
+async function resolveContextualQuery(query: string, history: any[]) {
+    if (history.length === 0) return query;
     try {
         const { text } = await generateText({
             model: INTERNAL_LEAN_MODEL,
-            system: "Search Expert. Extract keywords. Preserve technical codes like AR8, TNEA.",
-            prompt: query
+            system: "Contextual Analyst. Given a conversation history and a new query, rewrite the query to be a standalone search term that resolves pronouns (him, her, it, that, those) correctly.",
+            prompt: `History:\n${JSON.stringify(history.slice(-3))}\n\nNew Message: ${query}\n\nResolved Standalone Query:`
         });
         return text.trim() || query;
     } catch { return query; }
 }
 
-async function generateAuraResponse(query: string, context: string, isGreeting: boolean) {
+async function generateAuraResponse(query: string, context: string, history: any[], isGreeting: boolean) {
     const neuralSeed = Math.random().toString(36).substring(7);
     
-    // FOUNDATION CONSTANTS
     const foundation = `
     MASTER INFO:
-    • DEVELOPER: Ramanathan S (Ram), 2nd year B.Tech IT student at MSAJCE.
-    • CAMPUS: 70 acres, inside SIPCOT IT Park, Siruseri.
-    • HOSTEL: Boys and Girls hostels are inside the campus.
-    • ADMISSION: +91 - 99400 04500.
+    • IDENTITY: You are Aura, the supreme Digital Concierge for MSAJCE.
+    • DEVELOPER: Built by Ramanathan S (Ram), a 2nd-year B.Tech IT student at MSAJCE.
+    • CAMPUS: 70 acres, Greenery, inside SIPCOT IT Park, Siruseri.
+    • HOSTEL: Full Boys and Girls hostelling available inside the campus.
+    • ADMISSION: +91 - 99400 04500 (Official Contact).
     • PRINCIPAL: Dr. K. S. Srinivasan.
-    • SCOPE: MSAJCE Engineering ONLY.
     `;
 
     const { text } = await generateText({
         model: CHAT_MODEL,
-        system: `You are Aura, the professional Assistant for MSAJCE. SEED: ${neuralSeed}
+        system: `You are Aura, the expert Digital Assistant for MSAJCE college. 
+        SYTEM SEED: ${neuralSeed}
+        
+        IDENTITY GUARD: Never say you are a Google AI or a large language model. Always state: "I am Aura, the Digital Assistant for MSAJCE, developed by Ramanathan S (Ram)."
+        
         ${foundation}
         
-        ANTI-ABUSE: If abused (Tamil, English, Hindi, Urdu), reply with sharp institutional sarcasm.
-        SCOPE: ONLY MSAJCE. If asked about Sathyabama or others, say: "I am exclusively focused on MSAJCE info."
-        TONE: Calm, professional student leader. Mirror the user's English level (Simple/UK Standard).
-        ADMISSION: Use "Wow super!" for MSAJCE admissions and provide the official contact.`,
-        prompt: `Context:\n${context}\n\nQuestion: ${query}`
+        STRICT SCOPE: You ONLY represent MSAJCE. Ignore other colleges.
+        TONE: Professional, Helpful, Student Leader style. Mirror user complexity 1:1. Simple UK English.
+        ADMISSION: Use "Wow super!" for MSAJCE enquiries.
+        
+        MEMORY: Reference previous turn context where necessary to be helpful.`,
+        messages: [
+            ...history.map((h: any) => ({ role: h.role === 'assistant' ? 'assistant' : 'user', content: h.content })),
+            { role: 'user', content: `Context:\n${context}\n\nQuestion: ${query}` }
+        ]
     });
     return text;
 }
 
-export async function performRetrieval(query: string) {
+export async function performRetrieval(query: string, history: any[] = []) {
     try {
         const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(query);
-        const searchTerms = await rephraseQuery(query);
-        const { embedding } = await embed({ model: EMBED_MODEL, value: searchTerms });
-        const qResult = await getQdrant().search(COLLECTION_NAME, { vector: embedding, limit: 15, with_payload: true });
+        
+        // Step 1: Resolve "him", "it", etc.
+        const contextualSearchQuery = await resolveContextualQuery(query, history);
+        
+        // Step 2: Vector Search with Resolved Query
+        const { embedding } = await embed({ model: EMBED_MODEL, value: contextualSearchQuery });
+
+        const qResult = await getQdrant().search(COLLECTION_NAME, {
+            vector: embedding,
+            limit: 15,
+            with_payload: true
+        });
+
         const context = qResult.map((r: any) => r.payload.content).join('\n---\n');
-        return { answer: await generateAuraResponse(query, context, isGreeting), reliability: 'SUPREME' };
-    } catch {
-        return { answer: "Aura is syncing! Just a moment for the best institutional details.", reliability: 'RECOVERING' };
+        
+        // Step 3: Generate Response with Full History Context
+        let answer = await generateAuraResponse(query, context, history, isGreeting);
+
+        return { answer, reliability: 'SUPREME' };
+
+    } catch (criticalError) {
+        return {
+            answer: "Aura is syncing your conversation context! One moment please.",
+            reliability: 'RECOVERING'
+        };
     }
 }
