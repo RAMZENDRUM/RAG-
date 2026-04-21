@@ -11,10 +11,10 @@ const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
 /**
- * DYNAMIC STYLE GENERATOR
+ * AURA VIBE: ENERGETIC STUDENT ASSISTANT
  */
 function getTargetStyle() {
-    const styles = ["vibrant and professional", "warm and encouraging", "intellectual and deep", "friendly and energetic"];
+    const styles = ["super energetic and helpful", "cool and proactive", "vibrant student leader style", "passionate and direct"];
     return styles[Math.floor(Math.random() * styles.length)];
 }
 
@@ -22,7 +22,7 @@ async function rephraseQuery(query: string) {
     try {
         const { text } = await generateText({
             model: INTERNAL_LEAN_MODEL,
-            system: "Search Expert. Rephrase user chat into vector search keywords. Keywords only.",
+            system: "Search Expert. Rephrase for vector search keywords. Keywords only.",
             prompt: query
         });
         return text.trim() || query;
@@ -35,23 +35,25 @@ async function generateAuraResponse(query: string, context: string, isGreeting: 
     // STRUCTURED INTRODUCTION FOR GREETINGS
     const categoryMenu = isGreeting ? `
     ---
-    🌟 **Aura Knowledge Explorer** 🌟
-    I have deep mastery over:
-    • 🏛️ **Admissions**: Entrance, Flyers, Prospectus.
-    • 🎓 **Academic Core**: Regulation 2021/2017, Credits, Syllabi.
-    • 🚌 **Transport HQ**: Full Routes, Timings, Driver Contacts.
-    • 🤝 **Placements**: Company Records, Internships, Alumni.
-    • 🏢 **Institutional Life**: Hostels, Clubs, Principal, History.
+    🚀 **Aura Master Categories** 🚀
+    • 🏛️ **Admissions**: Entrance & Flyers.
+    • 🎓 **Academic Core**: Syllabi & Regulations.
+    • 🚌 **Transport HQ**: Full Routes & Timings.
+    • 🤝 **Placements**: Jobs & Internships.
+    • 🏢 **Institutional Life**: Hostels & Clubs.
     ` : "";
 
     const { text } = await generateText({
         model: CHAT_MODEL,
-        system: `You are Aura, the supreme Digital Concierge for MSAJCE. 
+        system: `You are Aura, the vibrant Digital Assistant for MSAJCE. 
         DEVELOPER: Ramanathan S (Ram). 
-        STYLE: Be ${style}. 
-        RULE: If the user greets you or asks who you are, use the "Category Menu" provided. 
-        RULE: Always vary your phrasing and intro/outro for every request to keep it fresh. 
-        RULE: Never give the exact same canned response twice.`,
+        STYLE: Be ${style}. Use phrases like "Wow super!", "Amazing choice!", "Great! I'm here to help!".
+        
+        ADMISSION RULE: If a user asks about joinng/admission, say: "Wow super! Which department are you planning for or what specific details do you need?" 
+        CONTACT RULE: Always end admission/contact queries with: "📞 +91 - 99400 04500 (This is the official admission contact number)."
+        
+        EMOJI RULE: No 🌈. Use only 🚀, ✨, ✅, 🎓, 🚌. Use them sparingly.
+        FORMAT: BOLD BULLET POINTS (•). Keep it student-friendly and energetic.`,
         prompt: `Context:\n${context}\n\nQuestion: ${query}\n${categoryMenu}`
     });
     return text;
@@ -80,7 +82,7 @@ export async function performRetrieval(query: string) {
     } catch (criticalError) {
         console.error("🔥 HYBRID BRAIN ERROR:", criticalError.message);
         return {
-            answer: "Aura is refining her neural pathways. Give me a moment to re-sync!",
+            answer: "Aura is syncing up! Give me a second to get the best info for you.",
             reliability: 'RECOVERING'
         };
     }
