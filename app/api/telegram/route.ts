@@ -64,8 +64,8 @@ export async function POST(req: Request) {
         console.warn("⚠️ Memory fetch failed:", hErr.message);
       }
 
-      // 2. FAST RAG (Speed-First Pattern)
-      const { answer, reliability } = await performRetrieval(text, history);
+      // 2. SUPREME RAG (Stability-First Pattern)
+      const { answer, reliability, sources } = await performRetrieval(text);
       
       const response = reliability === 'HIGH' ? answer : "I'm refining my records. Try asking: 'bus route to porur' or 'prospectus'.";
       
