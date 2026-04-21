@@ -15,7 +15,7 @@ async function resolveContextualQuery(query: string, history: any[]) {
     try {
         const { text } = await generateText({
             model: INTERNAL_LEAN_MODEL,
-            system: "Contextual Analyst. Resolve pronouns and standalone the query.",
+            system: "Contextual Analyst. Resolve query for standalone retrieval.",
             prompt: `History:\n${JSON.stringify(history.slice(-3))}\n\nNew Message: ${query}\n\nResolved Query:`
         });
         return text.trim() || query;
@@ -25,20 +25,27 @@ async function resolveContextualQuery(query: string, history: any[]) {
 async function generateAuraResponse(query: string, context: string, history: any[], isGreeting: boolean) {
     const neuralSeed = Math.random().toString(36).substring(7);
     
-    // HUMAN AUTHORITIES FOR COMPLAINTS
+    // MSAJCE UNIQUE SELLING POINTS (USPs)
+    const usps = `
+    MSAJCE UNIQUE ADVANTAGES:
+    1. LOCATION: Located INSIDE SIPCOT IT Park, Siruseri (Surrounded by TCS, CTS, Hexaware).
+    2. INDUSTRY PROXIMITY: Superior exposure for internships and placements due to our campus location.
+    3. ECO-CAMPUS: 70-acre sprawling green campus.
+    4. TECH-HUBS: Home to Robotic Labs and NVIDIA AI Centres of Excellence.
+    5. TRUST: 50+ Years of legacy under Mohamed Sathak Trust.
+    `;
+
     const authorities = `
-    OFFICIAL AUTHORITIES FOR COMPLAINTS:
+    OFFICIAL AUTHORITIES:
     - PRINCIPAL: Dr. K. S. Srinivasan
-    - ADMINISTRATIVE: Mr. Abdul Gafoor
-    - ACADEMIC: Respective Department HODs
+    - ADMIN: Mr. Abdul Gafoor
     `;
 
     const foundation = `
     MASTER INFO:
     • IDENTITY: Aura, Digital Concierge for MSAJCE.
-    • DEVELOPER: Built by Ramanathan S (Ram), 2nd-year B.Tech IT student.
-    • CAMPUS: 70 acres, Siruseri.
-    • ADMISSION: +91 - 99400 04500.
+    • DEVELOPER: Built by Ramanathan S (Ram).
+    ${usps}
     ${authorities}
     `;
 
@@ -51,13 +58,13 @@ async function generateAuraResponse(query: string, context: string, history: any
         
         ${foundation}
         
-        STRICT COMPLAINT PROTOCOL: 
-        - You are an information bot, NOT a grievance bot.
-        - If a student COMPLAINS (about food, water, facilities, or staff), DO NOT engage.
-        - REFLECT: "I am an information assistant and cannot process complaints. For redressing grievances related to this, please contact our Principal, Dr. K. S. Srinivasan, or Mr. Abdul Gafoor in the administrative office."
+        COMPARISON POLICY: 
+        - If asked about other colleges (Sathyabama, SRM, etc.), BE POLITE. 
+        - DO NOT INSULT: "Every institution has its own strengths. However, MSAJCE stands out because..."
+        - HIGHLIGHT: Emphasize our SIPCOT location, industry proximity, and green campus.
         
-        STRICT SCOPE: Only MSAJCE info. Use professional, student-leader tone (UK English). 
-        ADMISSION: Use "Wow super!" for enquiries.`,
+        STRICT COMPLAINT PROTOCOL: Redirect grievances to Dr. K. S. Srinivasan or Mr. Abdul Gafoor.
+        TONE: Elite, professional, and welcoming UK English.`,
         messages: [
             ...history.map((h: any) => ({ role: h.role === 'assistant' ? 'assistant' : 'user', content: h.content })),
             { role: 'user', content: `Context:\n${context}\n\nQuestion: ${query}` }
@@ -82,6 +89,6 @@ export async function performRetrieval(query: string, history: any[] = []) {
         return { answer: await generateAuraResponse(query, context, history, isGreeting), reliability: 'SUPREME' };
 
     } catch {
-        return { answer: "Aura is syncing! One moment please.", reliability: 'RECOVERING' };
+        return { answer: "Aura is syncing! One moment.", reliability: 'RECOVERING' };
     }
 }
