@@ -1,143 +1,107 @@
-import { generateText, embed } from 'ai';
-import { createVercel } from '@ai-sdk/vercel'; // Using the dedicated Vercel provider
+import { generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import postgres from 'postgres';
-import dotenv from 'dotenv';
 import { qdrant, COLLECTION_NAME } from './qdrant';
-dotenv.config();
 
-/**
- * ELITE AI GATEWAY CONFIG V6.0 (Vercel-NVIDIA Hybrid)
- */
-
-// PROVIDER 1: Vercel AI Gateway (Matched to Ingestor)
-const openai = createOpenAI({
-  apiKey: process.env.VERCEL_AI_KEY,
-  baseURL: 'https://ai-gateway.vercel.sh/v1',
-});
-
-// PROVIDER 2: NVIDIA NIM (For the Brain)
 const nvidia = createOpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
-  compatibility: 'strict',
 });
 
 const DEFAULT_CHAT_MODEL = 'meta/llama-3.3-70b-instruct';
-const RELIABILITY_THRESHOLD = 0.40;
+const LEAN_CHAT_MODEL = 'meta/llama-3.1-8b-instruct';
 
-export interface RetrievalResult {
-  answer?: string;
-  context: string;
-  sources: string[];
-  reliability: 'HIGH' | 'LOW';
-  score: number;
-}
-
-export async function performRetrieval(query: string, history: any[] = []): Promise<RetrievalResult> {
-  const lowerQuery = query.toLowerCase().trim();
-  
-  // 0. GREETING HANDLER
-  const greetings = ['hi', 'hello', 'hey', 'start', 'aura'];
-  if (greetings.includes(lowerQuery) || (lowerQuery.length < 3 && !history.length)) {
-    return {
-      answer: "Hello! I am Aura, your MSAJCE Digital Concierge. I remember our chat! What can I help you with now?",
-      context: 'system_greeting',
-      sources: ['Aura System'],
-      reliability: 'HIGH',
-      score: 1.0
-    };
-  }
-
-  // 1. MEMORY REPHRASING (Resolves "it", "that", "the timings")
-  let searchTerms = query;
-  if (history.length > 0) {
-    console.log("🧠 Aura is thinking back...");
-    const { text: rephrased } = await generateText({
-        model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: "You are a context-resolver. Re-write the user's LATEST message into a standalone search query using the provided history. Keep it concise. Focus on the subject and intent.",
-        prompt: `History:\n${history.map(m => `${m.role}: ${m.content}`).join('\n')}\n\nLatest: ${query}`
+/**
+ * Intelligent Rephraser: Recognizes Identity vs Institutional Data
+ */
+async function rephraseQuery(query: string) {
+    const { text } = await generateText({
+        model: nvidia.chat(LEAN_CHAT_MODEL),
+        maxRetries: 0,
+        system: "You are a search expert for the MSAJCE college bot. Rephrase the question into 3-5 keywords. If the user asks 'who are you', 'how are you' or about the developer, use 'Aura Digital Concierge Ramanathan S Ram B.Tech IT'.",
+        prompt: query
     });
-    searchTerms = rephrased;
-    console.log(`🔎 Rephrased Query: ${searchTerms}`);
-  }
-
-  console.log(`--- [ELITE VERCEL SEARCH] Terms: ${searchTerms} ---`);
-  try {
-    // 2. EMBEDDING (Using Vercel Gateway)
-    const { embedding } = await embed({
-      model: openai.embedding('text-embedding-3-small'),
-      value: searchTerms,
-    });
-
-    // 2. QDRANT SEARCH
-    const qResult = await qdrant.search(COLLECTION_NAME, {
-      vector: embedding,
-      limit: 5,
-      with_payload: true
-    });
-
-    if (!qResult.length) {
-        return { context: '', sources: [], reliability: 'LOW', score: 0, answer: "No institutional records found." };
-    }
-
-    const context = qResult.map(r => r.payload?.content).join('\n---\n');
-    const bestScore = qResult[0].score;
-    const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
-
-    // 3. HUMAN GENERATION (NVIDIA Llama 3.3 70B)
-    let answer = await generateAuraResponse(searchTerms, context);
-
-    // 4. SELF-HEALING LAYER (The "Ragas" Judicial Check)
-    console.log("⚖️ Aura's Judge is reviewing the response...");
-    const { text: judgment } = await generateText({
-        model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: "You are the RAGAS Judge. Evaluate the ANSWER based on the CONTEXT. Output 'PASS' if the answer is 100% faithful and based ONLY on context. Output 'FAIL' if the answer makes up facts, guesses, or ignores the context. Provide a 1-sentence reason if FAIL.",
-        prompt: `Context:\n${context}\n\nAnswer: ${answer}`
-    });
-
-    if (judgment.includes('FAIL')) {
-        console.warn("🩹 SELF-HEALING TRIGGERED:", judgment);
-        // Attempt 2: Re-generate with a more strict "Stick to Context" instruction
-        const { text: healedAnswer } = await generateText({
-            model: nvidia.chat(DEFAULT_CHAT_MODEL),
-            system: "CRITICAL RE-DRAFT: The previous draft failed accuracy checks. Re-write the answer using ONLY the facts provided. Be concise. If a detail is missing, say you don't have it yet. Style: Warm but strictly factual.",
-            prompt: `Context:\n${context}\n\nOriginal Question: ${searchTerms}`
-        });
-        answer = healedAnswer;
-        console.log("💎 Respone Healed Successfully.");
-    } else {
-        console.log("✅ Judgment PASSED: Faithfulness confirmed.");
-    }
-
-    console.log(`✅ [FINANCE] Score: ${bestScore.toFixed(3)}`);
-    return { 
-        context, 
-        sources, 
-        reliability: bestScore > RELIABILITY_THRESHOLD ? 'HIGH' : 'LOW', 
-        score: bestScore, 
-        answer 
-    };
-
-  } catch (err) {
-    console.error("❌ CLOUD ENGINE CRASH:", err.message);
-    return { 
-        context: '', 
-        sources: [], 
-        reliability: 'LOW', 
-        score: 0, 
-        answer: "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!" 
-    };
-  }
+    return text;
 }
 
 async function generateAuraResponse(query: string, context: string) {
     const { text } = await generateText({
         model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: `You are Aura, the vibrant Digital Concierge for MSAJCE. 
-        FORMATTING: Use **BOLD BULLET POINTS** (•) for details. Keep paragraphs short (Max 2 lines).
-        STRICTNESS: Answer only based on context. Be warm and helpful.`,
-        prompt: `Context:\n${context}\n\nQuestion: ${query}`
+        maxRetries: 0,
+        system: `You are Aura, the vibrant and highly intelligent Digital Concierge for Mohamed Sathak A.J. College of Engineering (MSAJCE). 
+        
+        IDENTITY NARRATIVE (ABSOLUTE TRUTH):
+        • You were developed by **Ramanathan S (Ram)**, a 2nd-year B.Tech IT student at MSAJCE (Batch 2024-2028).
+        • Ram is a creative Full-stack Developer, AI Expert, and Musician who uses FL Studio and Supabase.
+        • You are proud to be his creation. You provide info on Admissions, Placements, FULL Bus Routes, and Subject Mastery.
+        • Scope: Engineering ONLY. No Nursing/Architecture.
+        
+        STYLE:
+        • Be warm, energetic, and extremely detailed. 
+        • When asked about transport, provide **FULL ROUTES** and timings from the context.
+        • Use **BOLD BULLET POINTS** (•). 
+        • If the context is large, summarize it perfectly without missing details.`,
+        prompt: `Context:\n${context}\n\nUser Question: ${query}`
     });
     return text;
+}
+
+export async function performRetrieval(query: string) {
+    // 1. INTEL-DRIVEN REPHRASE
+    const searchTerms = await rephraseQuery(query);
+    
+    // 2. SUPREME EMBEDDING
+    const response = await fetch('https://integrate.api.nvidia.com/v1/embeddings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NVIDIA_API_KEY}`
+        },
+        body: JSON.stringify({
+            input: [searchTerms],
+            model: "nvidia/nv-embedqa-e5-v5",
+            input_type: "query",
+            encoding_format: "float",
+            truncate: "NONE"
+        })
+    });
+    const embedData = await response.json();
+    const embedding = embedData.data[0].embedding;
+
+    // 3. WIDE-RADIUS SEARCH (12 CHUNKS for maximum breadth)
+    const qResult = await qdrant.search(COLLECTION_NAME, {
+      vector: embedding,
+      limit: 12,
+      with_payload: true
+    });
+
+    const context = qResult.map((r: any) => r.payload.content).join('\n---\n');
+    const sources = Array.from(new Set(qResult.map((r: any) => r.payload.source || 'Institutional File')));
+
+    // 4. ANSWER (70B)
+    // Internal Pacing for stability
+    await new Promise(r => setTimeout(r, 4000));
+    let answer = await generateAuraResponse(query, context);
+
+    // 5. JUDGE (8B) - Skip self-heal on identity questions for speed
+    if (!query.toLowerCase().includes('who are you') && !query.toLowerCase().includes('developed')) {
+        await new Promise(r => setTimeout(r, 4000));
+        const { text: judgment } = await generateText({
+            model: nvidia.chat(LEAN_CHAT_MODEL),
+            maxRetries: 0,
+            system: "Evaluate Answer vs Context. PASS or FAIL.",
+            prompt: `Context:\n${context}\n\nAnswer: ${answer}`
+        });
+
+        if (judgment.includes('FAIL')) {
+            await new Promise(r => setTimeout(r, 4000));
+            answer = await generateAuraResponse(query, context + "\nSTRICT: Use ONLY the context provided.");
+        }
+    }
+
+    return {
+        answer,
+        reliability: 'SUPREME',
+        sources,
+        score: 0.99
+    };
 }

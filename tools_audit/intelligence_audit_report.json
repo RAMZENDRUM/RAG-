@@ -1,0 +1,350 @@
+[
+  {
+    "question": "What are the hostel fees for the current academic year?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1638,
+    "score": 0
+  },
+  {
+    "question": "How many rooms are available in the girls' hostel?",
+    "answer": "**•** Unfortunately, the information provided does not specify the number of rooms available in the girls' hostel. \n**•** It only provides details about the boys' hostel room capacity and number of rooms.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 64375,
+    "score": 0.4112089
+  },
+  {
+    "question": "What is the distance of the college from the Chennai airport?",
+    "answer": "I don't have that information yet. The provided text does not mention the distance from the Chennai airport to the Mohamed Sathak A.J. College of Engineering.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 34441,
+    "score": 0.4874902
+  },
+  {
+    "question": "Can you provide the contact details for admission inquiries?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1524,
+    "score": 0
+  },
+  {
+    "question": "Is there a transport facility available for day scholars?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 2421,
+    "score": 0
+  },
+  {
+    "question": "What are the total credits for the B.E. EEE program under Regulation 2021?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1527,
+    "score": 0
+  },
+  {
+    "question": "List the core courses for Semester 4 Electrical and Electronics Engineering.",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1452,
+    "score": 0
+  },
+  {
+    "question": "What is the passing mark requirement as per Regulation 2021?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1547,
+    "score": 0
+  },
+  {
+    "question": "How many credits are allocated for the final year project?",
+    "answer": "**No specific credits are mentioned for the final year project in the given context, only the marks allocation is provided.** \n**The marks allocation includes: Review (20), Project Report (30), and Viva-Voce (50).**",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 26540,
+    "score": 0.4362914
+  },
+  {
+    "question": "What subjects are covered in the Semester 1 Information Technology curriculum?",
+    "answer": "**•** The provided context does not explicitly mention the Semester 1 Information Technology curriculum. \n**•** However, it mentions the course objectives and practical exercises for a specific IT course, including PC components, Microsoft Office, spreadsheets, ChatGPT, and HTML/CSS.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 54363,
+    "score": 0.47431576
+  },
+  {
+    "question": "What are the objectives of the Power Electronics laboratory?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1385,
+    "score": 0
+  },
+  {
+    "question": "Can you explain the experimental setup for the Strength of Materials lab?",
+    "answer": "The Strength of Materials lab consists of **• Various experiments** to test different materials under various forces, including tension, compression, torsion, and impact tests. \nThe lab includes **• 11 experiments**, such as tension test on steel rod, compression test on wood, and hardness test on metals.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 9503,
+    "score": 0.5808709
+  },
+  {
+    "question": "What is the lesson plan for 'Artificial Intelligence' in the CSE department?",
+    "answer": "**Key Highlights of the Lesson Plan:**\n• The course covers topics like Big Data Analysis, Service Oriented Architecture, Cryptography & Network Security, and Artificial Intelligence.\n• The course is divided into units, with Unit V focusing on Intelligence and Applications, including natural language processing and machine learning.\n**Course Objectives:**\n• Equip students with knowledge to solve problems using computational thinking.\n• Organize and analyze data using logical approaches.\n• Develop solutions through algorithmic thinking.\n**Course Outcomes:**\n• Provide a basic exposition to the goals and methods of Computational Intelligence.\n• Apply intelligent techniques for problem-solving.\n• Improve problem-solving skills using acquired knowledge in areas like reasoning and machine learning.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 51533,
+    "score": 0.5062474
+  },
+  {
+    "question": "List the equipment available in the VLSI Design laboratory.",
+    "answer": "**• PCs with Fixed / Floating point DSP Processors (Kit / Add-on Cards)**\n**• MATLAB with Simulink and Signal Processing Tool Box or Equivalent Software in desktop systems**\n**• Signal Generators (1MHz)**\n**• CRO (20MHz)**\n**• Xilinx ISE**\n**• Xilinx FPGA Boards**",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 62757,
+    "score": 0.52551633
+  },
+  {
+    "question": "Which software is used for the Computer Networks lab experiments?",
+    "answer": "**•** The software used for the Computer Networks lab experiments includes network simulator (NS) and other public domain or commercial simulation software.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 15310,
+    "score": 0.4766658
+  },
+  {
+    "question": "When was the last NSS camp conducted and what were the activities?",
+    "answer": "**•** Our last NSS camp was conducted recently, but I don't have the exact date. \n**•** The activities included Medical Camps, COVID-19 Awareness Programs, and Technical Training for school dropouts to improve their livelihood.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8445,
+    "score": 0.4848176
+  },
+  {
+    "question": "Provide a summary of the Cultural Fest 'Zest' from last year.",
+    "answer": "There is no information provided about the Cultural Fest 'Zest'. The text appears to be a collection of achievements and events organized by MSAJCE, but it does not mention a Cultural Fest 'Zest'. \n**• No details about the Cultural Fest 'Zest' are available** \n**• The provided text includes information about events, awards, and conferences**",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 9911,
+    "score": 0.31658664
+  },
+  {
+    "question": "What are the placement statistics for the Mechanical department for 2023?",
+    "answer": "**Key Placement Statistics for Mechanical Department (2023):**\n• No. of Students Registered for Placement: 27\n• No. of Eligible Students for Placement: 27\n• No. of Students Placed: 19\n• Placement Percentage: Not explicitly stated, but can be calculated based on the provided numbers.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 42687,
+    "score": 0.4476611
+  },
+  {
+    "question": "Can I see the report on the latest Industrial Visit to L&T?",
+    "answer": "**•** I couldn't find any information on the latest Industrial Visit to L&T in the provided documents. \n**•** The documents only mention visits to various industries such as ISRO, CSIR, and Lenovo, but not L&T.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 9654,
+    "score": 0.46081245
+  },
+  {
+    "question": "What social initiatives has the college taken through the YRC cell?",
+    "answer": "**•** The college supports various social activities under the YRC (Youth Red Cross) cell. \n**•** Additionally, the college is also involved in other social initiatives such as NSS (National Service Scheme) and Unnat Bharat Abhiyan.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 15199,
+    "score": 0.47549576
+  },
+  {
+    "question": "Is the syllabus for Semester 5 IT different between R2017 and R2021?",
+    "answer": "**•** The provided curriculum is for R2017, and there's no information about the R2021 syllabus.\n**•** To determine the differences, you would need to compare the R2017 curriculum with the R2021 curriculum, which is not provided here.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 9321,
+    "score": 0.4189768
+  },
+  {
+    "question": "Who is the current management authority mentioned in the Mandatory Disclosure?",
+    "answer": "**• The current management authority is the Mohamed Sathak Trust.** \n**• It is a Trust type of organization.**",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 35585,
+    "score": 0.38378105
+  },
+  {
+    "question": "What is the student-to-faculty ratio according to the latest institutional records?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1526,
+    "score": 0
+  },
+  {
+    "question": "Does the college provide separate Wi-Fi facilities for hostels?",
+    "answer": "The college's hostel is Wi-Fi enabled, but I don't have information on whether it's a separate Wi-Fi facility specifically for the hostels.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 19828,
+    "score": 0.50961715
+  },
+  {
+    "question": "What are the rules regarding attendance for writing the end-semester exams?",
+    "answer": "**Key Attendance Rules:**\n• A student is expected to attend at least 75% of the classes to be eligible to write the end-semester exams.\n• Students with 65-74% attendance due to medical reasons or participation in sports events may be permitted to appear for the exams with a medical or sports participation certificate.\n• Students with less than 65% attendance will not be permitted to write the end-semester exams and must repeat the incomplete semester in the next academic year.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 10954,
+    "score": 0.5353667
+  },
+  {
+    "question": "What are the scholarship details for SC/ST students?",
+    "answer": "**•** The Government of Tamil Nadu offers SC/ST scholarships to students whose parent income is less than 2.5 lakh. \n**•** To continue the scholarship, students must maintain a minimum pass in both semesters, have 75% attendance, and not be receiving any other scholarship.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8815,
+    "score": 0.5189529
+  },
+  {
+    "question": "List the faculty members in the Department of Computer Science.",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1388,
+    "score": 0
+  },
+  {
+    "question": "What are the rules for lateral entry admissions?",
+    "answer": "**Key Points for Lateral Entry Admissions:**\n• The candidates must possess a Diploma in Engineering / Technology awarded by the State Board of Technical Education, Tamil Nadu or its equivalent.\n• They are eligible to apply for Lateral entry admission to the second year of B.E./B.Tech. degree programme.\n• Direct admission to 2nd year B.E / B.Tech is offered through lateral entry.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 59224,
+    "score": 0.4270838
+  },
+  {
+    "question": "Provide the list of sports facilities in the campus.",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1576,
+    "score": 0
+  },
+  {
+    "question": "What is the mission of the Department of Mechanical Engineering?",
+    "answer": "**The Department of Mechanical Engineering** aims to impart theoretical and practical knowledge in design, development, operation, and maintenance of processes involving various technologies of mechanical engineering. \n**Key objectives include**: providing students with a strong foundation in mechanical engineering, fostering innovation, and preparing them for successful careers in the field.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 12527,
+    "score": 0.47781342
+  },
+  {
+    "question": "How many credits are required for the AI&DS program?",
+    "answer": "There is no information provided about the credits required for the AI&DS program. \n**• The provided content only discusses the Artificial Intelligence and Machine Learning Centre under the AICTE-KARMA scheme.**",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8831,
+    "score": 0.38399214
+  },
+  {
+    "question": "List the bus routes covering the Tambaram region.",
+    "answer": "**•** Bus Route AR 10 covers the Tambaram region, with stops at **Tambaram W & E** at 7:00. \n**•** Another bus route covering the Tambaram region is not explicitly mentioned in the provided context.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8312,
+    "score": 0.43143502
+  },
+  {
+    "question": "What are the timings for the college library?",
+    "answer": "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!",
+    "reliability": "LOW",
+    "sources": [],
+    "latency": 1394,
+    "score": 0
+  },
+  {
+    "question": "What is the vision of the SIIF incubation foundation?",
+    "answer": "**•** The vision of the SIIF incubation foundation is not explicitly stated, but it can be inferred that it aims to support and mentor students in converting their intellectual ideas into products.\n**•** The foundation's participation in ARIIA and its consultancy projects suggest a focus on innovation, entrepreneurship, and industry collaboration.",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 9102,
+    "score": 0.3560421
+  },
+  {
+    "question": "What are the eligibility criteria for the M.E. Structural Engineering program?",
+    "answer": "**•** The provided information focuses on the program outcomes and skills gained by graduates of the M.E. Structural Engineering program. \n**•** Unfortunately, it does not specify the eligibility criteria for the program.",
+    "reliability": "HIGH",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8520,
+    "score": 0.5482721
+  },
+  {
+    "question": "Who is the lead for the Incubation Cell?",
+    "answer": "**•** Unfortunately, the lead for the Incubation Cell is not specified in the provided context. \n**•** For more information, you may want to contact the administration or visit the Incubation Hub at FF - 502.",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 8363,
+    "score": 0.31979835
+  },
+  {
+    "question": "When was the college established and who is the founder?",
+    "answer": "The Mohamed Sathak Trust was established on **26th October 1973**. The founder Chairman was **Late Alhaj S.M.Ahamed Jalaluddin**, who was the motivating force behind the establishment of the trust. \n**Key details:**\n• **Date of establishment:** 26th October 1973\n• **Founder:** Late Alhaj S.M.Ahamed Jalaluddin",
+    "reliability": "LOW",
+    "sources": [
+      "Institutional File"
+    ],
+    "latency": 10790,
+    "score": 0.3748498
+  }
+]

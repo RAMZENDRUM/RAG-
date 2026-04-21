@@ -17,7 +17,7 @@ const ai = createOpenAI({
 });
 
 const COLLECTION_NAME = 'msajce_knowledge';
-const MASTER_FILE = 'd:/.gemini/RAG college/production_data/normalized_json/elite_knowledge_base.json';
+const MASTER_FILE = path.join(process.cwd(), 'live_brain', 'aura_active_memory.json');
 
 async function syncProductionVault() {
   console.log("🚀 Starting Final Brain Sync to Qdrant Cloud...");
