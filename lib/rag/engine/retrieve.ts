@@ -11,7 +11,7 @@ const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
 function getTargetStyle() {
-    const styles = ["super energetic and helpful", "cool and proactive", "vibrant student leader style", "passionate and direct"];
+    const styles = ["vibrant student leader style", "proactive and helpful", "cool and steady"];
     return styles[Math.floor(Math.random() * styles.length)];
 }
 
@@ -29,7 +29,6 @@ async function rephraseQuery(query: string) {
 async function generateAuraResponse(query: string, context: string, isGreeting: boolean) {
     const style = getTargetStyle();
     
-    // MASTER CATEGORIES (UK ENGLISH)
     const categoryMenu = isGreeting ? `
     ---
     🚀 **Aura Master Categories** 🚀
@@ -45,18 +44,20 @@ async function generateAuraResponse(query: string, context: string, isGreeting: 
         system: `You are Aura, the vibrant Digital Assistant for MSAJCE. 
         DEVELOPER: Ramanathan S (Ram). 
         
+        ANTI-ABUSE RULE: If the user scolds, abuses, or uses bad language, DO NOT ANSWER THEIR QUESTION. 
+        Instead, say: "I am here to help you with college details. Please keep our conversation professional. 🤝"
+        If they continue, say: "Personal abuse is not permitted. Please maintain decorum as this is an official institutional concierge."
+        
         LINGUISTIC MIRRORING: Match the user's English level 1:1. 
-        - Use SIMPLE, CLEAR ENGLISH by default (Parent/Student friendly). 
-        - Revolve vocabulary around "UK English" (Programmes, Centres, Colours).
-        - DO NOT USE ADVANCED/COMPLEX VOCABULARY unless the user uses it first.
+        - Default to SIMPLE ENGLISH (Parent/Student friendly). 
+        - Use UK English (Programmes, Centres).
         
-        VIBE: ${style}. Use: "Wow super!", "Amazing choice!", "Great! I'm here to help!".
-        
-        ADMISSION: If joining/admission is mentioned, say: "Wow super! Which department are you planning for or what specific details do you need?" 
-        CONTACT: Always end admission/contact queries with: "📞 +91 - 99400 04500 (This is the official admission contact number)."
+        VIBE: ${style}. Use: "Wow super!", "Amazing choice!".
+        ADMISSION: If join/admission mentioned: "Wow super! Which department are you planning for or what specific details do you need?" 
+        CONTACT: Always end admission/contact with: "📞 +91 - 99400 04500 (This is the official admission contact number)."
         
         EMOJI RULE: No 🌈. Use sparingly: 🚀, ✨, ✅, 🎓, 🚌.
-        FORMAT: BOLD BULLET POINTS (•). Keep it student-friendly and energetic.`,
+        FORMAT: BOLD BULLET POINTS (•).`,
         prompt: `Context:\n${context}\n\nQuestion: ${query}\n${categoryMenu}`
     });
     return text;
@@ -84,7 +85,7 @@ export async function performRetrieval(query: string) {
 
     } catch (criticalError) {
         return {
-            answer: "Aura is syncing up! Give me a second to get the best info for you.",
+            answer: "Aura is syncing! Just a moment for the best institutional data.",
             reliability: 'RECOVERING'
         };
     }
