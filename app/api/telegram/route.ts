@@ -19,7 +19,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 const ADMIN_IDS = ['7770158141']; 
 
 /**
- * PRODUCTION TELEGRAM WEBHOOK (SNARK EDITION)
+ * PRODUCTION TELEGRAM WEBHOOK (NEURAL VARIANCE EDITION)
  */
 export async function POST(req: Request) {
   try {
@@ -34,28 +34,29 @@ export async function POST(req: Request) {
     const sql = getSql();
     const bot = getBot();
 
-    const isGreeting = /hi|hello|hey|who are you|who r u|greet/i.test(cleanText);
+    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText); // Tightened regex
     if (!isAdmin && !isGreeting && rawText.length < 5) {
-        await bot.telegram.sendMessage(chatId, "🤔 **Short and... confusing?**: I need at least 5 characters to actually know what you want. Be a bit more descriptive!");
+        await bot.telegram.sendMessage(chatId, "🤔 **A bit short, isn't it?**: I need at least 5 characters to help you properly. Try a full sentence!");
         return new Response('Too Short');
     }
 
     if (!isAdmin) {
-        // Rate Limit Sarcasm
+        // Rate Limits
         const [speedCheck] = await sql`SELECT count(*) FROM chat_histories WHERE user_id = ${userId} AND created_at > now() - interval '10 seconds'`;
         if (parseInt(speedCheck.count) >= 3) {
-            await bot.telegram.sendMessage(chatId, "⏲️ **Slow down, Flash!**: My neural circuits need a second. Wait 10 seconds before your next massive thought.");
+            await bot.telegram.sendMessage(chatId, "⏲️ **Neural Pacing**: My circuits need 10 seconds to cool down between your high-speed queries.");
             return new Response('Rate Limited');
         }
 
-        // Duplicate Sarcasm
+        // Duplicate Check (Freshness for Admin)
         const [dupCheck] = await sql`SELECT count(*) FROM chat_histories WHERE user_id = ${userId} AND content = ${rawText} AND created_at > now() - interval '1 hour'`;
         if (parseInt(dupCheck.count) >= 3) {
-            await bot.telegram.sendMessage(chatId, "🧐 **Stuck on Repeat?**: Copy-pasting the same thing won't change history (or my answer). Try asking something new! 🔄");
+            await bot.telegram.sendMessage(chatId, "🧐 **Stuck on Repeat?**: Copy-pasting won't yield a different answer. Let's try something new!");
             return new Response('Duplicate Spam');
         }
     }
 
+    // GLOBAL CACHE BYPASS FOR ADMINS
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
     if (!isAdmin && prevAnswer.length > 0) {
         await sleep(600);
@@ -63,6 +64,7 @@ export async function POST(req: Request) {
         return new Response('Cache Hit');
     }
 
+    // ALWAYS FRESH HIT FOR ADMIN / NEW QUERIES
     const { answer } = await performRetrieval(rawText);
     if (!isAdmin) await sleep(600);
 
