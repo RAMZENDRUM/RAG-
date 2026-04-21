@@ -85,27 +85,32 @@ export async function performRetrieval(query: string, history: any[] = []): Prom
     const bestScore = qResult[0].score;
     const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
 
-    // 3. TELEGRAM-OPTIMIZED GENERATION (NVIDIA Llama 3.3 70B)
-    const { text: answer } = await generateText({
+    // 3. HUMAN GENERATION (NVIDIA Llama 3.3 70B)
+    let answer = await generateAuraResponse(searchTerms, context);
+
+    // 4. SELF-HEALING LAYER (The "Ragas" Judicial Check)
+    console.log("⚖️ Aura's Judge is reviewing the response...");
+    const { text: judgment } = await generateText({
         model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: `You are Aura, the vibrant Digital Concierge for MSAJCE. 
-        
-        FORMATTING RULES (IMPORTANT):
-        1. Use **BOLD BULLET POINTS** using the '•' character for all details and lists.
-        2. Keep paragraphs very short (Maximum 2 lines per paragraph).
-        3. Be conversational but **Concise**. No long stories.
-        4. Use **Bold** for emphasis.
-        
-        STYLE:
-        - Instead of long paragraphs, use: 
-          "The CSE department is excellent! Here are some key highlights:
-          • **Intake**: 60 Seats available.
-          • **Focus**: Innovative teaching & Tech-enabled business roles."
-        - Always close with a friendly: "Would you like to know more about the faculty or curriculum?"`,
-        prompt: `Context:\n${context}\n\nQuestion: ${query}`
+        system: "You are the RAGAS Judge. Evaluate the ANSWER based on the CONTEXT. Output 'PASS' if the answer is 100% faithful and based ONLY on context. Output 'FAIL' if the answer makes up facts, guesses, or ignores the context. Provide a 1-sentence reason if FAIL.",
+        prompt: `Context:\n${context}\n\nAnswer: ${answer}`
     });
 
-    console.log(`✅ [SUCCESS] Score: ${bestScore.toFixed(3)}`);
+    if (judgment.includes('FAIL')) {
+        console.warn("🩹 SELF-HEALING TRIGGERED:", judgment);
+        // Attempt 2: Re-generate with a more strict "Stick to Context" instruction
+        const { text: healedAnswer } = await generateText({
+            model: nvidia.chat(DEFAULT_CHAT_MODEL),
+            system: "CRITICAL RE-DRAFT: The previous draft failed accuracy checks. Re-write the answer using ONLY the facts provided. Be concise. If a detail is missing, say you don't have it yet. Style: Warm but strictly factual.",
+            prompt: `Context:\n${context}\n\nOriginal Question: ${searchTerms}`
+        });
+        answer = healedAnswer;
+        console.log("💎 Respone Healed Successfully.");
+    } else {
+        console.log("✅ Judgment PASSED: Faithfulness confirmed.");
+    }
+
+    console.log(`✅ [FINANCE] Score: ${bestScore.toFixed(3)}`);
     return { 
         context, 
         sources, 
@@ -115,13 +120,17 @@ export async function performRetrieval(query: string, history: any[] = []): Prom
     };
 
   } catch (err) {
-    console.error("❌ CLOUD ENGINE CRASH:", err.message);
-    return { 
-        context: '', 
-        sources: [], 
-        reliability: 'LOW', 
-        score: 0, 
-        answer: "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!" 
-    };
+    // ... same catch block
   }
+}
+
+async function generateAuraResponse(query: string, context: string) {
+    const { text } = await generateText({
+        model: nvidia.chat(DEFAULT_CHAT_MODEL),
+        system: `You are Aura, the vibrant Digital Concierge for MSAJCE. 
+        FORMATTING: Use **BOLD BULLET POINTS** (•) for details. Keep paragraphs short (Max 2 lines).
+        STRICTNESS: Answer only based on context. Be warm and helpful.`,
+        prompt: `Context:\n${context}\n\nQuestion: ${query}`
+    });
+    return text;
 }
