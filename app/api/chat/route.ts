@@ -25,16 +25,19 @@ export async function POST(req: Request) {
     const cleanText = latestMessage.toLowerCase().trim();
     const sql = getSql();
 
-    // 1. ANALYTICS (SENTINEL LAYER)
+    // 1. ANALYTICS (BACKGROUND TASK)
     let meta = { category: 'GENERAL', mood: 'NEUTRAL', persona: 'UNKNOWN' };
-    try {
-        const { text: rawMeta } = await generateText({
-            model: INTENT_MODEL,
-            system: "Analyst. Provide JSON: { 'category': 'string', 'mood': 'string', 'persona': 'string' }",
-            prompt: `Question: ${latestMessage}`
-        });
-        meta = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
-    } catch {}
+    (async () => {
+        try {
+            const { text: rawMeta } = await generateText({
+                model: INTENT_MODEL,
+                system: "Analyst. Provide JSON: { 'category': 'string', 'mood': 'string', 'persona': 'string' }",
+                prompt: `Question: ${latestMessage}`
+            });
+            const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
+            // Success log if needed
+        } catch {}
+    })();
 
     // 2. CACHE CHECK (SPEED & COST)
     const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);

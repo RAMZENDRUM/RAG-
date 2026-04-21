@@ -44,53 +44,30 @@ export async function POST(req: Request) {
 
     const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
 
-    // 1. NEURAL PERSONA MAPPING (Parent vs Prospective vs Current)
+    // 1. NEURAL PERSONA MAPPING (BACKGROUND TASK - FIRE AND FORGET)
     let meta = { category: 'GENERAL', mood: 'NEUTRAL', critical: 'LOW', rival: false, persona: 'UNKNOWN', facility_issue: false };
-    try {
-        const { text: rawMeta } = await generateText({
-            model: INTENT_MODEL,
-            system: "Intelligence Analyst. Analyze the query and provide JSON: { 'category': 'string', 'mood': 'string', 'critical': 'string', 'rival_mention': bool, 'persona': 'PARENT|PROSPECTIVE_STUDENT|CURRENT_STUDENT_1YR|CURRENT_STUDENT_2YR|CURRENT_STUDENT_3YR|CURRENT_STUDENT_4YR|STAFF', 'is_facility_complaint': bool }",
-            prompt: `Question: ${rawText}`
-        });
-        const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
-        meta = { 
-            category: parsed.category || 'GENERAL', 
-            mood: parsed.mood || 'NEUTRAL', 
-            critical: parsed.critical || 'LOW', 
-            rival: parsed.rival_mention || false,
-            persona: parsed.persona || 'UNKNOWN',
-            facility_issue: parsed.is_facility_complaint || false
-        };
-    } catch {}
+    (async () => {
+        try {
+            const { text: rawMeta } = await generateText({
+                model: INTENT_MODEL,
+                system: "Intelligence Analyst. Analyze the query and provide JSON: { 'category': 'string', 'mood': 'string', 'critical': 'string', 'rival_mention': bool, 'persona': 'PARENT|PROSPECTIVE_STUDENT|CURRENT_STUDENT_1YR|CURRENT_STUDENT_2YR|CURRENT_STUDENT_3YR|CURRENT_STUDENT_4YR|STAFF', 'is_facility_complaint': bool }",
+                prompt: `Question: ${rawText}`
+            });
+            const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
+            // Log to telemetry or DB in background
+            await sql`UPDATE chat_histories SET metadata = ${JSON.stringify(parsed)} WHERE user_id = ${userId} AND content = ${rawText} LIMIT 1`.catch(() => {});
+        } catch {}
+    })();
 
-    // 2. CACHE PROXIMITY CHECK
-    const prevAnswer = await sql`SELECT answer FROM knowledge_cache WHERE query = ${cleanText} LIMIT 1`.catch(() => []);
-    if (!isAdmin && prevAnswer.length > 0) {
-        await bot.telegram.sendMessage(chatId, prevAnswer[0].answer, { parse_mode: 'Markdown' });
-        await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: true })})`;
-        return new Response('Cache Hit');
-    }
-
-    // 3. RAG FLOW
+    // 2. RAG FLOW (LIVE & STREAMLINED)
     const { answer } = await performRetrieval(rawText, chatHistory);
-    if (!isAdmin) await sleep(600);
 
+    // 3. IMMEDIATE SEND
     await bot.telegram.sendMessage(chatId, answer, { parse_mode: 'Markdown' });
 
-    // 4. PERSISTENCE & AUTO-LEARNING
+    // 4. BACKGROUND PERSISTENCE
     try {
-      await sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category: meta.category })})`;
-      
-      (async () => {
-          const { text: variantsJson } = await generateText({
-              model: INTENT_MODEL,
-              system: "Learning Engine. JSON: { 'variants': [], 'intent': '' }",
-              prompt: `Question: ${rawText}`
-          });
-          const data = JSON.parse(variantsJson.substring(variantsJson.indexOf('{'), variantsJson.lastIndexOf('}') + 1));
-          const entries = [data.intent.replace(/ /g, '_'), ...data.variants, cleanText].map(v => ({ query: v.toLowerCase().trim(), answer: answer }));
-          await sql`INSERT INTO knowledge_cache ${sql(entries, 'query', 'answer')} ON CONFLICT (query) DO NOTHING`;
-      })();
+      sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category: meta.category })})`.catch(() => {});
     } catch {}
 
     return new Response('OK');
