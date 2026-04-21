@@ -3857,5 +3857,23 @@
     },
     "category": "hostel",
     "importance": "normal"
+  },
+  {
+    "narrative": "The Official Internship Report Format (2025) is available for download. It includes all necessary forms for students, such as the Daily Diary, Attendance Sheet, and Evaluation Proforma.",
+    "exact": {
+      "download_link": "https://www.msajce-edu.in/uploads/placement/internship/Intership%20Report%202025.pdf",
+      "formats_included": "Format 3 (Synopsis), Format 5 (Daily Diary), Format 7 (Feedback), Format 8 (Evaluation), Format 9 (Attendance)"
+    },
+    "category": "academic",
+    "importance": "high"
+  },
+  {
+    "narrative": "Students undergoing internship must maintain a Daily Log (Format 5) and get an Attendance Sheet (Format 9) attested by their industry supervisor with a company seal. The internship duration should be 2 to 4 weeks.",
+    "exact": {
+      "duration": "2-4 weeks",
+      "mandatory_forms": "Format 5, Format 9"
+    },
+    "category": "academic",
+    "importance": "high"
   }
 ]
