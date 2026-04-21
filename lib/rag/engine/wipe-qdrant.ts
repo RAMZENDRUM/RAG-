@@ -1,6 +1,5 @@
 import { QdrantClient } from '@qdrant/js-client-rest';
 import dotenv from 'dotenv';
-import path from 'path';
 
 dotenv.config();
 
@@ -12,7 +11,7 @@ const client = new QdrantClient({
 const COLLECTION_NAME = 'msajce_knowledge';
 
 async function main() {
-  console.log(`🧹 Attempting to wipe collection: [${COLLECTION_NAME}]...`);
+  console.log(`🧹 Wiping collection: [${COLLECTION_NAME}]...`);
   
   try {
     const collections = await client.getCollections();
@@ -20,21 +19,22 @@ async function main() {
 
     if (exists) {
       await client.deleteCollection(COLLECTION_NAME);
-      console.log(`✅ Collection [${COLLECTION_NAME}] DELETED successfully.`);
-    } else {
-      console.log(`⚠️ Collection [${COLLECTION_NAME}] does not exist. Skipping wipe.`);
+      console.log(`✅ DELETED successfully.`);
     }
 
-    // Re-create the collection with proper dimensions (NVIDIA nv-embedqa-e5-v5 = 1024)
-    console.log(`🏗️ Re-creating collection [${COLLECTION_NAME}] with 1024 dimensions...`);
+    console.log(`🏗️ Re-creating [${COLLECTION_NAME}] with 1536 dimensions (Vercel SDK Standard)...`);
     await client.createCollection(COLLECTION_NAME, {
       vectors: {
-        size: 1024,
+        size: 1536, // OpenAI / AI SDK Standard
         distance: 'Cosine',
       }
     });
-    console.log(`✨ Collection [${COLLECTION_NAME}] is now CLEAN and ready for Supreme Ingestion.`);
 
+    // Add Payload Indexes
+    await client.createPayloadIndex(COLLECTION_NAME, { field_name: 'category', field_schema: 'keyword' });
+    await client.createPayloadIndex(COLLECTION_NAME, { field_name: 'content', field_schema: 'text' });
+
+    console.log(`✨ DONE.`);
   } catch (error) {
     console.error(`❌ Wipe Failed:`, error);
   }

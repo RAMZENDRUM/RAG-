@@ -1,38 +1,39 @@
 import { QdrantClient } from '@qdrant/js-client-rest';
-import dotenv from 'dotenv';
-dotenv.config();
 
-export const qdrant = new QdrantClient({
-  url: process.env.QDRANT_URL,
-  apiKey: process.env.QDRANT_API_KEY,
-});
+let _client: QdrantClient | null = null;
+
+// Lazy Loader to ensure ENV is loaded before initialization
+export const getQdrant = () => {
+  if (!_client) {
+    if (!process.env.QDRANT_URL) {
+      console.warn("⚠️ QDRANT_URL is missing! Falling back to localhost...");
+    }
+    _client = new QdrantClient({
+      url: process.env.QDRANT_URL,
+      apiKey: process.env.QDRANT_API_KEY,
+      checkCompatibility: false, // Skip version check for speed/stability
+    });
+  }
+  return _client;
+};
 
 export const COLLECTION_NAME = 'msajce_knowledge';
 
 export async function initQdrant() {
-  const collections = await qdrant.getCollections();
+  const client = getQdrant();
+  const collections = await client.getCollections();
   const exists = collections.collections.some(c => c.name === COLLECTION_NAME);
 
   if (!exists) {
-    console.log(`🌐 Creating Qdrant Collection: ${COLLECTION_NAME}`);
-    await qdrant.createCollection(COLLECTION_NAME, {
+    console.log(`🌐 Creating Vercel-SDK Aligned Collection: ${COLLECTION_NAME} (1536 Dim)`);
+    await client.createCollection(COLLECTION_NAME, {
       vectors: {
-        size: 1536, // text-embedding-3-small
+        size: 1536,
         distance: 'Cosine',
-      },
-      optimizers_config: {
-        default_segment_number: 2,
-      },
+      }
     });
 
-    // Create Payload Indices for Hybrid filtering
-    await qdrant.createPayloadIndex(COLLECTION_NAME, {
-      field_name: 'category',
-      field_schema: 'keyword',
-    });
-    await qdrant.createPayloadIndex(COLLECTION_NAME, {
-      field_name: 'content',
-      field_schema: 'text',
-    });
+    await client.createPayloadIndex(COLLECTION_NAME, { field_name: 'category', field_schema: 'keyword' });
+    await client.createPayloadIndex(COLLECTION_NAME, { field_name: 'content', field_schema: 'text' });
   }
 }
