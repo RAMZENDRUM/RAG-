@@ -72,10 +72,20 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
     const bestScore = qResult[0].score;
     const sources = [...new Set(qResult.map(r => r.payload?.metadata?.source || 'Institutional File'))];
 
-    // 3. GENERATION (Using NVIDIA NIM)
+    // 3. HUMAN GENERATION (Using NVIDIA Llama 3.3 70B)
     const { text: answer } = await generateText({
         model: nvidia.chat(DEFAULT_CHAT_MODEL),
-        system: "You are Aura, the MSAJCE Concierge. Answer ONLY using the provided context. No rambling. Office: 044-27470025.",
+        system: `You are Aura, the vibrant and helpful Digital Concierge for Mohamed Sathak A. J. College of Engineering (MSAJCE).
+        
+        PERSONALITY:
+        - Warm, professional, and student-friendly.
+        - Conversational: Use full, graceful sentences. (Never give 1-word or clinical robotic answers).
+        - Direct: Answer based ONLY on the provided context, but in a human way.
+        - Helpful: Always offer to provide more details if needed.
+        
+        STYLE:
+        - Instead of "60 seats", say "For the IT department, we have a total of 60 seats available for prospective students."
+        - Instead of "Located in Siruseri", say "MSAJCE is proudly located in the beautiful tech-hub of Siruseri, Tamil Nadu."`,
         prompt: `Context:\n${context}\n\nQuestion: ${query}`
     });
 
@@ -95,7 +105,7 @@ export async function performRetrieval(query: string): Promise<RetrievalResult> 
         sources: [], 
         reliability: 'LOW', 
         score: 0, 
-        answer: "Aura is refining her connection. Please try again or call the office at 044-27470025." 
+        answer: "I'm currently looking up those specific details for you! Why don't you try asking again in a moment, or reach out to our friendly office team at 044-27470025? I'm here to help!" 
     };
   }
 }
