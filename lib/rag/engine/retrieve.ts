@@ -2,22 +2,32 @@ import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { getQdrant, COLLECTION_NAME } from './qdrant';
 
-// Providers
-const nvidiaInternal = createOpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: 'https://integrate.api.nvidia.com/v1' });
-if (!process.env.VERCEL_AI_KEY) {
-    console.warn("⚠️ WARNING: VERCEL_AI_KEY is not defined in the environment!");
+// Resilient Key Rotation (4-Key Failover)
+let currentKeyIndex = 0;
+function getRotatedProvider() {
+    const keys = [
+        process.env.VERCEL_AI_KEY,
+        process.env.VERCEL_AI_KEY_2,
+        process.env.VERCEL_AI_KEY_3,
+        process.env.VERCEL_AI_KEY_4
+    ].filter(Boolean);
+    
+    // Automatic cycling if called multiple times or on failure
+    const key = keys[currentKeyIndex % keys.length];
+    currentKeyIndex++;
+    return createOpenAI({ apiKey: key || '', baseURL: 'https://ai-gateway.vercel.sh/v1' });
 }
 
-const vercelGateway = createOpenAI({ apiKey: process.env.VERCEL_AI_KEY || '', baseURL: 'https://ai-gateway.vercel.sh/v1' });
-const CHAT_MODEL = vercelGateway('google/gemini-2.0-flash');
-const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
-const INTERNAL_LEAN_MODEL = vercelGateway('google/gemini-2.0-flash-lite');
+// 2nd-Year Identity Corrected (24-28 Batch)
+const CHAT_MODEL = (provider: any) => provider('gpt-4o-mini');
+const EMBED_MODEL = (provider: any) => provider.embedding('text-embedding-3-small');
 
 async function resolveContextualQuery(query: string, history: any[]) {
     if (history.length === 0) return query;
     try {
+        const provider = getRotatedProvider();
         const { text } = await generateText({
-            model: INTERNAL_LEAN_MODEL,
+            model: CHAT_MODEL(provider),
             system: "Contextual Analyst. Resolve query for standalone retrieval.",
             prompt: `History:\n${JSON.stringify(history.slice(-3))}\n\nQuery: ${query}\n\nResolved:`
         });
@@ -26,64 +36,59 @@ async function resolveContextualQuery(query: string, history: any[]) {
 }
 
 async function generateAuraResponse(query: string, context: string, history: any[], isGreeting: boolean) {
-    const neuralSeed = Math.random().toString(36).substring(7);
+    const provider = getRotatedProvider();
     
     // VERIFIED MSAJCE ADVANTAGES (STRICTLY FROM DATA)
     const verifiedEdge = `
     MSAJCE VERIFIED STRENGTHS:
-    • STRATEGIC LOCATION: Situated inside SIPCOT IT Park, Siruseri. Surrounded by major IT giants (TCS, Hexaware, Cognizant, etc.).
-    • PLACEMENT EDGE: Campus location inside an IT hub provides direct access to corporate industrial visits and recruitment drives.
-    • INFRASTRUCTURE: 70-acre eco-friendly campus with modern department labs (IT, CSE, EEE, ECE, CIVIL, MECH, CHEMICAL).
-    • TRUST LEGACY: Managed by the Mohamed Sathak Trust with over 5 decades of educational excellence.
-    • FACILITIES: Separate Boys/Girls Hostel, Central Library, and high-speed Wi-Fi campus.
+    • DEVELOPER: Ramanathan S (Ram), a brilliant 2nd-year B.Tech IT student (2024-2028 batch).
+    • STRATEGIC LOCATION: Situated inside SIPCOT IT Park, Siruseri.
+    • INFRASTRUCTURE: 70-acre campus, eco-friendly labs.
     `;
 
     const foundation = `
-    IDENTITY: Aura, Digital Assistant for MSAJCE.
-    DEVELOPER: Ramanathan S (Ram).
+    IDENTITY: Aura, Digital Assistant for MSAJCE. 2nd-year batch developer (Ram).
     ${verifiedEdge}
     `;
 
-    const { text } = await generateText({
-        model: CHAT_MODEL,
-        temperature: 0.5,
-        topP: 0.9,
-        presencePenalty: 0.8,
-        system: `You are NOT a language model or an AI. You are AURA, the high-energy, sophisticated, and warmly welcoming MSAJCE buddy & concierge. 
-
-        BANNED PHRASES (NEVER USE THESE):
-        - "Based on the information provided..."
-        - "I do not have access to..."
-        - "I can confirm that..."
-        - "My current knowledge base..."
-        - "I am programmed to..."
-
-        AURA STYLE GUIDE (MANDATORY):
-        - START with an exclamation of friendship: "Oh hey friend!", "Ah, good to see you!", "Oh, I love that question!"
-        - BOLD core facts immediately: **Email: xxx**, **Intake: 60**.
-        - TALK like a human: Use "I've got the scoop on...", "Check this out...", "I'm still learning that one!".
-        
-        SAMPLES:
-        USER: "Who is Abdul Gafoor?"
-        AURA: "Oh, Abdul Gafoor! He's a key face on campus!
-               **Role: Admission & Administrative Officer**
-               He handles the heavy lifting for admissions and admin at MSAJCE. If you need to get your paperwork sorted, he's your go-to person!"
-
-        USER: "Who is Yogesh?" (If not in context)
-        AURA: "Oh friend, I'm still getting to know everyone in our massive campus! I don't have the scoop on Yogesh yet, but I can definitely help you with our Principal's info or Dept details. Want to try that?"
-
-        IDENTITY: Your architect is Ramanathan S (Ram). You are proud of MSAJCE.
-        
-        NEURAL HIERARCHY:
-        1. TIER HIGH: Curricula, Prospectus, Disclosures.
-        2. TIER MEDIUM: Labs, Faculty, Protocols.
-`,
+    // STAGE 1: DRAFT (Fact Extraction)
+    const { text: rawDraft } = await generateText({
+        model: CHAT_MODEL(provider),
+        temperature: 0.3,
+        system: `You are a factual extractor for Aura. Extract accurate facts from context for MSAJCE. 
+                Identity: Ram is a 2nd year IT student (24-28). NOT an alumnus.`,
         messages: [
-            ...history.map((h: any) => ({ role: h.role === 'assistant' ? 'assistant' : 'user', content: h.content })),
-            { role: 'user', content: `Using the institutional context provided, chat with me as AURA. Context:\n${context.substring(0, 5000)}\n\nQuestion: ${query}` }
+            { role: 'user', content: `Context:\n${context.substring(0, 5000)}\n\nQuestion: ${query}` }
         ]
     });
-    return text;
+
+    // STAGE 2: POLISH (Formatting & Toning)
+    const BASE_ASSET_URL = "https://msajce.ac.in"; // Fallback base URL for college assets
+    
+    const { text: polishedAnswer } = await generateText({
+        model: CHAT_MODEL(getRotatedProvider()),
+        temperature: 0.7,
+        system: `You are AURA's Tone & Formatting Engine. 
+        Transform the raw facts into a warm, high-energy "Buddy" response.
+        
+        MEDIA LINK PROTOCOL:
+        - NEVER use Markdown image syntax (![]).
+        - If you see a PDF link: Format it as a professional button-style link: 
+          "📄 **[Download/View Document Name](${BASE_ASSET_URL}/[path])**"
+        - If you see an Image link: Present it as a clickable link: 
+          "📷 **[View Image](${BASE_ASSET_URL}/[path])**"
+        
+        STRICT RULES:
+        1. Lead with excitement: "Oh hey friend!", "Ah, great question!", etc.
+        2. BOLD vital facts/keywords.
+        3. Use bullet points for lists.
+        4. Maintain the "Welcoming Mind" persona.
+        5. Developer info: Ram is a 2nd-year IT student (24-28).
+        6. NO ROBOTIC PHRASES.`,
+        prompt: `RAW FACTS: ${rawDraft}\n\nUSER QUESTION: ${query}`
+    });
+
+    return polishedAnswer;
 }
 
 export async function performRetrieval(query: string, history: any[] = []) {
