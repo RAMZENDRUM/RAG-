@@ -23,48 +23,32 @@ bot.on('message', async (ctx) => {
   if (!text) return;
 
   const userId = ctx.from.id.toString();
+  
+  // Show typing state for better UX
+  await ctx.sendChatAction('typing');
 
   try {
-    // 1. Unified Retrieval
-    const { context, reliability, answer, sources, score } = await performRetrieval(text);
-
-    if (reliability === 'LOW') {
-      return ctx.reply(answer);
-    }
-
-    // 2. Chat History
-    const history = await sql`
+    // 1. Fetch Chat History 
+    const historyData = await sql`
       SELECT role, content FROM chat_histories 
       WHERE user_id = ${userId} 
       ORDER BY created_at DESC 
       LIMIT 6
     `;
-    const chatHistory = history.reverse().map(h => ({
+    const chatHistory = historyData.reverse().map(h => ({
       role: h.role as 'user' | 'assistant',
       content: h.content
     }));
 
-    // 3. Response Generation
-    const { text: response } = await generateText({
-      model: ai.chat('openai/gpt-4.1-nano'),
-      system: `You are the MSAJCE Aura Concierge. Use institutional precision.
-      
-      RULES:
-      - Answer based ONLY on the context.
-      - Never hallucinate.
-      - Present data in bullet points.
-      
-      CONTEXT:
-      ${context}`,
-      messages: [...chatHistory, { role: 'user', content: text }],
-    });
+    // 2. Unified Retrieval & Response
+    const { answer, reliability } = await performRetrieval(text, chatHistory);
 
-    // 4. Persistence
+    // 3. Persistence
     await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${text})`;
-    await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'assistant', ${response})`;
+    await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'assistant', ${answer})`;
 
-    console.log(`Bot Success: ${text.substring(0,20)}... Score: ${score.toFixed(3)}`);
-    await ctx.reply(response);
+    console.log(`Bot Response [${reliability}]: ${text.substring(0,20)}...`);
+    await ctx.reply(answer);
 
   } catch (error) {
     const isRateLimit = error.message?.includes('rate_limit') || error.message?.includes('credits');
@@ -80,10 +64,10 @@ bot.on('message', async (ctx) => {
 
     if (isRateLimit) {
       console.error('Final Rate Limit hit in Bot');
-      return ctx.reply('I am processing many requests. Please try again in 10 seconds.');
+      return ctx.reply("I'm stretching my neural circuits a bit too thin! Give me 10 seconds to catch my breath and ask me again. 🚀");
     }
     console.error('Unified Bot Error:', error);
-    await ctx.reply('System is refining the knowledge base. Please try again shortly.');
+    await ctx.reply("I'm doing some quick mental stretches and refining my knowledge. Give me a moment and try your question again!");
   }
 });
 

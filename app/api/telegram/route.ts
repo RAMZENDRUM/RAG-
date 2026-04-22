@@ -39,36 +39,18 @@ export async function POST(req: Request) {
     const sql = getSql();
     const bot = getBot();
 
-    const historyRows = await sql`SELECT role, content FROM chat_histories WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 10`.catch(() => []);
+    // 1. Fetch Chat History 
+    const historyRows = await sql`SELECT role, content FROM chat_histories WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 6`.catch(() => []);
     const chatHistory = historyRows.reverse().map((h: any) => ({ role: h.role, content: h.content }));
 
-    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(cleanText);
-
-    // 1. NEURAL PERSONA MAPPING (BACKGROUND TASK - FIRE AND FORGET)
-    let meta = { category: 'GENERAL', mood: 'NEUTRAL', critical: 'LOW', rival: false, persona: 'UNKNOWN', facility_issue: false };
-    (async () => {
-        try {
-            const { text: rawMeta } = await generateText({
-                model: INTENT_MODEL,
-                system: "Intelligence Analyst. Analyze the query and provide JSON: { 'category': 'string', 'mood': 'string', 'critical': 'string', 'rival_mention': bool, 'persona': 'PARENT|PROSPECTIVE_STUDENT|CURRENT_STUDENT_1YR|CURRENT_STUDENT_2YR|CURRENT_STUDENT_3YR|CURRENT_STUDENT_4YR|STAFF', 'is_facility_complaint': bool }",
-                prompt: `Question: ${rawText}`
-            });
-            const parsed = JSON.parse(rawMeta.substring(rawMeta.indexOf('{'), rawMeta.lastIndexOf('}') + 1));
-            // Log to telemetry or DB in background
-            await sql`UPDATE chat_histories SET metadata = ${JSON.stringify(parsed)} WHERE user_id = ${userId} AND content = ${rawText} LIMIT 1`.catch(() => {});
-        } catch {}
-    })();
-
-    // 2. RAG FLOW (LIVE & STREAMLINED)
-    const { answer } = await performRetrieval(rawText, chatHistory);
+    // 2. Unified Retrieval & Response (Aura handles the personality)
+    const { answer, reliability } = await performRetrieval(rawText, chatHistory);
 
     // 3. IMMEDIATE SEND
     await bot.telegram.sendMessage(chatId, answer, { parse_mode: 'Markdown' });
 
-    // 4. BACKGROUND PERSISTENCE
-    try {
-      sql`INSERT INTO chat_histories (user_id, role, content, metadata) VALUES (${userId}, 'user', ${rawText}, ${JSON.stringify({ ...meta, cached: false })}), (${userId}, 'assistant', ${answer}, ${JSON.stringify({ category: meta.category })})`.catch(() => {});
-    } catch {}
+    // 4. Persistence
+    await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${rawText}), (${userId}, 'assistant', ${answer})`;
 
     return new Response('OK');
   } catch (error) {

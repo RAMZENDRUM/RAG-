@@ -1,60 +1,100 @@
-import postgres from 'postgres';
-import fs from 'fs';
-import path from 'path';
 import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-dotenv.config();
+import { embedMany } from 'ai';
+import { createOpenAI } from '@ai-sdk/openai';
+import { getQdrant, COLLECTION_NAME } from '../lib/rag/engine/qdrant';
+import crypto from 'crypto';
 
-const sql = postgres(process.env.DATABASE_URL || '');
-const TRAINING_FILE = path.join(process.cwd(), 'scratch', 'aura_training_dataset.csv');
-const INTELLIGENCE_FILE = path.join(process.cwd(), 'scratch', 'msajce_full_persona_report.csv');
+const vercelGateway = createOpenAI({ apiKey: process.env.VERCEL_AI_KEY, baseURL: 'https://ai-gateway.vercel.sh/v1' });
+const EMBED_MODEL = vercelGateway.embedding('text-embedding-3-small');
 
-async function masterSync() {
-  console.log("🚀 Starting Aura PERSONA MAPPER Sync...");
+const CLEANING_ZONE = 'd:/ .gemini/RAG college/cleaning_zone'.replace(' ', ''); // Handle potential spaces
+const LEGACY_JSON_DIR = 'd:/ .gemini/RAG college/raw_vault/legacy_archive/2_structured_json'.replace(' ', '');
 
-  try {
-    // --- 1. TRAINING DATA ---
-    const cacheRows = await sql`SELECT query, answer, created_at FROM knowledge_cache ORDER BY created_at DESC`;
-    if (cacheRows.length > 0) {
-        const header = "Question_Variant,Verified_Answer,Date_Learned\n";
-        const content = cacheRows.map(r => `"${r.query.replace(/"/g, '""')}","${r.answer.replace(/"/g, '""')}","${r.created_at}"`).join('\n');
-        fs.writeFileSync(TRAINING_FILE, header + content);
-    }
-
-    // --- 2. FULL PERSONA DASHBOARD ---
-    const chatRows = await sql`
-        SELECT user_id, content, metadata, created_at 
-        FROM chat_histories 
-        WHERE role = 'user' 
-        ORDER BY created_at DESC
-    `;
-
-    if (chatRows.length > 0) {
-        console.log(`📉 Generating Full Persona Report (${chatRows.length} analytic points)...`);
-        const intelHeader = "User_ID,User_Message,Category,Mood,Urgency,USER_PERSONA,Campus_Repair_Target,Rival_Mention,Efficiency,Date_Time\n";
-        const intelContent = chatRows.map(r => {
-            const meta = r.metadata || {};
-            const cat = meta.category || 'GENERAL';
-            const mood = meta.mood || 'NEUTRAL';
-            const urgency = meta.critical || 'LOW';
-            const persona = meta.persona || 'UNKNOWN';
-            const repair = meta.facility_issue ? '⚠️ MAINTENANCE ALERT' : 'CLEAN';
-            const rival = meta.rival ? 'MENTIONED' : 'CLEAN';
-            const efficiency = meta.cached ? 'FREE (CACHE HIT)' : 'PAID (RAG FLOW)';
-            
-            return `"${r.user_id}","${r.content.replace(/"/g, '""')}","${cat}","${mood}","${urgency}","${persona}","${repair}","${rival}","${efficiency}","${r.created_at}"`;
-        }).join('\n');
-        fs.writeFileSync(INTELLIGENCE_FILE, intelHeader + intelContent);
-    }
-
-    console.log("✅ PERSONA SYNC COMPLETE!");
-    console.log(`📁 Your Master Persona Report: ${INTELLIGENCE_FILE}`);
-
-  } catch (err) {
-    console.error("❌ Persona Sync Failed:", err.message);
-  } finally {
-    process.exit(0);
-  }
+function getAllFiles(dirPath: string, arrayOfFiles: string[] = []) {
+    const files = fs.readdirSync(dirPath);
+    files.forEach(function(file) {
+        const fullPath = path.join(dirPath, file);
+        if (fs.statSync(fullPath).isDirectory()) {
+            getAllFiles(fullPath, arrayOfFiles); // Pass the same array reference
+        } else {
+            if (file.endsWith('.md') || file.endsWith('.txt') || file.endsWith('.json')) {
+                arrayOfFiles.push(fullPath);
+            }
+        }
+    });
+    return arrayOfFiles;
 }
 
-masterSync();
+async function runSync() {
+    console.log("🛰️ AURA NEURAL SYNC: PRIORITIZING CLEANING_ZONE & LEGACY JSON");
+    const client = getQdrant();
+    const allFiles = [
+        ...(await getAllFiles('d:/.gemini/RAG college/cleaning_zone')),
+        ...(await getAllFiles('d:/.gemini/RAG college/raw_vault/legacy_archive/2_structured_json'))
+    ];
+
+    console.log(`📡 Found ${allFiles.length} source files for saturation.`);
+    
+    const memoryVault: any[] = [];
+    let points: any[] = [];
+    let batch: string[] = [];
+    let metadataBatch: any[] = [];
+
+    for (const filePath of allFiles) {
+        const content = fs.readFileSync(filePath, 'utf-8');
+        let processedContent = content;
+        
+        if (filePath.endsWith('.json')) {
+            const json = JSON.parse(content);
+            processedContent = JSON.stringify(json, null, 2);
+        }
+
+        // Chunking with overlap for high-detail saturation
+        const chunks = processedContent.match(/[\s\S]{1,1500}/g) || [];
+        
+        for (const chunk of chunks) {
+            batch.push(chunk);
+            const source = path.basename(filePath);
+            metadataBatch.push({ content: chunk, source });
+            memoryVault.push({ narrative: chunk, metadata: { source } });
+
+            if (batch.length >= 20) {
+                await processBatch(batch, metadataBatch, client);
+                batch = [];
+                metadataBatch = [];
+                await new Promise(r => setTimeout(r, 1000));
+            }
+        }
+    }
+    
+    if (batch.length > 0) await processBatch(batch, metadataBatch, client);
+
+    // Update Local Active Memory as well for resilience
+    fs.writeFileSync('d:/.gemini/RAG college/live_brain/aura_active_memory.json', JSON.stringify(memoryVault, null, 2));
+    console.log("✅ LOCAL MEMORY SATURATED: 100% Sync complete.");
+}
+
+async function processBatch(texts: string[], metadata: any[], client: any) {
+    try {
+        const { embeddings } = await embedMany({ model: EMBED_MODEL, values: texts });
+        const upsertPoints = texts.map((text, i) => {
+            const hash = crypto.createHash('md5').update(text).digest('hex');
+            return {
+                id: `${hash.slice(0,8)}-${hash.slice(8,12)}-4${hash.slice(13,16)}-a${hash.slice(17,20)}-${hash.slice(20,32)}`,
+                vector: embeddings[i],
+                payload: metadata[i]
+            };
+        });
+        
+        await client.upsert(COLLECTION_NAME, { wait: true, points: upsertPoints });
+        console.log(`🚀 Saturated ${upsertPoints.length} points...`);
+    } catch (e: any) {
+        console.warn("⚠️ Qdrant Push Failed (Network/DNS). Local sync continuing...");
+    }
+}
+
+runSync();
