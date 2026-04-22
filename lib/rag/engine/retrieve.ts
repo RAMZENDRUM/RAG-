@@ -1,33 +1,29 @@
 import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { getQdrant, COLLECTION_NAME } from './qdrant';
 
-// Resilient Key Rotation (4-Key Failover)
-let currentKeyIndex = 0;
-function getRotatedProvider() {
-    const keys = [
-        process.env.VERCEL_AI_KEY,
-        process.env.VERCEL_AI_KEY_2,
-        process.env.VERCEL_AI_KEY_3,
-        process.env.VERCEL_AI_KEY_4
-    ].filter(Boolean);
-    
-    // Automatic cycling if called multiple times or on failure
-    const key = keys[currentKeyIndex % keys.length];
-    currentKeyIndex++;
-    return createOpenAI({ apiKey: key || '', baseURL: 'https://ai-gateway.vercel.sh/v1' });
-}
+// Groq Provider (via AI SDK OpenAI) for Speed & Reliability
+const groq = createOpenAI({
+    apiKey: process.env.GROQ_API_KEY || '',
+    baseURL: 'https://api.groq.com/openai/v1'
+});
 
-// 2nd-Year Identity Corrected (24-28 Batch)
-const CHAT_MODEL = (provider: any) => provider('gpt-4o-mini');
-const EMBED_MODEL = (provider: any) => provider.embedding('text-embedding-3-small');
+// Google Provider for Embeddings
+const google = createGoogleGenerativeAI({
+    apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GEMINI_API_KEY || ''
+});
+
+// IDENTITY & MODELS
+const CHAT_MODEL = groq('llama-3.3-70b-versatile');
+const EMBED_MODEL = google.textEmbeddingModel('text-embedding-004');
+const INTERNAL_LEAN_MODEL = groq('llama-3.1-8b-instant');
 
 async function resolveContextualQuery(query: string, history: any[]) {
     if (history.length === 0) return query;
     try {
-        const provider = getRotatedProvider();
         const { text } = await generateText({
-            model: CHAT_MODEL(provider),
+            model: INTERNAL_LEAN_MODEL,
             system: "Contextual Analyst. Resolve query for standalone retrieval.",
             prompt: `History:\n${JSON.stringify(history.slice(-3))}\n\nQuery: ${query}\n\nResolved:`
         });
@@ -36,8 +32,6 @@ async function resolveContextualQuery(query: string, history: any[]) {
 }
 
 async function generateAuraResponse(query: string, context: string, history: any[], isGreeting: boolean) {
-    const provider = getRotatedProvider();
-    
     // VERIFIED MSAJCE ADVANTAGES (STRICTLY FROM DATA)
     const verifiedEdge = `
     MSAJCE VERIFIED STRENGTHS:
@@ -46,14 +40,9 @@ async function generateAuraResponse(query: string, context: string, history: any
     • INFRASTRUCTURE: 70-acre campus, eco-friendly labs.
     `;
 
-    const foundation = `
-    IDENTITY: Aura, Digital Assistant for MSAJCE. 2nd-year batch developer (Ram).
-    ${verifiedEdge}
-    `;
-
     // STAGE 1: DRAFT (Fact Extraction)
     const { text: rawDraft } = await generateText({
-        model: CHAT_MODEL(provider),
+        model: CHAT_MODEL,
         temperature: 0.3,
         system: `You are a factual extractor for Aura. Extract accurate facts from context for MSAJCE. 
                 Identity: Ram is a 2nd year IT student (24-28). NOT an alumnus.`,
@@ -63,28 +52,26 @@ async function generateAuraResponse(query: string, context: string, history: any
     });
 
     // STAGE 2: POLISH (Formatting & Toning)
-    const BASE_ASSET_URL = "https://msajce.ac.in"; // Fallback base URL for college assets
+    const BASE_ASSET_URL = "https://msajce-edu.in"; 
     
     const { text: polishedAnswer } = await generateText({
-        model: CHAT_MODEL(getRotatedProvider()),
+        model: CHAT_MODEL,
         temperature: 0.7,
-        system: `You are AURA's Tone & Formatting Engine. 
-        Transform the raw facts into a warm, high-energy "Buddy" response.
+        presencePenalty: 0.8, // Encourage variety
+        system: `You are AURA, the "Campus Buddy" for MSAJCE. 
+        Your tone is: Friendly, Chatting Friend, Warm, Welcoming, and Energetic.
+        
+        FORMATTING RULES:
+        1. **BOLD** vital facts, keywords, and dates.
+        2. Use bullet points for features.
+        3. Lead with a warm greeting (e.g., "Hey friend! 🌟", "Oh, I'd love to tell you about that!").
+        4. Refer to your developer, **Ram (Ramanathan S)**, as your "Creator/Bestie" – he's a **2nd-year IT student (24-28 batch)**.
+        5. NEVER sound robotic. Avoid phrases like "Based on the context" or "I am an AI".
+        6. Keep it concise but information-dense (0-3000 tokens).
         
         MEDIA LINK PROTOCOL:
-        - NEVER use Markdown image syntax (![]).
-        - If you see a PDF link: Format it as a professional button-style link: 
-          "📄 **[Download/View Document Name](${BASE_ASSET_URL}/[path])**"
-        - If you see an Image link: Present it as a clickable link: 
-          "📷 **[View Image](${BASE_ASSET_URL}/[path])**"
-        
-        STRICT RULES:
-        1. Lead with excitement: "Oh hey friend!", "Ah, great question!", etc.
-        2. BOLD vital facts/keywords.
-        3. Use bullet points for lists.
-        4. Maintain the "Welcoming Mind" persona.
-        5. Developer info: Ram is a 2nd-year IT student (24-28).
-        6. NO ROBOTIC PHRASES.`,
+        - If a PDF link exists: 📄 **[Download/View Document Name](${BASE_ASSET_URL}/[path])**
+        - If an image link exists: 📷 **[View Image](${BASE_ASSET_URL}/[path])**`,
         prompt: `RAW FACTS: ${rawDraft}\n\nUSER QUESTION: ${query}`
     });
 
@@ -93,27 +80,25 @@ async function generateAuraResponse(query: string, context: string, history: any
 
 export async function performRetrieval(query: string, history: any[] = []) {
     // 0-TOKEN SHORTCUT: Enhanced 'Chatting Friend' Greeting
-    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet)$/i.test(query.trim());
+    const isGreeting = /^(hi|hello|hey|who are you|who r u|greet|start)$/i.test(query.trim());
     if (isGreeting) {
         return { 
-            answer: "Hey there, friend! 🌟 I'm Aura, your MSAJCE buddy. How's your day going? What can I help you find today?", 
+            answer: "Hey there, friend! 🌟 I'm **Aura**, your MSAJCE campus buddy! I was built with ❤️ by **Ram (a 2nd-year IT rockstar)** to help you navigate everything here at Mohamed Sathak A.J. College of Engineering.\n\nWhat's on your mind? Admissions, placements, or maybe just curious about the campus life? Ask away! 🚀", 
             reliability: 'FAST_SKIP' 
         };
     }
 
     try {
-        // ADVANCED TECHNIQUE: Query Expansion (NirDiamant/Nisaar Style)
+        // ADVANCED TECHNIQUE: Query Expansion
         let expandedQuery = query;
         try {
             const { text } = await generateText({
                 model: INTERNAL_LEAN_MODEL,
-                system: "You are a Query Expander. Re-write the user query into a highly descriptive technical search term for MSAJCE library. Return ONLY the string.",
+                system: "Query Expander. Rewrite query for better vector retrieval. Return only text.",
                 prompt: `User: ${query}`
             });
             expandedQuery = text.trim() || query;
-        } catch {
-            console.warn("Advanced Expansion Failed - using raw query.");
-        }
+        } catch { }
 
         // 1. DUAL-VECTOR SEARCH
         const { embedding: e1 } = await embed({ model: EMBED_MODEL, value: query });
@@ -121,11 +106,10 @@ export async function performRetrieval(query: string, history: any[] = []) {
 
         const qResult = await getQdrant().search(COLLECTION_NAME, {
             vector: e1,
-            limit: 3,
+            limit: 4,
             with_payload: true
         });
 
-        // Supplement with expanded hits
         const qResult2 = await getQdrant().search(COLLECTION_NAME, {
             vector: e2,
             limit: 2,
@@ -133,9 +117,9 @@ export async function performRetrieval(query: string, history: any[] = []) {
         });
 
         // Join context
-        const context = [...qResult, ...qResult2].map((r: any) => r.payload.content).join('\n---\n');
+        const context = [...qResult, ...qResult2].map((r: any) => r.payload?.content || "").join('\n---\n');
 
-        // 2. SINGLE-PASS ELITE GENERATION
+        // 2. GENERATION
         const answer = await generateAuraResponse(query, context, history.slice(-2), isGreeting);
 
         return { 
