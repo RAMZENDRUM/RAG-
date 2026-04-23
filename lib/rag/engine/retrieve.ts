@@ -114,8 +114,12 @@ export async function performRetrieval(query: string, history: any[] = []) {
         let context = "";
         let technique = "QDRANT_VECTOR_PRIMARY";
 
+        // 0.5 RESOLVE CONVERSATIONAL QUERY (Memory Integration)
+        const resolvedQuery = await resolveContextualQuery(query, history);
+        console.log(`🧠 Contextual Resolution: "${query}" -> "${resolvedQuery}"`);
+
         // 1. EMBED QUERY (OpenAI 1536)
-        const { embedding } = await embed({ model: EMBED_MODEL, value: query });
+        const { embedding } = await embed({ model: EMBED_MODEL, value: resolvedQuery });
         const vectorArray = embedding;
 
         try {
