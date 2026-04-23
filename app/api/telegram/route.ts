@@ -21,7 +21,7 @@ const nvidiaInternal = createOpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseUR
 const INTENT_MODEL = nvidiaInternal.chat('meta/llama-3.1-8b-instruct');
 
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
-const ADMIN_IDS = ['7770158141']; 
+const ADMIN_IDS = ['7770158141', 'Zendrum']; // Added Zendrum Priority
 
 /**
  * PRODUCTION TELEGRAM WEBHOOK (PERSONA MAPPER EDITION)
