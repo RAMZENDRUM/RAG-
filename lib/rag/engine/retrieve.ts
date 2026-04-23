@@ -5,18 +5,33 @@ import postgres from 'postgres';
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-const envPath = 'd:/.gemini/RAG college/.env';
-const envConfig = dotenv.parse(fs.readFileSync(envPath));
+
+// Cloud-Safe Env Loading (Handles Local vs Vercel)
+const localEnvPath = path.resolve(process.cwd(), '.env');
+let envConfig: Record<string, string> = {};
+
+if (fs.existsSync(localEnvPath)) {
+    try {
+        const raw = fs.readFileSync(localEnvPath);
+        envConfig = dotenv.parse(raw);
+    } catch (e) {
+        console.warn("Could not parse local .env file");
+    }
+}
+
+// Map variables from manual config or process.env (Vercel)
+const GROQ_KEY = (envConfig['GROQ_API_KEY'] || process.env.GROQ_API_KEY || '').trim();
+const VERCEL_KEY = (envConfig['VERCEL_AI_KEY'] || process.env.VERCEL_AI_KEY || process.env.AI_GATEWAY_API_KEY || '').trim();
 
 // Groq Provider (via AI SDK OpenAI) for Speed & Reliability
 const groq = createOpenAI({
-    apiKey: (envConfig['GROQ_API_KEY'] || '').trim(),
+    apiKey: GROQ_KEY,
     baseURL: 'https://api.groq.com/openai/v1'
 });
 
 // OpenAI via Vercel Gateway for Embeddings (1536 Dim)
 const openai = createOpenAI({
-    apiKey: (envConfig['VERCEL_AI_KEY'] || envConfig['AI_GATEWAY_API_KEY'] || '').trim(),
+    apiKey: VERCEL_KEY,
     baseURL: 'https://ai-gateway.vercel.sh/v1'
 });
 
