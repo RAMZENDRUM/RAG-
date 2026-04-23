@@ -1,6 +1,7 @@
 import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import postgres from 'postgres';
+import { QdrantClient } from '@qdrant/js-client-rest';
 
 import fs from 'fs';
 import path from 'path';
@@ -109,42 +110,59 @@ export async function performRetrieval(query: string, history: any[] = []) {
         };
     }
 
-    try {
-        // ADVANCED TECHNIQUE: Query Expansion
-        let expandedQuery = query;
-        try {
-            const { text } = await generateText({
-                model: INTERNAL_LEAN_MODEL,
-                system: "Query Expander. Rewrite query for better vector retrieval. Return only text.",
-                prompt: `User: ${query}`
-            });
-            expandedQuery = text.trim() || query;
-        } catch { }
+        // --- HYDRA RETRIEVAL (QDRANT FIRST -> SUPABASE FALLBACK) ---
+        let context = "";
+        let technique = "QDRANT_VECTOR_PRIMARY";
 
-        // 1. HYBRID SEARCH (Supabase + OpenAI 1536)
+        // 1. EMBED QUERY (OpenAI 1536)
         const { embedding } = await embed({ model: EMBED_MODEL, value: query });
-        
-        const sql = postgres(process.env.DATABASE_URL!);
-        const matches = await sql`
-            SELECT content, metadata, similarity
-            FROM hybrid_search(
-                ${`[${embedding.join(',')}]`}::vector,
-                ${query},
-                0.2,
-                10
-            )
-        `;
+        const vectorArray = embedding;
 
-        // Join context
-        const context = matches.map((m: any) => m.content || "").join('\n---\n');
+        try {
+            // ENGINE A: QDRANT (Priority)
+            const qdrant = new QdrantClient({
+                url: (envConfig['QDRANT_URL'] || process.env.QDRANT_URL),
+                apiKey: (envConfig['QDRANT_API_KEY'] || process.env.QDRANT_API_KEY)
+            });
+
+            const qdrantResults = await qdrant.search('msajce_institutional_knowledge', {
+                vector: vectorArray,
+                limit: 5,
+                with_payload: true
+            });
+
+            if (qdrantResults && qdrantResults.length > 0) {
+                context = qdrantResults.map(r => r.payload?.content || "").join('\n---\n');
+                console.log(`📡 Qdrant Success: ${qdrantResults.length} matches found.`);
+            }
+        } catch (qError) {
+            console.warn("⚠️ Qdrant Engine Failed - Falling back to Supabase...");
+        }
+
+        // ENGINE B: SUPABASE FALLBACK (If Qdrant failed or returned empty)
+        if (!context || context.trim().length < 50) {
+            technique = "SUPABASE_HYBRID_FALLBACK";
+            const sql = postgres(process.env.DATABASE_URL!);
+            const matches = await sql`
+                SELECT content, metadata, similarity
+                FROM hybrid_search(
+                    ${`[${vectorArray.join(',')}]`}::vector,
+                    ${query},
+                    0.2,
+                    10
+                )
+            `;
+            context = matches.map((m: any) => m.content || "").join('\n---\n');
+            console.log(`🛡️ Supabase Fallback: ${matches.length} matches found.`);
+        }
 
         // 2. GENERATION
         const answer = await generateAuraResponse(query, context, history.slice(-2), isGreeting);
 
         return { 
             answer, 
-            reliability: 'HYBRID_RAG_STABLE', 
-            metadata: { expanded: true, technique: 'SUPABASE_HYBRID' } 
+            reliability: technique === "QDRANT_VECTOR_PRIMARY" ? 'VECTOR_FAST' : 'HYBRID_STABLE', 
+            metadata: { expanded: true, technique } 
         };
 
     } catch (e) {
