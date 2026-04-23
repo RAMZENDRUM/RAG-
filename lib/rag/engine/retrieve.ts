@@ -120,8 +120,14 @@ export async function performRetrieval(query: string, history: any[] = []) {
         let technique = "QDRANT_VECTOR_PRIMARY";
 
         // 0.5 RESOLVE CONVERSATIONAL QUERY (Memory Integration)
-        const resolvedQuery = await resolveContextualQuery(query, history);
-        console.log(`🧠 Contextual Resolution: "${query}" -> "${resolvedQuery}"`);
+        let resolvedQuery = query;
+        try {
+            resolvedQuery = await resolveContextualQuery(query, history);
+        } catch (memError) {
+            console.warn("Memory resolution failed, using raw query.");
+        }
+        
+        if (ADMIN_IDS.includes(query)) console.log(`🧠 DEBUG: "${query}" -> "${resolvedQuery}"`);
 
         // 1. EMBED QUERY (OpenAI 1536)
         const { embedding } = await embed({ model: EMBED_MODEL, value: resolvedQuery });
@@ -134,15 +140,17 @@ export async function performRetrieval(query: string, history: any[] = []) {
                 apiKey: (envConfig['QDRANT_API_KEY'] || process.env.QDRANT_API_KEY)
             });
 
+            // Priority Search: If searching for the principal, increase limit and focus
+            const isTargetedSearch = /srinivasan|principal|head/i.test(resolvedQuery);
+            
             const qdrantResults = await qdrant.search('msajce_institutional_knowledge', {
                 vector: vectorArray,
-                limit: 10,
+                limit: isTargetedSearch ? 15 : 10,
                 with_payload: true
             });
 
             if (qdrantResults && qdrantResults.length > 0) {
                 context = qdrantResults.map(r => r.payload?.content || "").join('\n---\n');
-                console.log(`📡 Qdrant Success: ${qdrantResults.length} matches found.`);
             }
         } catch (qError) {
             console.warn("⚠️ Qdrant Engine Failed - Falling back to Supabase...");
@@ -151,22 +159,25 @@ export async function performRetrieval(query: string, history: any[] = []) {
         // ENGINE B: SUPABASE FALLBACK (If Qdrant failed or returned empty)
         if (!context || context.trim().length < 50) {
             technique = "SUPABASE_HYBRID_FALLBACK";
-            const sql = postgres(process.env.DATABASE_URL!);
-            const matches = await sql`
-                SELECT content, metadata, similarity
-                FROM hybrid_search(
-                    ${`[${vectorArray.join(',')}]`}::vector,
-                    ${query},
-                    0.2,
-                    10
-                )
-            `;
-            context = matches.map((m: any) => m.content || "").join('\n---\n');
-            console.log(`🛡️ Supabase Fallback: ${matches.length} matches found.`);
+            try {
+                const sql = postgres(process.env.DATABASE_URL!);
+                const matches = await sql`
+                    SELECT content, metadata, similarity
+                    FROM hybrid_search(
+                        ${`[${vectorArray.join(',')}]`}::vector,
+                        ${resolvedQuery},
+                        0.1,
+                        15
+                    )
+                `;
+                context = matches.map((m: any) => m.content || "").join('\n---\n');
+            } catch (dbError) {
+                console.error("Supabase Fallback Failed:", dbError);
+            }
         }
 
         // 2. GENERATION
-        const answer = await generateAuraResponse(query, context, history.slice(-2), isGreeting);
+        const answer = await generateAuraResponse(resolvedQuery, context, history.slice(-2), isGreeting);
 
         return { 
             answer, 
@@ -174,8 +185,13 @@ export async function performRetrieval(query: string, history: any[] = []) {
             metadata: { expanded: true, technique } 
         };
 
-    } catch (e) {
+    } catch (e: any) {
         console.error("Critical Retrieval Failure:", e);
-        return { answer: "Oh hey friend! I'm doing some quick mental stretches right now. Try asking me again in a few seconds! 🚀", reliability: 'RECOVERING' };
+        const isAdmin = history.some(h => ADMIN_IDS.includes(h.user_id)); // Basic admin check
+        const errorMessage = e.message || "Unknown error";
+        return { 
+            answer: `Oh hey friend! I'm doing some quick mental stretches right now. Try asking me again in a few seconds! 🚀${isAdmin ? `\n\nDEBUG [Admin]: ${errorMessage}` : ''}`, 
+            reliability: 'RECOVERING' 
+        };
     }
 }
