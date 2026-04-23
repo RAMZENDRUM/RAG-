@@ -109,7 +109,7 @@ export async function performRetrieval(query: string, history: any[] = []) {
             reliability: 'FAST_SKIP' 
         };
     }
-
+    try {
         // --- HYDRA RETRIEVAL (QDRANT FIRST -> SUPABASE FALLBACK) ---
         let context = "";
         let technique = "QDRANT_VECTOR_PRIMARY";
