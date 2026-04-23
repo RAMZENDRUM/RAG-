@@ -97,7 +97,7 @@ async function massIngest() {
             for (const row of rows) {
                 await sql`
                     INSERT INTO documents (content, embedding, metadata)
-                    VALUES (${row.content}, ${row.embedding}::vector, ${row.metadata})
+                    VALUES (${row.content}, ${row.embedding}::vector, ${sql.json(row.metadata)})
                     ON CONFLICT DO NOTHING
                 `;
             }

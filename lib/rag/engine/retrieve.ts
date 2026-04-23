@@ -89,7 +89,7 @@ async function generateAuraResponse(query: string, context: string, history: any
         3. **FACTUAL & CONCISE**: Use the provided context to give high-density accurate information about MSAJCE.
         4. **BOLD** vital facts, keywords, and dates.
         5. Use bullet points for features/lists.
-        6. NEVER sound robotic. Avoid "Based on the context" or "I am an AI".`,
+        6. NEVER sound robotic. Avoid "Based on the context" or "I am an AI".
         
         MEDIA LINK PROTOCOL:
         - If a PDF link exists: 📄 **[Download/View Document Name](${BASE_ASSET_URL}/[path])**
