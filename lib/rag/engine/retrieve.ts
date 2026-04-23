@@ -2,10 +2,22 @@ import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import postgres from 'postgres';
 import { QdrantClient } from '@qdrant/js-client-rest';
+import { qdrant, COLLECTION_NAME } from './qdrant';
 
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+
+// IDENTITY & CONFIG
+const ADMIN_IDS = ['7770158141', 'Zendrum'];
+
+let _sql: any = null;
+const getSql = () => {
+    if (!_sql) {
+        _sql = postgres(process.env.DATABASE_URL || envConfig['DATABASE_URL'] || '');
+    }
+    return _sql;
+};
 
 // Cloud-Safe Env Loading (Handles Local vs Vercel)
 const localEnvPath = path.resolve(process.cwd(), '.env');
@@ -23,6 +35,9 @@ if (fs.existsSync(localEnvPath)) {
 // Map variables from manual config or process.env (Vercel)
 const GROQ_KEY = (envConfig['GROQ_API_KEY'] || process.env.GROQ_API_KEY || '').trim();
 const VERCEL_KEY = (envConfig['VERCEL_AI_KEY'] || process.env.VERCEL_AI_KEY || process.env.AI_GATEWAY_API_KEY || '').trim();
+
+// IDENTITY & CONFIG
+const ADMIN_IDS = ['7770158141', 'Zendrum'];
 
 // Groq Provider (via AI SDK OpenAI) for Speed & Reliability
 const groq = createOpenAI({
@@ -42,7 +57,7 @@ const EMBED_MODEL = openai.embedding('openai/text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = openai('gpt-4o-mini'); // Using 4o-mini for lean tasks too for consistency
 
 async function resolveContextualQuery(query: string, history: any[]) {
-    if (history.length === 0) return query;
+    if (!history || history.length === 0) return query;
     try {
         const { text } = await generateText({
             model: INTERNAL_LEAN_MODEL,
@@ -50,7 +65,10 @@ async function resolveContextualQuery(query: string, history: any[]) {
             prompt: `History:\n${JSON.stringify(history.slice(-3))}\n\nQuery: ${query}\n\nResolved:`
         });
         return text.trim() || query;
-    } catch { return query; }
+    } catch (e) { 
+        console.warn("Contextual resolution failed:", e);
+        return query; 
+    }
 }
 
 async function generateAuraResponse(query: string, context: string, history: any[], isGreeting: boolean) {
@@ -135,15 +153,11 @@ export async function performRetrieval(query: string, history: any[] = []) {
 
         try {
             // ENGINE A: QDRANT (Priority)
-            const qdrant = new QdrantClient({
-                url: (envConfig['QDRANT_URL'] || process.env.QDRANT_URL),
-                apiKey: (envConfig['QDRANT_API_KEY'] || process.env.QDRANT_API_KEY)
-            });
-
+            
             // Priority Search: If searching for the principal, increase limit and focus
             const isTargetedSearch = /srinivasan|principal|head/i.test(resolvedQuery);
             
-            const qdrantResults = await qdrant.search('msajce_institutional_knowledge', {
+            const qdrantResults = await qdrant.search(COLLECTION_NAME, {
                 vector: vectorArray,
                 limit: isTargetedSearch ? 15 : 10,
                 with_payload: true
@@ -160,7 +174,7 @@ export async function performRetrieval(query: string, history: any[] = []) {
         if (!context || context.trim().length < 50) {
             technique = "SUPABASE_HYBRID_FALLBACK";
             try {
-                const sql = postgres(process.env.DATABASE_URL!);
+                const sql = getSql();
                 const matches = await sql`
                     SELECT content, metadata, similarity
                     FROM hybrid_search(

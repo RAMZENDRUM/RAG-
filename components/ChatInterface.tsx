@@ -90,9 +90,11 @@ export default function ChatInterface() {
                   {m.role === 'user' ? (
                     m.content
                   ) : (
-                    <ReactMarkdown className="prose prose-sm max-w-none prose-p:leading-relaxed prose-li:my-1">
-                        {m.content}
-                    </ReactMarkdown>
+                    <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-li:my-1 text-gray-700 markdown-content">
+                        <ReactMarkdown>
+                            {m.content}
+                        </ReactMarkdown>
+                    </div>
                   )}
                 </div>
               </div>

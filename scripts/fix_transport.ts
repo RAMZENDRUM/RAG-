@@ -44,12 +44,12 @@ async function fixTransportSupabase() {
                     VALUES (
                         ${enrichedChunks[i]},
                         ${`[${embeddings[i].join(',')}]`}::vector,
-                        ${{
+                        ${JSON.stringify({
                             source_file: file,
                             routeName: routeName,
                             category: 'TRANSPORT',
                             source_layer: 'institutional_life'
-                        }}
+                        })}::jsonb
                     )
                     ON CONFLICT DO NOTHING;
                 `;

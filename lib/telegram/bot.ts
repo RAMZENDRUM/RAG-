@@ -41,32 +41,35 @@ bot.on('message', async (ctx) => {
     }));
 
     // 2. Unified Retrieval & Response
-    const { answer, reliability } = await performRetrieval(text, chatHistory);
+    const retrievalResult = await performRetrieval(text, chatHistory);
+    const { answer, reliability } = retrievalResult;
 
     // 3. Persistence
     await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'user', ${text})`;
     await sql`INSERT INTO chat_histories (user_id, role, content) VALUES (${userId}, 'assistant', ${answer})`;
 
     console.log(`Bot Response [${reliability}]: ${text.substring(0,20)}...`);
-    await ctx.reply(answer);
+    await ctx.reply(answer, { parse_mode: 'Markdown' });
 
   } catch (error) {
-    const isRateLimit = error.message?.includes('rate_limit') || error.message?.includes('credits');
+    console.error('Unified Bot Error:', error);
     
-    // 🔥 GRACEFUL DEGRADATION: If LLM is busy but retrieval worked, send the raw facts!
+    // 🔥 GRACEFUL DEGRADATION: Try one last time with fresh retrieval, no history
     try {
-        const { context, reliability } = await performRetrieval(text);
-        if (reliability === 'HIGH' && context) {
-            console.log('Falling back to raw context due to Rate Limit');
-            return ctx.reply(`Fact Sheet (Aura): \n\n${context.substring(0, 4000)}...`);
+        const { answer, reliability } = await performRetrieval(text);
+        if (reliability !== 'RECOVERING') {
+            console.log('Falling back to stateless retrieval');
+            return ctx.reply(answer, { parse_mode: 'Markdown' });
         }
-    } catch (e) {}
+    } catch (e) {
+        console.error('Stateless fallback failed:', e);
+    }
 
+    const isRateLimit = error.message?.includes('rate_limit') || error.message?.includes('credits');
     if (isRateLimit) {
-      console.error('Final Rate Limit hit in Bot');
       return ctx.reply("I'm stretching my neural circuits a bit too thin! Give me 10 seconds to catch my breath and ask me again. 🚀");
     }
-    console.error('Unified Bot Error:', error);
+    
     await ctx.reply("I'm doing some quick mental stretches and refining my knowledge. Give me a moment and try your question again!");
   }
 });
