@@ -131,7 +131,7 @@ export async function performRetrieval(query: string, history: any[] = []) {
 
             const qdrantResults = await qdrant.search('msajce_institutional_knowledge', {
                 vector: vectorArray,
-                limit: 5,
+                limit: 10,
                 with_payload: true
             });
 
