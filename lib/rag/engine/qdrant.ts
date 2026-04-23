@@ -24,4 +24,4 @@ export const qdrant = new QdrantClient({
 
 export const getQdrant = () => qdrant;
 
-export const COLLECTION_NAME = 'msajce_institutional_knowledge';
+export const COLLECTION_NAME = 'aura_rag_core';

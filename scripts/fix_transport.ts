@@ -40,7 +40,7 @@ async function fixTransportSupabase() {
 
             for (let i = 0; i < enrichedChunks.length; i++) {
                 await sql`
-                    INSERT INTO documents (content, embedding, metadata)
+                    INSERT INTO aura_rag_documents (content, embedding, metadata)
                     VALUES (
                         ${enrichedChunks[i]},
                         ${`[${embeddings[i].join(',')}]`}::vector,

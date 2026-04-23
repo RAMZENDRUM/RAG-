@@ -8,7 +8,7 @@ async function update() {
   console.log("🛠️ Re-weighting Hybrid Search for Elite Precision...");
 
   await sql`
-    CREATE OR REPLACE FUNCTION hybrid_search (
+    CREATE OR REPLACE FUNCTION aura_hybrid_search (
       query_embedding vector(1536),
       query_text text,
       match_threshold float,
@@ -25,16 +25,16 @@ async function update() {
     BEGIN
       RETURN QUERY
       SELECT
-        documents.id,
-        documents.content,
-        documents.metadata,
+        aura_rag_documents.id,
+        aura_rag_documents.content,
+        aura_rag_documents.metadata,
         (
-          (0.75 * (1 - (documents.embedding <=> query_embedding))) +
-          (0.25 * LEAST(1.0, ts_rank_cd(documents.fts_vector, plainto_tsquery('english', query_text)) * 10))
+          (0.75 * (1 - (aura_rag_documents.embedding <=> query_embedding))) +
+          (0.25 * LEAST(1.0, ts_rank_cd(aura_rag_documents.fts_vector, plainto_tsquery('english', query_text)) * 10))
         ) AS similarity
-      FROM documents
-      WHERE (1 - (documents.embedding <=> query_embedding)) > 0.4
-      OR documents.fts_vector @@ plainto_tsquery('english', query_text)
+      FROM aura_rag_documents
+      WHERE (1 - (aura_rag_documents.embedding <=> query_embedding)) > 0.4
+      OR aura_rag_documents.fts_vector @@ plainto_tsquery('english', query_text)
       ORDER BY similarity DESC
       LIMIT match_count;
     END;

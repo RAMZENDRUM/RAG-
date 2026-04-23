@@ -36,10 +36,7 @@ if (fs.existsSync(localEnvPath)) {
 const GROQ_KEY = (envConfig['GROQ_API_KEY'] || process.env.GROQ_API_KEY || '').trim();
 const VERCEL_KEY = (envConfig['VERCEL_AI_KEY'] || process.env.VERCEL_AI_KEY || process.env.AI_GATEWAY_API_KEY || '').trim();
 
-// IDENTITY & CONFIG
-const ADMIN_IDS = ['7770158141', 'Zendrum'];
-
-// Groq Provider (via AI SDK OpenAI) for Speed & Reliability
+ // Groq Provider (via AI SDK OpenAI) for Speed & Reliability
 const groq = createOpenAI({
     apiKey: GROQ_KEY,
     baseURL: 'https://api.groq.com/openai/v1'
@@ -177,7 +174,7 @@ export async function performRetrieval(query: string, history: any[] = []) {
                 const sql = getSql();
                 const matches = await sql`
                     SELECT content, metadata, similarity
-                    FROM hybrid_search(
+                    FROM aura_hybrid_search(
                         ${`[${vectorArray.join(',')}]`}::vector,
                         ${resolvedQuery},
                         0.1,

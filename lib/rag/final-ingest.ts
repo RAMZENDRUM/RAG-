@@ -22,7 +22,7 @@ async function finalIngest() {
   await sql`CREATE EXTENSION IF NOT EXISTS vector`;
   
   await sql`
-    CREATE TABLE IF NOT EXISTS documents (
+    CREATE TABLE IF NOT EXISTS aura_rag_documents (
       id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
       content text NOT NULL,
       embedding vector(1536),
@@ -33,7 +33,7 @@ async function finalIngest() {
   `;
 
   await sql`
-    CREATE OR REPLACE FUNCTION hybrid_search (
+    CREATE OR REPLACE FUNCTION aura_hybrid_search (
       query_embedding vector(1536),
       query_text text,
       match_threshold float,
@@ -50,16 +50,16 @@ async function finalIngest() {
     BEGIN
       RETURN QUERY
       SELECT
-        documents.id,
-        documents.content,
-        documents.metadata,
+        aura_rag_documents.id,
+        aura_rag_documents.content,
+        aura_rag_documents.metadata,
         (
-          (0.75 * (1 - (documents.embedding <=> query_embedding))) +
-          (0.25 * LEAST(1.0, ts_rank_cd(documents.fts_vector, plainto_tsquery('english', query_text)) * 10))
+          (0.75 * (1 - (aura_rag_documents.embedding <=> query_embedding))) +
+          (0.25 * LEAST(1.0, ts_rank_cd(aura_rag_documents.fts_vector, plainto_tsquery('english', query_text)) * 10))
         ) AS similarity
-      FROM documents
-      WHERE (1 - (documents.embedding <=> query_embedding)) > 0.4
-      OR documents.fts_vector @@ plainto_tsquery('english', query_text)
+      FROM aura_rag_documents
+      WHERE (1 - (aura_rag_documents.embedding <=> query_embedding)) > 0.4
+      OR aura_rag_documents.fts_vector @@ plainto_tsquery('english', query_text)
       ORDER BY similarity DESC
       LIMIT match_count;
     END;
@@ -85,9 +85,9 @@ async function finalIngest() {
   });
 
   const batchSize = 60;
-  const existingCount = await sql`SELECT count(*) FROM documents`;
+  const existingCount = await sql`SELECT count(*) FROM aura_rag_documents`;
   const skipCount = parseInt(existingCount[0].count);
-  console.log(`📦 Database already contains ${skipCount} documents.`);
+  console.log(`📦 Aura Knowledge Base already contains ${skipCount} documents.`);
   console.log(`📡 Resuming from Batch ${Math.floor(skipCount / batchSize) + 1}...`);
 
   const totalBatches = Math.ceil(sortedChunks.length / batchSize);
@@ -112,7 +112,7 @@ async function finalIngest() {
       }));
 
       await sql`
-        INSERT INTO documents ${sql(rows, 'content', 'embedding', 'metadata')}
+        INSERT INTO aura_rag_documents ${sql(rows, 'content', 'embedding', 'metadata')}
       `;
 
       await new Promise(r => setTimeout(r, 12000));
@@ -124,11 +124,11 @@ async function finalIngest() {
   }
 
   if (skipCount < sortedChunks.length) {
-    console.log("⚡ Building Optimized Indices...");
-    await sql`CREATE INDEX IF NOT EXISTS idx_documents_embedding_hnsw ON documents USING hnsw (embedding vector_cosine_ops)`;
-    await sql`CREATE INDEX IF NOT EXISTS idx_documents_fts_gin ON documents USING gin (fts_vector)`;
+    console.log("⚡ Building Optimized Indices for Aura...");
+    await sql`CREATE INDEX IF NOT EXISTS idx_aura_embedding_hnsw ON aura_rag_documents USING hnsw (embedding vector_cosine_ops)`;
+    await sql`CREATE INDEX IF NOT EXISTS idx_aura_fts_gin ON aura_rag_documents USING gin (fts_vector)`;
   } else {
-    console.log("💎 Knowledge Base is already fully synchronized.");
+    console.log("💎 Aura Knowledge Base is already fully synchronized.");
   }
 
   console.log("🎉 Production Hybrid Knowledge Graph is LIVE!");
