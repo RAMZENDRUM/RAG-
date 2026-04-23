@@ -1,22 +1,28 @@
 import { generateText, embed } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { getQdrant, COLLECTION_NAME } from './qdrant';
+import postgres from 'postgres';
+
+import fs from 'fs';
+import path from 'path';
+import dotenv from 'dotenv';
+const envPath = 'd:/.gemini/RAG college/.env';
+const envConfig = dotenv.parse(fs.readFileSync(envPath));
 
 // Groq Provider (via AI SDK OpenAI) for Speed & Reliability
 const groq = createOpenAI({
-    apiKey: process.env.GROQ_API_KEY || '',
+    apiKey: (envConfig['GROQ_API_KEY'] || '').trim(),
     baseURL: 'https://api.groq.com/openai/v1'
 });
 
-// Google Provider for Embeddings
-const google = createGoogleGenerativeAI({
-    apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GEMINI_API_KEY || ''
+// OpenAI via Vercel Gateway for Embeddings (1536 Dim)
+const openai = createOpenAI({
+    apiKey: (envConfig['VERCEL_AI_KEY'] || envConfig['AI_GATEWAY_API_KEY'] || '').trim(),
+    baseURL: 'https://ai-gateway.vercel.sh/v1'
 });
 
 // IDENTITY & MODELS
 const CHAT_MODEL = groq('llama-3.3-70b-versatile');
-const EMBED_MODEL = google.textEmbeddingModel('text-embedding-004');
+const EMBED_MODEL = openai.embedding('openai/text-embedding-3-small');
 const INTERNAL_LEAN_MODEL = groq('llama-3.1-8b-instant');
 
 async function resolveContextualQuery(query: string, history: any[]) {
@@ -100,61 +106,34 @@ export async function performRetrieval(query: string, history: any[] = []) {
             expandedQuery = text.trim() || query;
         } catch { }
 
-        // 1. DUAL-VECTOR SEARCH
-        const { embedding: e1 } = await embed({ model: EMBED_MODEL, value: query });
-        const { embedding: e2 } = await embed({ model: EMBED_MODEL, value: expandedQuery });
-
-        const qResult = await getQdrant().search(COLLECTION_NAME, {
-            vector: e1,
-            limit: 4,
-            with_payload: true
-        });
-
-        const qResult2 = await getQdrant().search(COLLECTION_NAME, {
-            vector: e2,
-            limit: 2,
-            with_payload: true
-        });
+        // 1. HYBRID SEARCH (Supabase + OpenAI 1536)
+        const { embedding } = await embed({ model: EMBED_MODEL, value: query });
+        
+        const sql = postgres(process.env.DATABASE_URL!);
+        const matches = await sql`
+            SELECT content, metadata, similarity
+            FROM hybrid_search(
+                ${`[${embedding.join(',')}]`}::vector,
+                ${query},
+                0.2,
+                10
+            )
+        `;
 
         // Join context
-        const context = [...qResult, ...qResult2].map((r: any) => r.payload?.content || "").join('\n---\n');
+        const context = matches.map((m: any) => m.content || "").join('\n---\n');
 
         // 2. GENERATION
         const answer = await generateAuraResponse(query, context, history.slice(-2), isGreeting);
 
         return { 
             answer, 
-            reliability: 'ADVANCED_RAG', 
-            metadata: { expanded: true, technique: 'MULTI_QUERY' } 
+            reliability: 'HYBRID_RAG_STABLE', 
+            metadata: { expanded: true, technique: 'SUPABASE_HYBRID' } 
         };
 
     } catch (e) {
-        console.error("Qdrant Failover - Activating Neural Fallback...");
-        try {
-            const fs = require('fs');
-            const path = require('path');
-            const memoryPath = path.resolve(process.cwd(), 'live_brain/aura_active_memory.json');
-            
-            if (fs.existsSync(memoryPath)) {
-                const memory = JSON.parse(fs.readFileSync(memoryPath, 'utf-8'));
-                // Simple keyword-based ranking for fallback (using 'narrative' field)
-                const keywords = query.toLowerCase().split(' ').filter((w: string) => w.length > 3);
-                const localContext = memory
-                    .map((m: any) => ({ 
-                        content: m.narrative || "", 
-                        score: keywords.reduce((acc: number, k: string) => acc + ((m.narrative || "").toLowerCase().includes(k) ? 1 : 0), 0)
-                    }))
-                    .sort((a: any, b: any) => b.score - a.score)
-                    .slice(0, 5)
-                    .map((m: any) => m.content)
-                    .join('\n---\n');
-
-                const answer = await generateAuraResponse(query, localContext, history.slice(-2), isGreeting);
-                return { answer, reliability: 'FALLBACK_READY', metadata: { technique: 'LOCAL_BRAIN' } };
-            }
-        } catch (fallError) {
-            console.error("Critical Brain Failure:", fallError);
-        }
+        console.error("Critical Retrieval Failure:", e);
         return { answer: "Oh hey friend! I'm doing some quick mental stretches right now. Try asking me again in a few seconds! 🚀", reliability: 'RECOVERING' };
     }
 }
